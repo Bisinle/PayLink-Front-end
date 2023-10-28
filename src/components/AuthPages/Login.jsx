@@ -1,8 +1,13 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { login } from "./auth";
 
 export default function Login() {
+  //instanticate the navigate method
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -24,23 +29,24 @@ export default function Login() {
       body: JSON.stringify(data),
     };
 
-    // fetch("http://127.0.0.1:5555/auth/login", requestOptions)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data.access_token);
-    //     login(data.access_token);
-    //     data.access_token && navigate("/");
-    //     data.access_token ? setIsLogedin(true) : setIsLogedin(false);
-    //     localStorage.setItem("refresh_token", data.refresh_token);
-    //     localStorage.setItem("user_name", data.user_name);
-    //     localStorage.setItem("user_role", data.user_role);
-    //     localStorage.setItem("user_profile_pic", data.user_profile_pic);
-    //   });
+    fetch("http://127.0.0.1:5555/auth/login", requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(response);
+        login(data.access_token);
+        data.access_token && navigate("/");
+        // data.access_token ? setIsLogedin(true) : setIsLogedin(false);
+        localStorage.setItem("refresh_token", data.refresh_token);
+        localStorage.setItem("user_name", data.user_name);
+        localStorage.setItem("user_role", data.user_role);
+        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("user_profile_pic", data.user_profile_pic);
+      });
   }
   return (
     <section class="bg-gray-300  ">
       <div class="flex flex-col  w-full  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-        <div class="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0  dark:border-gray-700">
+        <div class="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0  dark:border-gray-100 shadow-lg">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl flex justify-center">
               Login
@@ -62,7 +68,6 @@ export default function Login() {
                   {...register("username", {
                     required: true,
                     maxLength: 20,
-                    minLength: 5,
                   })}
                 />
 
@@ -89,7 +94,7 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
-                  {...register("password", { required: true, minLength: 8 })}
+                  {...register("password", { required: true, minLength: 2 })}
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="password"
                 />
@@ -134,12 +139,12 @@ export default function Login() {
               </button>
               <p class="text-sm font-light  text-gray-500 dark:text-gray-400">
                 Do not have an account?{" "}
-                <a
-                  href="#"
-                  class="font-medium text-primary-600 hover:underline dark:text-primary-500 text-indigo-800"
+                <Link
+                  to="/signup"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-indigo-800"
                 >
                   Signup here
-                </a>
+                </Link>
               </p>
             </form>
           </div>
