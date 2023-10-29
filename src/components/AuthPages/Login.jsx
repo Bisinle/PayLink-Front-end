@@ -2,19 +2,25 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { dataContext } from "../ContexProvider/MyContext";
 import { login } from "./auth";
 import loginSVG from "../../assets/loginSVG.json";
 import "aos/dist/aos.css";
 import AOS from "aos";
-
 import Lottie from "lottie-web";
 
 export default function Login() {
   //instanticate the navigate method
   const navigate = useNavigate();
+  //destructure the contex
+  const { contextTest, setContextTest } = useContext(dataContext);
 
+  //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const container = useRef();
+
+  //for animating the SVG
   useEffect(() => {
     AOS.init();
     const anim = Lottie.loadAnimation({
@@ -35,6 +41,7 @@ export default function Login() {
     };
   }, []);
 
+  //form hook methods
   const {
     register,
     watch,
@@ -43,9 +50,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  // console.log(watch("username"));
-  // console.log(watch("password"));
-
+  // handle sumbit function for the login form
   function loginUser(data) {
     console.log(data);
     const requestOptions = {
@@ -70,6 +75,7 @@ export default function Login() {
         localStorage.setItem("user_profile_pic", data.user_profile_pic);
       });
   }
+
   return (
     <section
       class="bg-transparent  "

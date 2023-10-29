@@ -71,8 +71,6 @@ function Signup() {
     >
       <div className="flex  w-[100%] mr-10 items-center justify-center sm:flex sm:flex-col md:flex-col lg:flex-row px-6 py-8  ">
         <div
-          data-aos="fade-right"
-          data-aos-duration="500"
           className={`sm:h-screen border-b-0  ${
             animationLoaded ? "" : "hidden"
           }         
@@ -82,7 +80,8 @@ function Signup() {
           ref={container}
         ></div>
 
-        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 md:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
+        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 sm:mt-[-200px]  sm:z-10 lg:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
+
           <div className="w-full ">
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account
@@ -217,28 +216,6 @@ function Signup() {
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     {...register("confirm_password")}
                   />
-                </div>
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="terms"
-                      aria-describedby="terms"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label for="terms" className="font-light text-gray-500 ">
-                      I accept the{" "}
-                      <a
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        href="#"
-                      >
-                        Terms and Conditions
-                      </a>
-                    </label>
-                  </div>
                 </div>
               </div>
 
