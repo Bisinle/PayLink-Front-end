@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Lottie from "lottie-web";
 import signupBanner from "../../assets/signupBanner.json";
 import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Signup() {
   const [animationLoaded, setAnimationLoaded] = useState(false);
@@ -31,7 +32,7 @@ function Signup() {
     });
 
     return () => {
-      // Clean up the animation when the component unmounts
+      // Clean up the animation when the component is no longer in the view
       anim.destroy();
     };
   }, []);
@@ -63,17 +64,25 @@ function Signup() {
       });
   }
   return (
-    <section className="flex ">
-      <div className="flex  w-[100%]  items-center justify-center px-6 py-8 md:h-screen lg:py-0">
+    <section
+      className="flex sm:h-screen"
+      data-aos="fade-up"
+      data-aos-duration="500"
+    >
+      <div className="flex  w-[100%] mr-10 items-center justify-center sm:flex sm:flex-col md:flex-col lg:flex-row px-6 py-8  ">
         <div
-          className={`  ${animationLoaded ? "" : "hidden"}         
+          data-aos="fade-right"
+          data-aos-duration="500"
+          className={`sm:h-screen border-b-0  ${
+            animationLoaded ? "" : "hidden"
+          }         
         
 
         `}
           ref={container}
         ></div>
 
-        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 md:mt-0  sm:w-[100%] md:w-[60%] lg:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
+        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 md:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
           <div className="w-full ">
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account

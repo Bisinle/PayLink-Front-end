@@ -10,7 +10,7 @@ export default function SideBar() {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex sm:h-screen">
       <div
         className={`bg-light-purple  bg-indigo-500 h-screen p-5 pt-8 ${
           open ? "w-60" : "w-16"

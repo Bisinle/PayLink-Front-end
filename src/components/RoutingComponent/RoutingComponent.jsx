@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Routes, Route } from "react-router-dom";
+import AOS from "aos";
 
 // import Navbar from "./components/Navbar";
 
@@ -9,8 +10,15 @@ import Signup from "../AuthPages/Signup";
 import Home from "../Home";
 
 function RoutingComponent() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div className="App flex-col justify-center items-center w-full ">
+    <div
+      className="App flex-col justify-center items-center w-full "
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />

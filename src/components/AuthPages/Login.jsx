@@ -1,12 +1,39 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "./auth";
+import loginSVG from "../../assets/loginSVG.json";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import Lottie from "lottie-web";
 
 export default function Login() {
   //instanticate the navigate method
   const navigate = useNavigate();
+
+  const [animationLoaded, setAnimationLoaded] = useState(false);
+  const container = useRef();
+  useEffect(() => {
+    AOS.init();
+    const anim = Lottie.loadAnimation({
+      container: container.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: loginSVG,
+    });
+
+    anim.addEventListener("DOMLoaded", () => {
+      setAnimationLoaded(true);
+    });
+
+    return () => {
+      // Clean up the animation when the component is no longer in the view
+      anim.destroy();
+    };
+  }, []);
 
   const {
     register,
@@ -44,11 +71,24 @@ export default function Login() {
       });
   }
   return (
-    <section class="bg-gray-300  ">
-      <div class="flex flex-col  w-full  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-        <div class="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0  dark:border-gray-100 shadow-lg">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl flex justify-center">
+    <section
+      class="bg-transparent  "
+      data-aos="fade-up"
+      data-aos-duration="500"
+    >
+      <div class="flex flex-row sm:flex sm:flex-col  sm:justify-cente sm:iter lg:flex-row  sm-h-screen  items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+        <div
+          className={` sm:h-screen sm:mt-[-100px]  lg:mt-0 ${
+            animationLoaded ? "" : "hidden"
+          }         
+        
+
+        `}
+          ref={container}
+        ></div>
+        <div class="   sm:w-[60%]  xl:w-[30%]  sm:mt-[-400px] lg:mr-[300px] sm:z-10  lg:mt-0 bg-white rounded-lg   dark:border   xl:p-0  dark:border-gray-100 shadow-gray-400  shadow-lg">
+          <div class="p-6 space-y-4 md:space-y-10 sm:p-8 ">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-indigo-700 md:text-2xl flex justify-center">
               Login
             </h1>
             <form class="space-y-4 md:space-y-6 " action="#">
@@ -63,7 +103,7 @@ export default function Login() {
                   type="text"
                   name="username"
                   id="username"
-                  class="bg-gray-50 border border-gray-900 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="user name"
                   {...register("username", {
                     required: true,
@@ -95,7 +135,7 @@ export default function Login() {
                 <input
                   type="password"
                   {...register("password", { required: true, minLength: 2 })}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="password"
                 />
                 {errors.password && (
@@ -133,7 +173,7 @@ export default function Login() {
               </div>
               <button
                 onClick={handleSubmit(loginUser)}
-                className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                className=" text-white border shadow  flex justify-center items-center mx-auto border-gray-300 bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Login
               </button>
