@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "./auth";
 import loginSVG from "../../assets/loginSVG.json";
-import AOS from "aos";
 import "aos/dist/aos.css";
+import AOS from "aos";
 
 import Lottie from "lottie-web";
 
