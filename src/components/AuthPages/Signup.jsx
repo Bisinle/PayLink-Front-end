@@ -73,7 +73,7 @@ function Signup() {
         <div
           data-aos="fade-right"
           data-aos-duration="500"
-          className={`sm:h-screen border-b-0  ${
+          className={`sm:h-screen border-b-0 mt-0 ${
             animationLoaded ? "" : "hidden"
           }         
         
@@ -82,7 +82,7 @@ function Signup() {
           ref={container}
         ></div>
 
-        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 md:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
+        <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 md:mt-[-250px] md:z-10  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
           <div className="w-full ">
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account
