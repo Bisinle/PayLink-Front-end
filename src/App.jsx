@@ -15,7 +15,6 @@ function App() {
   console.log(contextTest);
   return (
     <div className="App flex ">
-      <SideBar />
       <RoutingComponent />
     </div>
   );
