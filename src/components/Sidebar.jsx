@@ -129,7 +129,7 @@ export default function SideBar() {
           </ul>
         </div>
       </div>
-      <main>
+      <main className="bg-indigo-500">
         <Outlet />
       </main>
     </div>

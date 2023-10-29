@@ -10,14 +10,22 @@ import SideBar from "./components/Sidebar";
 import RoutingComponent from "./components/RoutingComponent/RoutingComponent";
 import { useContext } from "react";
 import { dataContext } from "./components/ContexProvider/MyContext";
-import { useAuth } from "./components/AuthPages/auth";
+import { login, useAuth } from "./components/AuthPages/auth";
 function App() {
-  const { isLoggedIn } = useContext(dataContext);
+  const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
   console.log(isLoggedIn);
 
   return (
-    <div className="App flex ">
-      {isLoggedIn ? <RoutingComponent /> : <Login />}
+    <div className="App  ">
+      {!isLoggedIn ? ( // Check if the user is not logged in
+        loginSignupToggle ? ( // Check if the user wants to sign up
+          <Signup />
+        ) : (
+          <Login />
+        )
+      ) : (
+        <RoutingComponent />
+      )}
     </div>
   );
 }

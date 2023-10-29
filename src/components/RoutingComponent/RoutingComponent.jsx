@@ -18,13 +18,23 @@ import Help from "../User/Help";
 import Transactions from "../User/Transactions";
 import Wallet from "../User/Wallet";
 
+//----------C O N T E X T
+import { useContext } from "react";
+import { dataContext } from "../ContexProvider/MyContext";
+
+//----------P R T E C T O R
+import Protexted from "../AuthPages/Protexted";
+
+//__________________________________________________________________________________
+
 function RoutingComponent() {
+  const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
   useEffect(() => {
     AOS.init();
   }, []);
   return (
     <div className="App flex  ">
-      <SideBar />
+      {isLoggedIn && <SideBar />}
 
       <Routes>
         <Route path="/" element={<Dashboard />} />
@@ -33,7 +43,6 @@ function RoutingComponent() {
         <Route path="help" element={<Help />} />
         <Route path="account" element={<Account />} />
         <Route path="login" element={<Login />} />
-        {/* <Route path="logout" element={<Logout />} /> */}
         <Route path="signup" element={<Signup />} />
       </Routes>
     </div>

@@ -5,8 +5,13 @@ import Lottie from "lottie-web";
 import signupBanner from "../../assets/signupBanner.json";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useContext } from "react";
+import { dataContext } from "../ContexProvider/MyContext";
 
 function Signup() {
+  //----------C O N T E X T
+  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
+    useContext(dataContext);
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const container = useRef();
   const {
@@ -64,11 +69,7 @@ function Signup() {
       });
   }
   return (
-    <section
-      className="flex sm:h-screen"
-      data-aos="fade-up"
-      data-aos-duration="500"
-    >
+    <section className="flex " data-aos="fade-up" data-aos-duration="500">
       <div className="flex  w-[100%] mr-10 items-center justify-center sm:flex sm:flex-col md:flex-col lg:flex-row px-6 py-8  ">
         <div
           className={`sm:h-screen border-b-0  ${
@@ -81,7 +82,6 @@ function Signup() {
         ></div>
 
         <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 sm:mt-[-200px]  sm:z-10 lg:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
-
           <div className="w-full ">
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account
@@ -230,6 +230,7 @@ function Signup() {
                 Already have an account?{" "}
                 <Link
                   to="/login"
+                  onClick={() => setLoginSignupToggle(!loginSignupToggle)}
                   className="font-medium  text-primary-600 hover:underline dark:text-primary-500 text-indigo-800"
                 >
                   Login here

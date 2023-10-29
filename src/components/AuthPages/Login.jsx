@@ -14,8 +14,8 @@ export default function Login() {
   //instanticate the navigate method
   const navigate = useNavigate();
   //destructure the contex
-  const { setIsLoggedIn } = useContext(dataContext);
-
+  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
+    useContext(dataContext);
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const container = useRef();
@@ -78,7 +78,6 @@ export default function Login() {
         console.error(error);
       });
   }
-
   return (
     <section
       class="bg-transparent  "
@@ -190,6 +189,7 @@ export default function Login() {
                 Do not have an account?{" "}
                 <Link
                   to="/signup"
+                  onClick={() => setLoginSignupToggle(!loginSignupToggle)}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-indigo-800"
                 >
                   Signup here
