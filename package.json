@@ -18,7 +18,8 @@
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.17.0",
-    "react-token-auth": "^2.3.8"
+    "react-token-auth": "^2.3.8",
+    "recharts": "^2.9.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
