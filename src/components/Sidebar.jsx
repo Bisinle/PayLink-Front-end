@@ -38,11 +38,11 @@ export default function SideBar() {
             <li
               className={`text-light-white text-sm flex items-center gap-x-4 
                     cursor-pointer w-96 p-2 hover:bg-light-white hover:text-black rounded-md
-                    duration-300 `}
+                    duration-300   font-bold bg-white  rounded-l  active:bg-violet-700   `}
             >
               <MdSpaceDashboard className="text-black" />
               <NavLink exact="true" to="/Account">
-                <span className={`${!open && "hidden"}`}>Dashboard</span>
+                <span className={`  ${!open && "hidden"}`}>Dashboard</span>
               </NavLink>
             </li>
             <li
