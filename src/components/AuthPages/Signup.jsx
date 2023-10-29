@@ -62,7 +62,7 @@ function Signup() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        // navigate("/login");
+        navigate("/login");
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

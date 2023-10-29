@@ -12,11 +12,11 @@ import SideBar from "../Sidebar";
 // import Logout from "../AuthPages/Logout"; --visit here --------
 
 //-----------------------U S E R ---------routes
-import Dashboard from "../User/Dashboard";
+import Dashboard from "../User/dashboard/Dashboard";
 import Account from "../User/Account";
 import Help from "../User/Help";
-import Transactions from "../User/Transactions";
-import Wallet from "../User/Wallet";
+import Transactions from "../User/transactions/Transactions";
+import Wallet from "../User/wallet/Wallet";
 
 //----------C O N T E X T
 import { useContext } from "react";

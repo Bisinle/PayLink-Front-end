@@ -11,7 +11,9 @@ export const { useAuth, authFetch, login, logout } = createAuthProvider({
       },
     })
       .then((r) => r.json())
-      .then((data) => data.access),
+      .then((data) => {
+        console.log(data.access);
+      }),
 });
 
 // .then((data) => login(data)),

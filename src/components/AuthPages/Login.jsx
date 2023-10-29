@@ -73,6 +73,7 @@ export default function Login() {
         localStorage.setItem("user_role", data.user_role);
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("user_profile_pic", data.user_profile_pic);
+        localStorage.setItem("account_number", data.account_number);
       })
       .catch((error) => {
         console.error(error);
