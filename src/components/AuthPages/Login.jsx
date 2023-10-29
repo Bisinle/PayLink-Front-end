@@ -14,7 +14,7 @@ export default function Login() {
   //instanticate the navigate method
   const navigate = useNavigate();
   //destructure the contex
-  const { contextTest, setContextTest } = useContext(dataContext);
+  const { setIsLoggedIn } = useContext(dataContext);
 
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
@@ -52,7 +52,7 @@ export default function Login() {
 
   // handle sumbit function for the login form
   function loginUser(data) {
-    console.log(data);
+    // console.log(data);
     const requestOptions = {
       method: "POST",
       headers: {
@@ -67,12 +67,15 @@ export default function Login() {
         // console.log(response);
         login(data.access_token);
         data.access_token && navigate("/");
-        // data.access_token ? setIsLogedin(true) : setIsLogedin(false);
+        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
         localStorage.setItem("refresh_token", data.refresh_token);
         localStorage.setItem("user_name", data.user_name);
         localStorage.setItem("user_role", data.user_role);
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("user_profile_pic", data.user_profile_pic);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 

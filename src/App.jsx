@@ -10,12 +10,14 @@ import SideBar from "./components/Sidebar";
 import RoutingComponent from "./components/RoutingComponent/RoutingComponent";
 import { useContext } from "react";
 import { dataContext } from "./components/ContexProvider/MyContext";
+import { useAuth } from "./components/AuthPages/auth";
 function App() {
-  const { contextTest, setContextTest } = useContext(dataContext);
-  console.log(contextTest);
+  const { isLoggedIn } = useContext(dataContext);
+  console.log(isLoggedIn);
+
   return (
     <div className="App flex ">
-      <RoutingComponent />
+      {isLoggedIn ? <RoutingComponent /> : <Login />}
     </div>
   );
 }

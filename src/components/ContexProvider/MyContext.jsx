@@ -4,10 +4,10 @@ import { useState } from "react";
 const dataContext = createContext();
 
 function MyContext({ children }) {
-  const [contextTest, setContextTest] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const values = {
-    contextTest,
-    setContextTest,
+    isLoggedIn,
+    setIsLoggedIn,
   };
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
 }

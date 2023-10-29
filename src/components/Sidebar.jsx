@@ -4,10 +4,25 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { IoWallet, IoSettingsSharp } from "react-icons/io5";
 import { GrTransaction } from "react-icons/gr";
 import { ImNotification } from "react-icons/im";
-import { NavLink, Outlet } from "react-router-dom";
+import { MdOutlineLogout } from "react-icons/md";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { logout } from "./AuthPages/auth";
 
+import { useContext } from "react";
+import { dataContext } from "./ContexProvider/MyContext";
 export default function SideBar() {
+  const { setIsLoggedIn } = useContext(dataContext);
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
+
+  //logout function
+  const handleLogout = () => {
+    // setUserRole(null);
+    localStorage.clear();
+    logout();
+    navigate("login");
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className="flex sm:h-screen">
@@ -41,7 +56,7 @@ export default function SideBar() {
                     duration-300 `}
             >
               <MdSpaceDashboard className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/">
                 <span className={`${!open && "hidden"}`}>Dashboard</span>
               </NavLink>
             </li>
@@ -51,7 +66,7 @@ export default function SideBar() {
                     mt-4  duration-300`}
             >
               <IoWallet className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/wallet">
                 <span className={`${!open && "hidden"}`}>Wallet</span>
               </NavLink>
             </li>
@@ -61,7 +76,7 @@ export default function SideBar() {
                     mt-4 duration-300 `}
             >
               <GrTransaction className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/transactions">
                 <span className={`${!open && "hidden"}`}>Transactions</span>
               </NavLink>
             </li>
@@ -71,7 +86,7 @@ export default function SideBar() {
                     mt-4 duration-300 `}
             >
               <ImNotification className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/help">
                 <span className={`${!open && "hidden"}`}>Help</span>
               </NavLink>
             </li>
@@ -87,7 +102,19 @@ export default function SideBar() {
                 </span>
               </NavLink>
             </li>
-            <li>
+            <li
+              className={`text-light-white text-sm flex items-center gap-x-4 
+              cursor-pointer w -96 p-2 hover:bg-light-white hover:text-black rounded-md
+              mt-4 duration-300 `}
+            >
+              <MdOutlineLogout className="text-black" />
+              <buttone onClick={handleLogout}>
+                <span className={`duration-300 ${!open && "hidden"}`}>
+                  logout
+                </span>
+              </buttone>
+            </li>
+            {/* <li>
               {" "}
               <NavLink to="signup">Signup</NavLink>
             </li>
@@ -98,7 +125,7 @@ export default function SideBar() {
             <li>
               {" "}
               <NavLink to="/">Home</NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
