@@ -81,6 +81,7 @@ function Signup() {
         ></div>
 
         <div className="w-[40%] bg-white   rounded-lg shadow-slate-400 sm:mt-[-200px]  sm:z-10 lg:mt-0  sm:w-[80%] md:w-[80%] xl:w-[50%] dark:border-gray-800 md:p-3 p-3 shadow-lg">
+
           <div className="w-full ">
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account
