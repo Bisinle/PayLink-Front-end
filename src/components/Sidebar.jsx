@@ -56,7 +56,7 @@ export default function SideBar() {
                     duration-300 `}
             >
               <MdSpaceDashboard className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/">
                 <span className={`${!open && "hidden"}`}>Dashboard</span>
               </NavLink>
             </li>
@@ -66,7 +66,7 @@ export default function SideBar() {
                     mt-4  duration-300`}
             >
               <IoWallet className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/wallet">
                 <span className={`${!open && "hidden"}`}>Wallet</span>
               </NavLink>
             </li>
@@ -76,7 +76,7 @@ export default function SideBar() {
                     mt-4 duration-300 `}
             >
               <GrTransaction className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/transactions">
                 <span className={`${!open && "hidden"}`}>Transactions</span>
               </NavLink>
             </li>
@@ -86,7 +86,7 @@ export default function SideBar() {
                     mt-4 duration-300 `}
             >
               <ImNotification className="text-black" />
-              <NavLink exact="true" to="/Account">
+              <NavLink exact="true" to="/help">
                 <span className={`${!open && "hidden"}`}>Help</span>
               </NavLink>
             </li>
