@@ -8,17 +8,16 @@ import AOS from "aos";
 import Login from "../AuthPages/Login";
 import Signup from "../AuthPages/Signup";
 import Home from "../Home";
+import SideBar from "../Sidebar";
 
 function RoutingComponent() {
   useEffect(() => {
     AOS.init();
   }, []);
   return (
-    <div
-      className="App flex-col justify-center items-center w-full "
-      data-aos="fade-up"
-      data-aos-duration="1000"
-    >
+    <div className="App flex  " data-aos="fade-up" data-aos-duration="1000">
+      <SideBar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
