@@ -28,7 +28,7 @@ export default function SideBar() {
     <div className="flex mr-[1%]  h-screen min-h-screen ">
       <div
         className={`bg-light-purple  bg-indigo-500  p-5 pt-8 ${
-          open ? "w-60" : "w-16"
+          open ? "w-60" : "w-20"
         } duration-300 relative h-screen`}
       >
         <BsArrowLeftShort
@@ -50,70 +50,80 @@ export default function SideBar() {
                 mt-20 py-2 "
         >
           <ul className="pt-2 ">
-            <li
+            <NavLink
+              exact="true"
+              to="/"
               className={`text-light-white text-sm flex items-center gap-x-4 
-                    cursor-pointer  w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+                    cursor-pointer  w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
                     duration-300 `}
             >
               <MdSpaceDashboard className="text-black" />
-              <NavLink exact="true" to="/">
-                <span className={`${!open && "hidden"}`}>Dashboard</span>
-              </NavLink>
-            </li>
-            <li
+
+              <span className={`${!open && "hidden"}`}>Dashboard</span>
+            </NavLink>
+
+            <NavLink
+              exact="true"
+              to="wallet"
               className={`text-light-white text-sm flex items-center gap-x-4 
-                    cursor-pointer  w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+                    cursor-pointer  w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
                     mt-4  duration-300`}
             >
               <IoWallet className="text-black" />
-              <NavLink exact="true" to="/wallet">
-                <span className={`${!open && "hidden"}`}>Wallet</span>
-              </NavLink>
-            </li>
-            <li
+              <span className={`${!open && "hidden"}`}>Wallet</span>
+            </NavLink>
+
+            <NavLink
+              exact="true"
+              to="/transactions"
               className={`text-light-white text-sm flex items-center gap-x-4 
-                    cursor-pointer  w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+                    cursor-pointer  w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
                     mt-4 duration-300 `}
             >
               <GrTransaction className="text-black" />
-              <NavLink exact="true" to="/transactions">
-                <span className={`${!open && "hidden"}`}>Transactions</span>
-              </NavLink>
-            </li>
-            <li
+
+              <span className={`${!open && "hidden"}`}>Transactions</span>
+            </NavLink>
+
+            <NavLink
+              exact="true"
+              to="/help"
               className={`text-light-white text-sm flex items-center gap-x-4 
-                    cursor-pointer  w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+                    cursor-pointer  w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
                     mt-4 duration-300 `}
             >
               <ImNotification className="text-black" />
-              <NavLink exact="true" to="/help">
-                <span className={`${!open && "hidden"}`}>Help</span>
-              </NavLink>
-            </li>
-            <li
+
+              <span className={`${!open && "hidden"}`}>Help</span>
+            </NavLink>
+
+            <NavLink
+              exact="true"
+              to="/Account"
               className={`text-light-white text-sm flex items-center gap-x-4 
-              cursor-pointer  w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+              cursor-pointer  w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
               mt-4 duration-300 `}
             >
               <IoSettingsSharp className="text-black" />
-              <NavLink exact="true" to="/Account">
-                <span className={`duration-300 ${!open && "hidden"}`}>
-                  Account
-                </span>
-              </NavLink>
-            </li>
-            <li
+
+              <span className={`duration-300 ${!open && "hidden"}`}>
+                Account
+              </span>
+            </NavLink>
+
+            <button
+              onClick={handleLogout}
               className={`text-light-white text-sm flex items-center gap-x-4 
-             cursor-pointer w-[100%]  p-6  hover:bg-white hover:text-black rounded-md
+             cursor-pointer w-[100%]  p-4  hover:bg-white hover:text-black rounded-md
              mt-4 duration-300 `}
             >
               <MdOutlineLogout className="text-black" />
-              <buttone onClick={handleLogout}>
-                <span className={`duration-300 ${!open && "hidden"}`}>
-                  logout
-                </span>
-              </buttone>
-            </li>
+
+              <span className={`duration-300 ${!open && "hidden"}`}>
+                logout
+              </span>
+            </button>
+
             {/* <li>
               {" "}
               <NavLink to="signup">Signup</NavLink>
