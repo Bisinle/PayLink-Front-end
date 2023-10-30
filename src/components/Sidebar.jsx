@@ -25,7 +25,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="flex mr-[1%]  h-screen min-h-screen ">
+    <div className="flex mr-[1%]  h-screen min-h-screen  self-start sticky top-0 col-span-1">
       <div
         className={`bg-light-purple  bg-indigo-500  p-5 pt-8 ${
           open ? "w-60" : "w-20"
