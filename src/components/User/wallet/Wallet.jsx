@@ -44,22 +44,17 @@ function Wallet() {
 
   //__________________________________________________________________________________
   return (
-    <div className=" flex flex-row justify-between bg-gray-400 flex flex-1  overflow-y-auto paragraph px-4">
+    <div className="  flex-row justify-between bg-gray-400 flex flex-1  overflow-y-auto paragraph px-4 gap-10">
       <div className="w-[100%] flex flex-col gap-4 ">
         <div className="   w-full  mt-1  flex flex-row items-center justify-center]">
           <WalletStats userBalance={userBalance} />
-          <h1 className="text-4xl  font-bold whitespace-nowrap">
-            Welcome Back {Current_UserName}
-          </h1>
         </div>
-        <div className=" h-96 w-96 bg-black">
+        <div className=" h-96 w-[100%] ml-4 bg-black">
           <h1>asldkfjsldfkaj</h1>
         </div>
-        <div className="flex justify-center items-center bg-gray-400 h-[300px]  w-[70%] overflow-hidden">
-          <WalletActivity />
-        </div>
+        <WalletActivity />
       </div>
-      <div className="left-side h-screen bg-orange-600 w-full">
+      <div className="left-side h-screen bg-orange-600  w-[100%">
         {" "}
         <h1>hello</h1>
         <Pichart />

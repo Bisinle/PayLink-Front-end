@@ -52,7 +52,7 @@ export default function WalletActivity() {
     );
   });
   return (
-    <div className="  rounded-lg shadow-lg ml-5 border   mt-60 w-[60%] ">
+    <div className="  rounded-lg shadow-lg ml-5 mr-5 border   mt-20 w-[100%] ">
       <table className="w-full">
         <thead className="bg-gray-100 rounded-xl  border-b-2 border-gray-300">
           <tr>
@@ -68,7 +68,7 @@ export default function WalletActivity() {
             <th className="w-24 p-2 text-sm font-semibold tracking-wide text-left">
               Date
             </th>
-            <th className="w-32 p-2 text-sm font-semibold tracking-wide text-left">
+            <th className="w-20 p-2 text-sm font-semibold tracking-wide text-left">
               Amount
             </th>
           </tr>
