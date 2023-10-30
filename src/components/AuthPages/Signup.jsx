@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-web";
 import signupBanner from "../../assets/signupBanner.json";
 import AOS from "aos";
@@ -12,6 +12,9 @@ function Signup() {
   //----------C O N T E X T
   const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
     useContext(dataContext);
+
+  const navigate = useNavigate();
+
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const container = useRef();
   const {
@@ -41,10 +44,9 @@ function Signup() {
       anim.destroy();
     };
   }, []);
-  // console.log(watch("username"));
-  // console.log(watch("password"));
-  function signup(data) {
-    // console.log(data);
+
+  function signUpUser(data) {
+    console.log(data);
     const requestOptions = {
       method: "POST",
       headers: {
@@ -62,7 +64,7 @@ function Signup() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        navigate("/login");
+        // navigate("login");
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -86,19 +88,21 @@ function Signup() {
             <h1 className="flex justify-center mb-10 text-3xl font-bold">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6  w-full" action="#">
+            <form
+              className="space-y-4 md:space-y-6  w-full"
+              action="#"
+              onSubmit={handleSubmit(signUpUser)}
+            >
               <div className=" grid grid-cols-2 gap-4">
                 <div>
                   <label
-                    for="firstname"
+                    for="first_name"
                     className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     First name
                   </label>
                   <input
                     type="text"
-                    name="firstname"
-                    id="firstname"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="first name"
                     {...register("first_name")}
@@ -106,15 +110,13 @@ function Signup() {
                 </div>
                 <div>
                   <label
-                    for="Lastname"
+                    for="last_name"
                     className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Last Name
                   </label>
                   <input
                     type="text"
-                    name="Lastname"
-                    id="Lastname"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Last name"
                     {...register("last_name")}
@@ -130,8 +132,6 @@ function Signup() {
                   </label>
                   <input
                     type="text"
-                    name="user_name"
-                    id="user_name"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="user name"
                     {...register("user_name")}
@@ -146,8 +146,6 @@ function Signup() {
                   </label>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     {...register("email")}
@@ -162,8 +160,6 @@ function Signup() {
                   </label>
                   <input
                     type="text"
-                    name="address"
-                    id="address"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="address"
                     {...register("address")}
@@ -178,8 +174,6 @@ function Signup() {
                   </label>
                   <input
                     type="text"
-                    name="phone_number"
-                    id="phone_number"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="phone_number"
                     {...register("phone_number")}
@@ -194,8 +188,6 @@ function Signup() {
                   </label>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     {...register("password")}
@@ -210,8 +202,6 @@ function Signup() {
                   </label>
                   <input
                     type="password"
-                    name="password"
-                    id="confirm_password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     {...register("confirm_password")}
@@ -219,11 +209,7 @@ function Signup() {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className=" text-white border shadow  flex justify-center items-center mx-auto border-gray-300 bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                onClick={handleSubmit(signup)}
-              >
+              <button className=" text-white border shadow  flex justify-center items-center mx-auto border-gray-300 bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Create an account
               </button>
               <p className="text-sm font-light   text-gray-500 dark:text-gray-400">

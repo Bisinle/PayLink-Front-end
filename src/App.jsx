@@ -47,15 +47,7 @@ function App() {
 
   return (
     <div className="App  ">
-      {!isLoggedIn ? ( // Check if the user is not logged in
-        loginSignupToggle ? ( // Check if the user wants to sign up
-          <Signup />
-        ) : (
-          <Login />
-        )
-      ) : (
-        <RoutingComponent />
-      )}
+      <RoutingComponent />
     </div>
   );
 }
@@ -63,10 +55,15 @@ function App() {
 export default App;
 
 // return (
-//   // <>
-//   //   <Navbar />
-//   //
-//   //
-//   // </>
-
-// )
+//   <div className="App  ">
+//     {!isLoggedIn ? ( // Check if the user is not logged in
+//       loginSignupToggle ? ( // Check if the user wants to sign up
+//         <Signup />
+//       ) : (
+//         <Login />
+//       )
+//     ) : (
+//       <RoutingComponent />
+//     )}
+//   </div>
+// );

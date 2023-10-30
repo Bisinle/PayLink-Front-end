@@ -64,7 +64,7 @@ export default function Login() {
     fetch("http://127.0.0.1:5555/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(response);
+        console.log(data);
         login(data.access_token);
         data.access_token && navigate("/");
         data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);

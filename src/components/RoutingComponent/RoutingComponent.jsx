@@ -34,7 +34,8 @@ function RoutingComponent() {
   }, []);
   return (
     <div className="App flex  ">
-      {isLoggedIn && <SideBar />}
+      {/* {isLoggedIn && <SideBar />} */}
+      <SideBar />
 
       <Routes>
         <Route path="/" element={<Dashboard />} />
