@@ -38,7 +38,6 @@ function Donut({ currentUserWalletActivity }) {
         strokeColor="black"
         className="custom-donut-chart"
       />
-      ;
     </div>
   );
 }

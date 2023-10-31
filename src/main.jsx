@@ -6,13 +6,16 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 // import { } from "./components/ContexProvider/MyContext.jsx";
 import MyContext from "./components/ContexProvider/MyContext.jsx";
+import { ThemeProvider } from "@material-tailwind/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MyContext>
-      <Router>
-        <App />
-      </Router>
-    </MyContext>
+    <ThemeProvider>
+      <MyContext>
+        <Router>
+          <App />
+        </Router>
+      </MyContext>
+    </ThemeProvider>
   </React.StrictMode>
 );

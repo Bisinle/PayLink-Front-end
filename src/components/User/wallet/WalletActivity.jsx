@@ -4,6 +4,7 @@ import { dataContext } from "../../ContexProvider/MyContext";
 import { useContext } from "react";
 import { walletContext } from "./WalletContextProvider";
 import Donut from "./Donut";
+import Example from "./Example";
 
 export default function WalletActivity() {
   const { Current_UserId } = useContext(dataContext);
@@ -68,6 +69,7 @@ export default function WalletActivity() {
   return (
     <div className=" sm:flex sm:flex-col md:flex-row ">
       {/* <Pichart walletData={walletData} /> */}
+      {/* <Example /> */}
       <Donut currentUserWalletActivity={currentUserWalletActivity} />
       <div className="  rounded-lg shadow-lg ml-5 mr-5 border    w-[100%] ">
         <table className="w-full">
