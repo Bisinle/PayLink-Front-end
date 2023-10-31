@@ -1,6 +1,6 @@
 import React from "react";
 import DonutChart from "react-donut-chart";
-import "./Donut.css";
+import "./MinotTouches.css";
 
 function Donut({ currentUserWalletActivity }) {
   // console.log(currentUserWalletActivity[0]);
@@ -15,13 +15,13 @@ function Donut({ currentUserWalletActivity }) {
       return TotalReceived;
     }
   });
-  console.log(TotalSent);
-  console.log(TotalReceived);
-  console.log(currentUserWalletActivity);
+  // console.log(TotalSent);
+  // console.log(TotalReceived);
+  // console.log(currentUserWalletActivity);
   // console.log(totalSentAndReceived);
 
   return (
-    <div className="border pt-10 h-[400px] w-[500px] rounded-lg shadow-xl font-bold text-xl flex flex-col  justify-center items-center shadow-gray-300">
+    <div className="border pt-10 ml-6 h-[400px] w-[500px] rounded-2xl  border-t-2 shadow-xl font-bold text-xl flex flex-col  justify-center items-center shadow-gray-300">
       <h1 className="mt-2 mb-5 ">Sent vs Received</h1>
       <DonutChart
         data={[

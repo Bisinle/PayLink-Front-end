@@ -67,11 +67,9 @@ export default function WalletActivity() {
     );
   });
   return (
-    <div className=" sm:flex sm:flex-col md:flex-row ">
-      {/* <Pichart walletData={walletData} /> */}
-      {/* <Example /> */}
-      <Donut currentUserWalletActivity={currentUserWalletActivity} />
-      <div className="  rounded-lg shadow-lg ml-5 mr-5 border    w-[100%] ">
+    <div className=" flex justify-between  md:flex-col xl:flex-row items-center sm:flex-col  mt-5  ">
+  
+      <div className="  rounded-lg border-b-4 shadow-sm md:w-full md:m-5 ml-4 mr-5 border-t-4 flex     w-[70%] ">
         <table className="w-full">
           <thead className="bg-gray-100 rounded-xl  border-b-2 border-gray-300">
             <tr>
@@ -92,9 +90,11 @@ export default function WalletActivity() {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">{activityRow}</tbody>
+          <tbody className="divide-y divide-gray-300">{activityRow}</tbody>
         </table>
       </div>
+      <Donut currentUserWalletActivity={currentUserWalletActivity} />
+
     </div>
   );
 }
