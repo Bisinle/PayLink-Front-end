@@ -1,6 +1,6 @@
 import React from "react";
 import { FaShopify, FaCoins } from "react-icons/fa6";
-import CreditCard from "./CreditCard";
+import CreditCard from "./CreditCard/CreditCard";
 import { BsFillBarChartLineFill } from "react-icons/bs";
 import { GiWallet } from "react-icons/gi";
 

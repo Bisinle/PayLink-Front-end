@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 import WalletActivity from "./WalletActivity";
 import PayModal from "./PayModal";
+import CreditCard from "./CreditCard/CreditCard";
+import CreditInfo from "./CreditCard/CreditInfo";
 // import Donut from "./Donut";
 
 function Wallet() {
@@ -46,23 +48,11 @@ function Wallet() {
     <div className="  flex md:flex-col xl:flex-row flex-row justify-center   flex-1  overflow-y-auto paragraph px-4 gap-10 ">
       <div className="w-[100%] flex flex-col gap-4 ">
         <div className="   w-full  mt-1  flex flex-row items-center justify-center]">
+       
           <WalletStats userBalance={userBalance} />
         </div>
         {/* ------------------------TAILWIND-- C A R D------------------------------ */}
-        <div class="w-[100%] h-80 p-6   border border-gray-200 rounded-lg shadow bg-yellow-400 ">
-          <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Noteworthy technology acquisitions 2021
-            </h5>
-          </a>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-          <div className="">
-            <PayModal />
-          </div>
-        </div>
+      <CreditInfo/>
 
         <WalletActivity />
       </div>
