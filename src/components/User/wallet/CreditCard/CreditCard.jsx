@@ -17,8 +17,8 @@ function CreditCard() {
         <div className="chip">
           <img src={chip} alt="chip" />
         </div>
-        <div className="number">{localStorage.getItem("account_number")}</div>
-        <div className="name">{localStorage.getItem("user_name")}</div>
+        <div className="number text-xl mt-2">{localStorage.getItem("account_number")}</div>
+        <div className="name text-sm">{localStorage.getItem("user_name")}</div>
         <div className="from">10/19</div>
         <div className="to">06/21</div>
       </div>

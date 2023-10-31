@@ -60,7 +60,7 @@ function PayModal() {
       <button
         onClick={openModel}
         type="button"
-        class=" btn text-white font-bold text-xl bg-indigo-900 border-gray-30  px-4 py-2 rounded-xl text"
+        class=" btn text-white font-bold text-xl bg-indigo-400 border-gray-30  px-4 py-2 rounded-xl text"
         data-toggle="modal"
         data-target="#exampleModalCenter"
       >
