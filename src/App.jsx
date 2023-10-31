@@ -17,7 +17,7 @@ function App() {
 
   const { authState, login } = useAuth();
   const b4 = localStorage.getItem("REACT_TOKEN_AUTH_KEY");
-  console.log(b4);
+  // console.log(b4);
   const onUpdateToken = async () => {
     try {
       const response = await fetch(

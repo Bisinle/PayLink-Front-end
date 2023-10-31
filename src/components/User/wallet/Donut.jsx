@@ -15,9 +15,9 @@ function Donut({ currentUserWalletActivity }) {
       return TotalReceived;
     }
   });
-  console.log(TotalSent);
-  console.log(TotalReceived);
-  console.log(currentUserWalletActivity);
+  // console.log(TotalSent);
+  // console.log(TotalReceived);
+  // console.log(currentUserWalletActivity);
   // console.log(totalSentAndReceived);
 
   return (

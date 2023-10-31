@@ -4,7 +4,7 @@ import Pichart from "./Pichart";
 import { useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 import WalletActivity from "./WalletActivity";
-import { PayModal } from "./PayModal";
+import PayModal from "./PayModal";
 // import Donut from "./Donut";
 
 function Wallet() {
