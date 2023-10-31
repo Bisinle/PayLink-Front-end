@@ -8,10 +8,10 @@ function WalletActivityRecord({
   activity_transaction_type,
 }) {
   const typeColor =
-    activity_transaction_type === "sent" ? "bg-green-200" : "bg-yellow-200";
+    activity_transaction_type === "sent" ? "bg-red-200" : "bg-green-200";
   const arrow_color =
-    activity_transaction_type === "sent" ? "text-green-400" : "text-red-400";
-  const arrows = activity_transaction_type === "sent" ? "⬇" : "⬆";
+    activity_transaction_type === "sent" ? "text-red-400" : "text-green-400";
+  const arrows = activity_transaction_type === "sent" ? "⬆" : "⬇";
 
   return (
     <>

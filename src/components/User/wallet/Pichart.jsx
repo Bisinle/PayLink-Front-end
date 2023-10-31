@@ -1,24 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
-
+import { walletContext } from "./WalletContextProvider";
 const data = [
-  { name: "Food", value: 540 },
-  { name: "Rent", value: 620 },
-  { name: "Bills", value: 453 },
-  { name: "Investment", value: 230 },
-  { name: "Transportation", value: 686 },
-  { name: "HealthCare", value: 900 },
+  { name: "Sent", value: 540 },
+  { name: "Received", value: 620 },
 ];
-
 const RADIAN = Math.PI / 180;
-const COLORS = [
-  "#00C49F",
-  "#F2320D",
-  "#FFBB28",
-  "#FF8042",
-  "#301934",
-  "#9E08E2",
-];
+const COLORS = ["#00C49F", "#00008B"];
 
 const renderCustomizedLabel = ({
   cx,
@@ -45,7 +33,23 @@ const renderCustomizedLabel = ({
   );
 };
 
-export default function Pichart() {
+export default function Pichart({ walletData }) {
+  const [totalSent, setTotalSent] = useState(0);
+  const [totalReceived, setTotalReceived] = useState(0);
+  // const { walletActivityData } = useContext(walletContext);
+
+  if (!walletData || walletData.length === 0) {
+    // Render a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+  // console.log(walletData);
+  //let calculate the total amount sent and received by the user
+  const totalSentAndReceived = walletData.map((activity) => {});
+
   return (
     <div className="w-[30rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">Expense Types</strong>

@@ -2,26 +2,39 @@ import React, { useState, useEffect } from "react";
 import WalletActivityRecord from "./WalletActivityRecord";
 import { dataContext } from "../../ContexProvider/MyContext";
 import { useContext } from "react";
+import { walletContext } from "./WalletContextProvider";
+import Donut from "./Donut";
 
 export default function WalletActivity() {
-  const { Current_UserName, Current_UserId } = useContext(dataContext);
-  const [walletActivityData, setWalletActivityData] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5555/wallet/wallet-Activity")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((response) => {
-        console.log(response);
-        setWalletActivityData(response);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }, []);
+  const { Current_UserId } = useContext(dataContext);
+
+  const { walletActivityData } = useContext(walletContext);
+  if (!walletActivityData || walletActivityData.length === 0) {
+    // Render a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // const [walletActivityData, setWalletActivityData] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:5555/wallet/wallet-Activity")
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((response) => {
+  //       // console.log(response);
+  //       setWalletActivityData(response);
+  //     })
+  //     .catch((error) => {
+  //       console.error("There was a problem with the fetch operation:", error);
+  //     });
+  // }, []);
 
   if (!walletActivityData || walletActivityData.length === 0) {
     // Render a loading indicator
@@ -37,7 +50,8 @@ export default function WalletActivity() {
       return user;
     }
   });
-  console.log(currentUserWalletActivity);
+
+  // console.log(currentUserWalletActivity);
   const activityRow = currentUserWalletActivity.map((activity) => {
     return (
       <tr key={activity.id}>
@@ -52,29 +66,33 @@ export default function WalletActivity() {
     );
   });
   return (
-    <div className="  rounded-lg shadow-lg ml-5 mr-5 border   mt-20 w-[100%] ">
-      <table className="w-full">
-        <thead className="bg-gray-100 rounded-xl  border-b-2 border-gray-300">
-          <tr>
-            <th className="w-20 p-2 text-sm font-semibold tracking-wide text-left">
-              #
-            </th>
-            <th className="p-2 text-sm font-semibold tracking-wide text-left">
-              Descriptions
-            </th>
-            <th className="  w-24 p-2 text-sm font-semibold tracking-wide text-left">
-              Type
-            </th>
-            <th className="w-24 p-2 text-sm font-semibold tracking-wide text-left">
-              Date
-            </th>
-            <th className="w-20 p-2 text-sm font-semibold tracking-wide text-left">
-              Amount
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-100">{activityRow}</tbody>
-      </table>
+    <div className=" sm:flex sm:flex-col md:flex-row ">
+      {/* <Pichart walletData={walletData} /> */}
+      <Donut currentUserWalletActivity={currentUserWalletActivity} />
+      <div className="  rounded-lg shadow-lg ml-5 mr-5 border    w-[100%] ">
+        <table className="w-full">
+          <thead className="bg-gray-100 rounded-xl  border-b-2 border-gray-300">
+            <tr>
+              <th className="w-20 p-2 text-sm font-semibold tracking-wide text-left">
+                #
+              </th>
+              <th className="p-2 text-sm font-semibold tracking-wide text-left">
+                Descriptions
+              </th>
+              <th className="  w-24 p-2 text-sm font-semibold tracking-wide text-left">
+                Type
+              </th>
+              <th className="w-24 p-2 text-sm font-semibold tracking-wide text-left">
+                Date
+              </th>
+              <th className="w-20 p-2 text-sm font-semibold tracking-wide text-left">
+                Amount
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">{activityRow}</tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ import Wallet from "../User/wallet/Wallet";
 //----------C O N T E X T
 import { useContext } from "react";
 import { dataContext } from "../ContexProvider/MyContext";
-
+import WalletContextProvider from "../User/wallet/WalletContextProvider";
 //----------P R T E C T O R
 import Protexted from "../AuthPages/Protexted";
 
@@ -39,7 +39,16 @@ function RoutingComponent() {
 
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="wallet" element={<Wallet />} />
+
+        <Route
+          path="wallet"
+          element={
+            <WalletContextProvider>
+              <Wallet />
+            </WalletContextProvider>
+          }
+        />
+
         <Route path="transactions" element={<Transactions />} />
         <Route path="help" element={<Help />} />
         <Route path="account" element={<Account />} />

@@ -5,7 +5,7 @@ import { BsFillBarChartLineFill } from "react-icons/bs";
 import { GiWallet } from "react-icons/gi";
 
 function WalletStats({ userBalance }) {
-  console.log(userBalance);
+  // console.log(userBalance);
   if (!userBalance) {
     // Handle the case where userBalance is not found
     return (
