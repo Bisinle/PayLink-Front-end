@@ -3,7 +3,7 @@ import { GiWallet } from "react-icons/gi";
 
 function WalletStatsCard() {
   return (
-    <div className="stat  w-[300px] py-2 px-2   rounded-lg   flex flex-col text-white relative">
+    <div className="stat  w-[300px] py-2 px-2   rounded-lg   flex bg-green-300 text-white relative">
       <div className="icon-title h-40  rounded-lg flex  items-center gap-10 text-black border shadow-lg bg-gradient-to-tr  from-pink-800 to-indigo-500">
         <div className=" flex flex-row">
           <span className=" text-2xl absolute  top-4 text-gray-300 font-semibold p-2 ml-4 flex justify-center items-center">

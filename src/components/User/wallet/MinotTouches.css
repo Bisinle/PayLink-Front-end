@@ -7,3 +7,18 @@
 .custom-donut-chart:nth-child(2) {
   fill: #1658d1; /* Set the desired color */
 }
+
+.model {
+  display: none;
+}
+
+.model.open {
+  display: block;
+  transition: 3s;
+  
+  /* Add other styling to make the model visible and centered on the screen */
+}
+
+/* .model-content {
+  /* Style the content within the model */
+/* } * */

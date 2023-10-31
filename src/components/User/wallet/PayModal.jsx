@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import "./MinotTouches.css";
 
 //get the user id from the contetxProvider
 import { useContext } from "react";
@@ -8,7 +9,8 @@ import { dataContext } from "../../ContexProvider/MyContext";
 function PayModal() {
   //destructure the context
   const { Current_UserId } = useContext(dataContext);
-  console.log(localStorage.getItem("REACT_TOKEN_AUTH_KEY"));
+  const [isModelOpen, setIsModelOpen] = useState(false);
+
   const {
     register,
     watch,
@@ -18,12 +20,13 @@ function PayModal() {
   } = useForm();
 
   function sendMoney(data) {
+    data.sender_id = localStorage.getItem("user_id");
     console.log(data);
-    // data.user_id = "24";
+
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("REACT_TOKEN_AUTH_KEY")}`,
+        Authorization: "Bearer " + localStorage.getItem("REACT_TOKEN_AUTH_KEY"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -44,9 +47,18 @@ function PayModal() {
         console.error("There was a problem with the fetch operation:", error);
       });
   }
+  const openModel = () => {
+    setIsModelOpen(true);
+  };
+
+  const closeModel = () => {
+    setIsModelOpen(false);
+  };
+
   return (
-    <div className="bg-green-500 w-[50%] h-[100%]">
+    <div className="bg-green-500 w-[70%]">
       <button
+        onClick={openModel}
         type="button"
         class=" btn text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-xl text"
         data-toggle="modal"
@@ -56,38 +68,42 @@ function PayModal() {
       </button>
 
       <div
-        class="modal fade 	"
+        class={`model modal  ${isModelOpen ? "open" : "hidden"} `}
+        data-bs-backdrop="static"
+        data-keyboard="false"
+        
         id="exampleModalCenter"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true"
       >
+       
         <div
-          class="modal-dialog bg-yellow-300 modal-dialog-centered  "
+          class="  w-1/2    absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg "
           role="document"
         >
-          <div class="modal-content bg-orange-900 flex justify-center items-center">
-            <div class="modal-header flex flex-col justify-center items-center bg-cyan-600 w-[100%]">
+          <div class="modal-content flex justify-center items-center">
+            <div class="modal-header flex flex-col justify-center items-center w-[100%]">
               <h5
-                class="modal-title text-2xl font-bold text-white  "
+                class="modal-title text-2xl font-bold text-black  mb-5 "
                 id="exampleModalCenterTitle"
               >
                 M O D E L
               </h5>
               <form class="space-y-4 md:space-y-6 w-[80%]  " action="#">
-                <div className="bg-blue-500">
+                <div className="">
                   <label
                     for="account"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    class="block mb-2 text-xl font-medium text-gray-900 "
                   >
                     account
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="account"
                     id="account"
-                    className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="account"
                     {...register("account", {
                       required: true,
@@ -112,14 +128,14 @@ function PayModal() {
                 <div>
                   <label
                     for="confirm-amount"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    class="block mb-2 text-xl font-medium text-gray-900 "
                   >
                     amount
                   </label>
                   <input
-                    type="amount"
+                    type="number"
                     {...register("amount", { required: true, minLength: 2 })}
-                    className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="amount"
                   />
                   {errors.amount && (
@@ -137,14 +153,14 @@ function PayModal() {
                 <div>
                   <label
                     for="category"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    class="block mb-2 text-xl font-medium text-gray-900 "
                   >
                     what are you paying for
                   </label>
                   <input
-                    type="category"
+                    type="text"
                     {...register("category", { required: true, minLength: 2 })}
-                    className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="category"
                   />
                   {errors.category && (
@@ -175,6 +191,7 @@ function PayModal() {
                 type="button"
                 class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
                 data-dismiss="modal"
+                onClick={closeModel}
               >
                 Close
               </button>

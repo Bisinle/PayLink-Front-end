@@ -18,9 +18,9 @@ function WalletStats({ userBalance }) {
   return (
     <>
       {/* <h1 className="text-5xl font-bold ml-10 mt-5">welcom back user</h1> */}
-      <div className="flex flex-row gap-50  ml-3  flex-wrap w-full ">
-        <div className="stat  w-[300px] py-2 px-2   rounded-lg    flex flex-col text-white relative">
-          <div className="icon-title h-40  rounded-lg flex  items-center gap-10 text-black border shadow-lg bg-gradient-to-tr  from-pink-800 to-indigo-500">
+      <div className="flex flex-row gap-50  sm:flex-wrap sm:justify-center sm:gap-3 lg:gap-3 lg:justify-start lg:flex-row items-center  mt-4 mb-4   flex-wrap w-full ">
+        <div className="   w-[300px]    rounded-lg    flex flex-col text-white relative">
+          <div className="icon-title h-40 w-[100%] rounded-lg shadow-md flex  items-center gap-10 text-black border  bg-gradient-to-tr  from-pink-800 to-indigo-500">
             <div className=" flex flex-row">
               <span className="  absolute  top-4 text-yellow-300 font-semibold p-2 ml-4 flex justify-center items-center">
                 Main
@@ -32,7 +32,7 @@ function WalletStats({ userBalance }) {
             <span class=" flex  justify-center items-center text-gray-300 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold ">
               Balance
             </span>
-            <span className=" text-2xl absolute  bottom-4 left-10 text-white font-semibold p-2 ml-4 flex justify-center items-center">
+            <span className=" text-2xl absolute  bottom-2 left-3 text-white font-semibold p-2  flex justify-center items-center">
               ${userBalance.balance}
             </span>
           </div>
@@ -40,7 +40,7 @@ function WalletStats({ userBalance }) {
 
         <BoxWrapper>
           {" "}
-          <div className="icon-title h-40  bg-orange-500 rounded-lg flex  items-center gap-10 text-black">
+          <div className="icon-title h-40  shadow-md  border-2 rounded-lg flex  items-center gap-10 text-black">
             <div className="icon bg-indigo-500 h-12 w-12 flex justify-center items-center rounded-full">
               <FaShopify className=" rounded-full h-12 w-12 text-white " />
             </div>
@@ -57,7 +57,7 @@ function WalletStats({ userBalance }) {
         </BoxWrapper>
         <BoxWrapper>
           {" "}
-          <div className="icon-title h-40  bg-orange-500 rounded-lg flex  items-center gap-10 text-black">
+          <div className="icon-title h-40  shadow-md  border-2 rounded-lg flex  items-center gap-10 text-black">
             <div className="icon bg-indigo-500 h-12 w-12 flex justify-center items-center rounded-full">
               <FaShopify className=" rounded-full h-12 w-12 text-white " />
             </div>
@@ -74,7 +74,7 @@ function WalletStats({ userBalance }) {
         </BoxWrapper>
         <BoxWrapper>
           {" "}
-          <div className="icon-title h-40  bg-orange-500 rounded-lg flex  items-center gap-10 text-black">
+          <div className="icon-title h-40  shadow-md  border-2 rounded-lg flex  items-center gap-10 text-black">
             <div className="icon bg-indigo-500 h-12 w-12 flex justify-center items-center rounded-full">
               <FaShopify className=" rounded-full h-12 w-12 text-white " />
             </div>

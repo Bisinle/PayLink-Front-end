@@ -43,13 +43,13 @@ function Wallet() {
   );
 
   return (
-    <div className="  flex-row justify-between flex flex-1 s overflow-y-auto paragraph px-4 gap-10">
+    <div className="  flex md:flex-col xl:flex-row flex-row justify-center   flex-1  overflow-y-auto paragraph px-4 gap-10 ">
       <div className="w-[100%] flex flex-col gap-4 ">
         <div className="   w-full  mt-1  flex flex-row items-center justify-center]">
           <WalletStats userBalance={userBalance} />
         </div>
         {/* ------------------------TAILWIND-- C A R D------------------------------ */}
-        <div class="w-[100%] h-80 p-6 relative m-4 bg-white border border-gray-200 rounded-lg shadow ">
+        <div class="w-[100%] h-80 p-6   border border-gray-200 rounded-lg shadow bg-yellow-400 ">
           <a href="#">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Noteworthy technology acquisitions 2021
