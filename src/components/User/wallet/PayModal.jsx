@@ -56,34 +56,32 @@ function PayModal() {
   };
 
   return (
-    <div className="bg-green-500 w-[70%]">
+    <div className=" absolute  top-44 left-96 btn ">
       <button
         onClick={openModel}
         type="button"
-        class=" btn text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-xl text"
+        class=" btn text-white font-bold text-xl bg-indigo-400 border-gray-30  px-4 py-2 rounded-xl text"
         data-toggle="modal"
         data-target="#exampleModalCenter"
       >
-        Launch demo modal
+        send money
       </button>
 
       <div
         class={`model modal  ${isModelOpen ? "open" : "hidden"} `}
         data-bs-backdrop="static"
         data-keyboard="false"
-        
         id="exampleModalCenter"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true"
       >
-       
         <div
           class="  w-1/2    absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg "
           role="document"
         >
-          <div class="modal-content flex justify-center items-center">
+          <div class="modal-content flex justify-center items-center ">
             <div class="modal-header flex flex-col justify-center items-center w-[100%]">
               <h5
                 class="modal-title text-2xl font-bold text-black  mb-5 "
@@ -186,7 +184,7 @@ function PayModal() {
               </button>
             </div>
             <div class="modal-body"></div>
-            <div class="modal-footer">
+            <div class="modal-footer ">
               <button
                 type="button"
                 class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
