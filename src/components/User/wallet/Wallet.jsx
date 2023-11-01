@@ -7,6 +7,7 @@ import WalletActivity from "./WalletActivity";
 import PayModal from "./Modal/PayModal";
 import CreditCard from "./CreditCard/CreditCard";
 import CreditInfo from "./CreditCard/CreditInfo";
+import axios from "axios";
 // import Donut from "./Donut";
 
 function Wallet() {
@@ -15,7 +16,34 @@ function Wallet() {
   //__________________________________________________;
   // Fetch wallet data and set walletData in the state
   useEffect(() => {
-    fetch("http://localhost:5555/wallet/wallet")
+    // useEffect(() => {
+    //   axios
+    //     .get(
+    //          "http://localhost:5555/wallet/wallet"
+    //       ,
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    //         },
+    //       }
+    //     )
+    //     .then((res) => {
+    //       setWalletData(res.data);
+    //       console.log("CART ITEMS", res.data);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching cart items:", error);
+    //     });
+    // }, [localStorage.getItem("user_id")]);
+
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("http://localhost:5555/wallet/wallet", requestOptions)
       .then((res) => {
         if (!res.ok) {
           S;
@@ -24,7 +52,7 @@ function Wallet() {
         return res.json();
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         setWalletData(response);
       })
       .catch((error) => {

@@ -10,14 +10,20 @@ function PayModal() {
   //destructure the context
   const { Current_UserId } = useContext(dataContext);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  // console.log(localStorage.getItem("access_token"));
 
   const {
     register,
     watch,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      serverError: "",
+    },
+  });
 
   function sendMoney(data) {
     data.sender_id = localStorage.getItem("user_id");
@@ -26,7 +32,7 @@ function PayModal() {
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("REACT_TOKEN_AUTH_KEY"),
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -42,6 +48,7 @@ function PayModal() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         // navigate("login");
+        setError("serverError", { type: "custom", message: response.message });
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -182,7 +189,9 @@ function PayModal() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body">
+              <p className="text-red-500 text-xl">{errors.serverError?.message}</p>
+            </div>
             <div class="modal-footer ">
               <button
                 type="button"
