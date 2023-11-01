@@ -10,6 +10,7 @@ function PayModal() {
   //destructure the context
   const { Current_UserId } = useContext(dataContext);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  console.log(localStorage.getItem("access_token"));
 
   const {
     register,
@@ -26,7 +27,7 @@ function PayModal() {
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("REACT_TOKEN_AUTH_KEY"),
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),

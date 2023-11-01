@@ -14,23 +14,50 @@ function Wallet() {
   const [walletData, setWalletData] = useState([]);
   //__________________________________________________;
   // Fetch wallet data and set walletData in the state
-  useEffect(() => {
-    fetch("http://localhost:5555/wallet/wallet")
-      .then((res) => {
-        if (!res.ok) {
-          S;
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((response) => {
-        // console.log(response);
-        setWalletData(response);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }, []);
+  // useEffect(() => {
+    useEffect(() => {
+      axios
+        .get(
+          `    "http://localhost:5555/wallet/wallet"
+        `,
+          {
+            headers: {
+              Authorization: `Bearer ${jwToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          setCurrentUserCartItems(res.data);
+          console.log("CART ITEMS", res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching cart items:", error);
+        });
+    }, [localStorage.getItem('user_id')]);
+
+    // const requestOptions = {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: "Bearer " + localStorage.getItem("access_token"),
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+  //   fetch("http://localhost:5555/wallet/wallet", requestOptions)
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         S;
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       setWalletData(response);
+  //     })
+  //     .catch((error) => {
+  //       console.error("There was a problem with the fetch operation:", error);
+  //     });
+  // }, []);
 
   if (!walletData || walletData.length === 0) {
     // Render a loading indicator
