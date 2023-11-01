@@ -16,6 +16,7 @@ function NewWalletModal() {
     watch,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
   } = useForm();
 

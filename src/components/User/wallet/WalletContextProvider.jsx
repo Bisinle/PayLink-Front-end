@@ -10,22 +10,22 @@ function WalletContextProvider({ children }) {
     []
   );
 
-  useEffect(() => {
-    fetch("http://localhost:5555/wallet/wallet-Activity")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((response) => {
-        // console.log(response);
-        setWalletActivityData(response);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5555/wallet/wallet-Activity")
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((response) => {
+  //       // console.log(response);
+  //       setWalletActivityData(response);
+  //     })
+  //     .catch((error) => {
+  //       console.error("There was a problem with the fetch operation:", error);
+  //     });
+  // }, []);
 
   const values = {
     walletActivityData,
