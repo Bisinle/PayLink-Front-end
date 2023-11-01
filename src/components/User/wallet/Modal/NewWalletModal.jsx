@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "./MinotTouches.css";
+import "../MinotTouches.css";
 
 //get the user id from the contetxProvider
 import { useContext } from "react";
-import { dataContext } from "../../ContexProvider/MyContext";
-function PayModal() {
+// import dataContext
+function NewWalletModal() {
   //destructure the context
-  const { Current_UserId } = useContext(dataContext);
-  const [isModelOpen, setIsModelOpen] = useState(false);
+  // const { Current_UserId } = useContext(dataContext);
+  const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
 
   const {
     register,
@@ -47,31 +47,30 @@ function PayModal() {
         console.error("There was a problem with the fetch operation:", error);
       });
   }
-  const openModel = () => {
-    setIsModelOpen(true);
+  const openNewWalletModel = () => {
+    setIsNewWalletModelOpen(true);
   };
 
-  const closeModel = () => {
-    setIsModelOpen(false);
+  const closeNewWalletModel = () => {
+    setIsNewWalletModelOpen(false);
   };
-
   return (
-    <div className=" absolute  top-44 left-96 btn ">
+    <div className="   top-44 left-96 btn ">
       <button
-        onClick={openModel}
+        onClick={openNewWalletModel}
         type="button"
         class=" btn text-white font-bold text-xl bg-indigo-400 border-gray-30  px-4 py-2 rounded-xl text"
         data-toggle="modal"
-        data-target="#exampleModalCenter"
+        data-target="#walletModal"
       >
-        send money
+        Create Wallet
       </button>
 
       <div
-        class={`model modal  ${isModelOpen ? "open" : "hidden"} `}
+        class={`model modal  ${isNewWalletModelOpen ? "open" : "hidden"} `}
         data-bs-backdrop="static"
         data-keyboard="false"
-        id="exampleModalCenter"
+        id="walletModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalCenterTitle"
@@ -87,7 +86,7 @@ function PayModal() {
                 class="modal-title text-2xl font-bold text-black  mb-5 "
                 id="exampleModalCenterTitle"
               >
-                M O D E L
+                P A Y L I N
               </h5>
               <form class="space-y-4 md:space-y-6 w-[80%]  " action="#">
                 <div className="">
@@ -101,7 +100,7 @@ function PayModal() {
                     type="number"
                     name="account"
                     id="account"
-                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-[80%] p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="account"
                     {...register("account", {
                       required: true,
@@ -125,53 +124,23 @@ function PayModal() {
 
                 <div>
                   <label
-                    for="confirm-amount"
-                    class="block mb-2 text-xl font-medium text-gray-900 "
+                    for="countries"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    amount
+                    Select an option
                   </label>
-                  <input
-                    type="number"
-                    {...register("amount", { required: true, minLength: 2 })}
-                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="amount"
-                  />
-                  {errors.amount && (
-                    <p style={{ color: "red" }}>
-                      <small>amount is required</small>
-                    </p>
-                  )}
-                  {errors.amount?.type === "minLength" && (
-                    <p style={{ color: "red" }}>
-                      {" "}
-                      <small>should have min 2 characters</small>{" "}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label
-                    for="category"
-                    class="block mb-2 text-xl font-medium text-gray-900 "
+                  <select
+                    id="countries"
+                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-[80%] p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
-                    what are you paying for
-                  </label>
-                  <input
-                    type="text"
-                    {...register("category", { required: true, minLength: 2 })}
-                    className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="category"
-                  />
-                  {errors.category && (
-                    <p style={{ color: "red" }}>
-                      <small>category is required</small>
-                    </p>
-                  )}
-                  {errors.category?.type === "minLength" && (
-                    <p style={{ color: "red" }}>
-                      {" "}
-                      <small>should have min 2 characters</small>{" "}
-                    </p>
-                  )}
+                    <option selected className="bg-yellow-900 text-lg">
+                      Choose a Wallet type
+                    </option>
+                    <option value="US">Savings</option>
+                    <option value="CA">Invesment</option>
+                    <option value="FR">Emergencies</option>
+                    <option value="DE">Spending</option>
+                  </select>
                 </div>
               </form>
               <button
@@ -189,7 +158,7 @@ function PayModal() {
                 type="button"
                 class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
                 data-dismiss="modal"
-                onClick={closeModel}
+                onClick={closeNewWalletModel}
               >
                 Close
               </button>
@@ -208,4 +177,4 @@ function PayModal() {
   );
 }
 
-export default PayModal;
+export default NewWalletModal;

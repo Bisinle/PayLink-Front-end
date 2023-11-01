@@ -3,7 +3,7 @@ import { FaShopify, FaCoins } from "react-icons/fa6";
 import CreditCard from "./CreditCard/CreditCard";
 import { BsFillBarChartLineFill } from "react-icons/bs";
 import { GiWallet } from "react-icons/gi";
-
+import NewWalletModal from "./Modal/NewWalletModal";
 function WalletStats({ userBalance }) {
   // console.log(userBalance);
   if (!userBalance) {
@@ -90,6 +90,10 @@ function WalletStats({ userBalance }) {
               </div>
             </div>
           </div>{" "}
+        </BoxWrapper>
+        
+        <BoxWrapper>
+          <NewWalletModal />
         </BoxWrapper>
       </div>
     </>

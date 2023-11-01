@@ -1,5 +1,5 @@
 import React from "react";
-import PayModal from "../PayModal";
+import PayModal from "../Modal/PayModal";
 import CreditCard from "./CreditCard";
 import Analytics from "../Analytics";
 
