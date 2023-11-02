@@ -82,6 +82,8 @@ function MyContext({ children }) {
       });
   }, []);
 
+  
+
   const values = {
     isLoggedIn,
     setIsLoggedIn,
@@ -94,6 +96,7 @@ function MyContext({ children }) {
     Current_UserAccount_number,
     transactionData,
     walletData,
+    localRoutePrefix,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

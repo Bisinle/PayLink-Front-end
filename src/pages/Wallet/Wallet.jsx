@@ -1,9 +1,29 @@
-import React,{useState,useEffect,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
-
+import CreditCard from "./CreditCard/CreditCard";
+import PayModal from "./Modal/PayModal";
+import axios from "axios";
 
 export default function Wallet() {
-  const{walletData}= useContext(dataContext)
+  const { walletData, localRoutePrefix } = useContext(dataContext);
+  const [walletActivity, setWalletActivity] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(" Activty", res.data);
+        setWalletActivity(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cart items:", error);
+      });
+  }, []);
+
   if (!walletData || walletData.length === 0) {
     // Render a loading indicator
     return (
@@ -12,11 +32,44 @@ export default function Wallet() {
       </div>
     );
   }
-  console.log(walletData);
+  // console.log(walletData);
 
   //-----------------------------------------------------------------
   //------------fund current users Wallet----------------------------
-  
+  const currentUserWllet = walletData.find((user) => user.id === 6);
+  console.log(currentUserWllet);
 
-  return <div>Wallet page</div>;
+  //-----------------------------------------------------------------
+  //------------get the wallet act----------------------------
+
+  console.log(walletActivity);
+
+  return (
+    <div className=" flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-semibold">
+        Hello Abdiwaud, Welcom to your Wallet
+      </h1>
+      <div className="h-screen  w-full flex flex-col items-center    shadow-inner p-8 relative">
+        <div className=" w-full mt-9 h-[50%] border rounded-xl ">
+          <div className="sm:flex sm:justify-center border w-full h-full p-7 items-center">
+            <CreditCard />
+            <div className=" rounded-lg w-full h-[100%] flex flex-col items-center justify-center  ml-6   ">
+              <h1 className="text-7xl">Balance</h1>
+              <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center bg-white h-[60%] relative">
+                <h1 className="text-4xl">${currentUserWllet.balance}</h1>
+              </div>
+              <div className=" flex justify-center  w-full ">
+                <PayModal />
+                <div className="w-1/2 ml-3 btn ">
+                  <button class="btn text-white font-bold text-xl  bg-indigo-400 border-gray-30  w-[50%]  border px-4 py-2 rounded-xl text">
+                    currenncy converter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
