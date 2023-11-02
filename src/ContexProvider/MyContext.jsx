@@ -15,12 +15,15 @@ function MyContext({ children }) {
   const Current_UserProfilePicture = localStorage.getItem("user_profile_pic");
   const Current_UserAccount_number = localStorage.getItem("account_number");
   const localRoutePrefix = "http://localhost:5555";
-  //----------------------------------------------------------------------------
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [transactionData, setTransactionData] = useState([]);
   const [allUsersData, setAllUsersData] = useState([]);
   const [walletData, setWalletData] = useState([]);
-  //----------------------------------------------------------------------------
+  const [walletActivity, setWalletActivity] = useState([]);
+
+  //
+  //
+  //
 
   /*----------------------- G E T        A L L    U S E R S ---------------------------- */
   useEffect(() => {
@@ -38,9 +41,11 @@ function MyContext({ children }) {
         console.error("Error fetching cart items:", error);
       });
   }, [Current_UserId]);
-  //----------------------------------------------------------------------------
-  /*----------------------- G E T        T R A N S A C T I O N S---------------------------- */
+  //
+  //
+  //
 
+  /*----------------------- G E T        T R A N S A C T I O N S---------------------------- */
   useEffect(() => {
     axios
       .get(`${localRoutePrefix}/transaction/transactions`, {
@@ -68,7 +73,7 @@ function MyContext({ children }) {
     fetch("http://localhost:5555/wallet/wallet", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          S;
+          
           throw new Error("Network response was not ok");
         }
         return res.json();
@@ -82,7 +87,29 @@ function MyContext({ children }) {
       });
   }, []);
 
-  
+  //
+  //
+  //
+
+  useEffect(() => {
+    axios
+      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        // console.log(" Activty", res.data);
+        const activity = res.data.filter((act) => {
+          return act.user_id === 4;
+        });
+        // console.log(activity);
+        setWalletActivity(activity);
+      })
+      .catch((error) => {
+        console.error("Error fetching cart items:", error);
+      });
+  }, []);
 
   const values = {
     isLoggedIn,
@@ -97,6 +124,7 @@ function MyContext({ children }) {
     transactionData,
     walletData,
     localRoutePrefix,
+    walletActivity,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

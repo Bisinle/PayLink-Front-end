@@ -3,26 +3,10 @@ import { dataContext } from "../../ContexProvider/MyContext";
 import CreditCard from "./CreditCard/CreditCard";
 import PayModal from "./Modal/PayModal";
 import axios from "axios";
+import { format, getWeek, getMonth } from "date-fns";
 
 export default function Wallet() {
   const { walletData, localRoutePrefix } = useContext(dataContext);
-  const [walletActivity, setWalletActivity] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((res) => {
-        console.log(" Activty", res.data);
-        setWalletActivity(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching cart items:", error);
-      });
-  }, []);
 
   if (!walletData || walletData.length === 0) {
     // Render a loading indicator
@@ -32,17 +16,63 @@ export default function Wallet() {
       </div>
     );
   }
-  // console.log(walletData);
+
+  //--------------------------------------------------------------
+  //--------------------------------------------------------------
+  //--------------------------------------------------------------
+  // Step 1: Group transactions by week and calculate totals
+  // const weeklyData = walletActivity.reduce((acc, transaction) => {
+  //   const transactionDate = new Date(transaction.created_at);
+  //   const weekNumber = getMonth(transactionDate); // Use getWeek from date-fns to get the week number
+
+  //   if (!acc[weekNumber]) {
+  //     acc[weekNumber] = { sent: 0, received: 0 };
+  //   }
+
+  //   if (transaction.transaction_type === "sent") {
+  //     acc[weekNumber].sent += transaction.amount;
+  //   } else if (transaction.transaction_type === "received") {
+  //     acc[weekNumber].received += transaction.amount;
+  //   }
+
+  //   return acc;
+  // }, {});
+
+  // // Step 2: Calculate the weekly totals
+  // const weeklyTotals = Object.values(weeklyData);
+
+  // // Step 3: Prepare data for the bar chart
+  // const data = {
+  //   labels: Object.keys(weeklyData).map((week) => `Week ${week}`),
+  //   datasets: [
+  //     {
+  //       label: "Sent",
+  //       data: weeklyTotals.map((week) => week.sent),
+  //       backgroundColor: "blue",
+  //     },
+  //     {
+  //       label: "Received",
+  //       data: weeklyTotals.map((week) => week.received),
+  //       backgroundColor: "green",
+  //     },
+  //   ],
+  // };
+
+  // console.log(weeklyData);
+  // console.log(walletActivity);
+  //----------------------------------------------------------------
+  //----------------------------------------------------------------
+  //----------------------------------------------------------------
 
   //-----------------------------------------------------------------
   //------------fund current users Wallet----------------------------
   const currentUserWllet = walletData.find((user) => user.id === 6);
-  console.log(currentUserWllet);
+  // console.log(currentUserWllet);
 
   //-----------------------------------------------------------------
   //------------get the wallet act----------------------------
 
-  console.log(walletActivity);
+  // console.log(walletActivity);
 
   return (
     <div className=" flex flex-col justify-center items-center">
