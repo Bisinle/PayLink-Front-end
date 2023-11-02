@@ -57,6 +57,31 @@ function MyContext({ children }) {
       });
   }, []);
   /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("http://localhost:5555/wallet/wallet", requestOptions)
+      .then((res) => {
+        if (!res.ok) {
+          S;
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((response) => {
+        // console.log(response);
+        setWalletData(response);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  }, []);
+
   const values = {
     isLoggedIn,
     setIsLoggedIn,
