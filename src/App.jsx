@@ -13,7 +13,18 @@ import { dataContext } from "./components/ContexProvider/MyContext";
 import { useAuth } from "./components/AuthPages/auth";
 
 function App() {
-  const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
+  const { isLoggedIn, transactionData, loginSignupToggle } =
+    useContext(dataContext);
+
+  // console.log(transactionData);
+  if (transactionData === null) {
+    // Render a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   const { authState, login } = useAuth();
   const b4 = localStorage.getItem("REACT_TOKEN_AUTH_KEY");

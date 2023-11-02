@@ -14,7 +14,7 @@ function WalletStats({ userBalance }) {
       </div>
     );
   }
-
+  console.log(userBalance);
   return (
     <>
       {/* <h1 className="text-5xl font-bold ml-10 mt-5">welcom back user</h1> */}
@@ -91,7 +91,7 @@ function WalletStats({ userBalance }) {
             </div>
           </div>{" "}
         </BoxWrapper>
-        
+
         <BoxWrapper>
           <NewWalletModal />
         </BoxWrapper>

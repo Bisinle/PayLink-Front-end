@@ -19,11 +19,7 @@ function PayModal() {
     reset,
     setError,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      serverError: "",
-    },
-  });
+  } = useForm();
 
   function sendMoney(data) {
     data.sender_id = localStorage.getItem("user_id");
@@ -48,7 +44,6 @@ function PayModal() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         // navigate("login");
-        setError("serverError", { type: "custom", message: response.message });
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -189,9 +184,7 @@ function PayModal() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <p className="text-red-500 text-xl">{errors.serverError?.message}</p>
-            </div>
+            <div class="modal-body"></div>
             <div class="modal-footer ">
               <button
                 type="button"
@@ -217,3 +210,7 @@ function PayModal() {
 }
 
 export default PayModal;
+
+{
+  /* <p className="text-red-500 text-xl">{errors.serverError?.message}</p> */
+}
