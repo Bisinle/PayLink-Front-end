@@ -8,30 +8,46 @@ import {
 } from "@tanstack/react-table";
 import { USERS } from "./data";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import DownloadBtn from "./DownloadBtn";
 import DebouncedInput from "./DebouncedInput";
 import { SearchIcon } from "./Icons/Icons";
+import { dataContext } from "../../ContexProvider/MyContext";
 
-const TanStackTable = ({ transactionData, Current_UserId }) => {
+const TanStackTable = ({ transactionData }) => {
+  const { Current_UserId } = useContext(dataContext);
+  console.log(Current_UserId);
   //----------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------
   //---------------let get all the transactions that belong to the current user-------------------------------------------------------------------------
+  if (!Current_UserId || Current_UserId === undefined) {
+    // Render a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
   const myTransactions = transactionData.filter((transaction) => {
     console.log(transaction.sender_id);
-    if (transaction.sender_id === 30) return transaction;
+    if (transaction.sender_id === 22) return transaction;
   });
-  // console.log(myTransactions);
+  console.log(myTransactions);
+  // console.log(transactionData);
   //----------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("", {
-      id: "id",
-      cell: (info) => <span>{info.row.index + 1}</span>,
-      header: "id",
+    columnHelper.accessor("transaction_id", {
+  
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "transaction_id",
+    }),
+    columnHelper.accessor(`sender_name`, {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "sender_name",
     }),
     columnHelper.accessor(`category`, {
       cell: (info) => <span>{info.getValue().type}</span>,
@@ -56,6 +72,10 @@ const TanStackTable = ({ transactionData, Current_UserId }) => {
     columnHelper.accessor("sender_id", {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "sender_id",
+    }),
+    columnHelper.accessor("transaction_fee", {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "transaction_fee",
     }),
   ];
   const [data] = useState(() => [...myTransactions]);

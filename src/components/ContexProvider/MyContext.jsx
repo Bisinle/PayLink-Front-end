@@ -54,6 +54,7 @@ function MyContext({ children }) {
       });
   }, [Current_UserId]);
 
+  console.log(Current_UserId);
 
   const values = {
     isLoggedIn,
