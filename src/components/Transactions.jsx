@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { getOrderStatus } from "../lib/helpers";
 import { dataContext } from "../ContexProvider/MyContext";
 
-export default function RecentOrders() {
+export default function Transactions() {
   const { transactionData } = useContext(dataContext);
   if (!transactionData || transactionData.length === 0) {
     // Render a loading indicator

@@ -41,10 +41,8 @@ function MyContext({ children }) {
         console.error("Error fetching cart items:", error);
       });
   }, [Current_UserId]);
-  //
-  //
-  //
 
+  //****************** */
   /*----------------------- G E T        T R A N S A C T I O N S---------------------------- */
   useEffect(() => {
     axios
@@ -61,6 +59,10 @@ function MyContext({ children }) {
         console.error("Error fetching cart items:", error);
       });
   }, []);
+
+  //****************** */
+
+
   /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
   useEffect(() => {
     const requestOptions = {
@@ -73,7 +75,6 @@ function MyContext({ children }) {
     fetch("http://localhost:5555/wallet/wallet", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          
           throw new Error("Network response was not ok");
         }
         return res.json();
@@ -87,10 +88,8 @@ function MyContext({ children }) {
       });
   }, []);
 
-  //
-  //
-  //
-
+  //****************** */
+ 
   useEffect(() => {
     axios
       .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
@@ -110,6 +109,8 @@ function MyContext({ children }) {
         console.error("Error fetching cart items:", error);
       });
   }, []);
+  
+  //****************** */
 
   const values = {
     isLoggedIn,
