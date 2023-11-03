@@ -32,7 +32,7 @@ export default function Transactions() {
             </tr>
           </thead>
           <tbody>
-            {transactionData.map((order) => (
+            {transactionData ? transactionData.map((order) => (
               <tr key={order.id}>
                 <td>{order.transaction_id}</td>
                 <td>{order.sender_name}</td>
@@ -42,7 +42,7 @@ export default function Transactions() {
                 <td>{order.transaction_fee}</td>
                 <td>{getOrderStatus(order.created)}</td>
               </tr>
-            ))}
+            )):'jlaskdjfalksdjfkl'}
           </tbody>
         </table>
       </div>
