@@ -71,7 +71,7 @@ function PopularProducts() {
         <div className="mt-4 flex flex-col gap-3">
           {beneficiaries.map((ben) => (
             <Link
-              key={ben.id}
+              
               to="/wallet"
               className="flex items-start hover:no-underline l"
             >

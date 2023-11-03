@@ -6,9 +6,14 @@ const dataContext = createContext();
 
 function MyContext({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginSignupToggle, setLoginSignupToggle] = useState(false);
+
+  /**---------------------------------------------------------   T O K E N---------------------- */
+  const access_token = localStorage.getItem("access_token");
+  console.log(access_token);
+
 
   /**---------------  F O R     U S E R ---------------------- */
-  const [loginSignupToggle, setLoginSignupToggle] = useState(false);
   const Current_UserName = localStorage.getItem("user_name");
   const Current_UserRole = localStorage.getItem("user_role");
   const Current_UserId = localStorage.getItem("user_id");

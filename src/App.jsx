@@ -1,25 +1,40 @@
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/shared/Layout";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Wallet from "./pages/Wallet/Wallet";
-import AddedPage from "./pages/AddedPage";
-import Login from './AuthPages/Login'
+import Transactions from "./pages/Transactions";
+import Login from "./AuthPages/Login";
+import NotFound from "./AuthPages/NotFound";
+import { dataContext } from "./ContexProvider/MyContext";
+import Protector from "./AuthPages/Protector/Protector";
 
 function App() {
+  const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="wallet" element={<Wallet />} />
-          <Route path="register" element={<Register />} />
-          <Route path="addedPage" element={<AddedPage />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </Router>
+    <div className="App  ">
+      {!isLoggedIn ? ( // Check if the user is not logged in
+        loginSignupToggle ? ( // Check if the user wants to sign up
+          <Register />
+        ) : (
+          <Login />
+        )
+      ) : (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="wallet" element={<Wallet />} />
+            <Route path="register" element={<Register />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      )}
+    </div>
   );
 }
 

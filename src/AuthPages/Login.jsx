@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { dataContext } from "../ContexProvider/MyContext";
 import { login } from "./auth";
-import loginSVG from '../assets/loginSVG.json'
+import loginSVG from "../assets/loginSVG.json";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import Lottie from "lottie-web";
@@ -13,6 +13,7 @@ import Lottie from "lottie-web";
 export default function Login() {
   //instanticate the navigate method
   const navigate = useNavigate();
+  // const navigate = useNavigate();
   //destructure the contex
   const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
     useContext(dataContext);
@@ -64,12 +65,12 @@ export default function Login() {
     fetch("http://127.0.0.1:5555/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        // login(data.access_token);
-        data.access_token && navigate("/");
-        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
+        // console.log(data);
+        login(data.access_token);
+        // data.access_token && navigate("/");
+        data.access_token? setIsLoggedIn(true) : setIsLoggedIn(true);
         localStorage.setItem("refresh_token", data.refresh_token);
-        localStorage.setItem("access_token", data.refresh_token);
+        localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("user_name", data.user_name);
         localStorage.setItem("user_role", data.user_role);
         localStorage.setItem("user_id", data.user_id);
@@ -190,7 +191,7 @@ export default function Login() {
               <p class="text-sm font-light  text-gray-500 dark:text-gray-400">
                 Do not have an account?{" "}
                 <Link
-                  to="/signup"
+                  to="/register"
                   onClick={() => setLoginSignupToggle(!loginSignupToggle)}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-indigo-800"
                 >

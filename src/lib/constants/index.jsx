@@ -22,24 +22,20 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/wallet",
     icon: <HiOutlineCube />,
   },
+
   {
-    key: "register",
-    label: "Register",
-    path: "/register",
-    icon: <HiOutlineShoppingCart />,
-  },
-  {
-    key: "addedPage",
-    label: "AddedPage",
-    path: "/addedPage",
+    key: "transactions",
+    label: "Transactions",
+    path: "/transactions",
     icon: <HiOutlineUsers />,
   },
-  {
-      key: 'login',
-      label: 'Login',
-      path: '/login',
-      icon: <HiOutlineDocumentText />
-  },
+  // {
+  //   key: "register",
+  //   label: "Register",
+  //   path: "/register",
+  //   icon: <HiOutlineUsers />,
+  // },
+
   // {
   //     key: 'messages',
   //     label: 'Messages',
