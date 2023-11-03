@@ -34,12 +34,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/addedPage",
     icon: <HiOutlineUsers />,
   },
-  // {
-  //     key: 'transactions',
-  //     label: 'Transactions',
-  //     path: '/transactions',
-  //     icon: <HiOutlineDocumentText />
-  // },
+  {
+      key: 'login',
+      label: 'Login',
+      path: '/login',
+      icon: <HiOutlineDocumentText />
+  },
   // {
   //     key: 'messages',
   //     label: 'Messages',

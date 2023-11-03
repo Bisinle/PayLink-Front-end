@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Wallet from "./pages/Wallet/Wallet";
 import AddedPage from "./pages/AddedPage";
+import Login from './AuthPages/Login'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="wallet" element={<Wallet />} />
           <Route path="register" element={<Register />} />
           <Route path="addedPage" element={<AddedPage />} />
+          <Route path="login" element={<Login />} />
         </Route>
         <Route path="/register" element={<Register />} />
       </Routes>

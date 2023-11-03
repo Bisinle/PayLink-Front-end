@@ -1,16 +1,14 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-web";
-import signupBanner from '../assets/signupBanner.json'
+import signupBanner from "../../assets/signupBanner.json";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useContext } from "react";
 import { dataContext } from "../ContexProvider/MyContext";
 
-function Register() {
+function Signup() {
   //----------C O N T E X T
   const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
     useContext(dataContext);
@@ -232,4 +230,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Signup;
