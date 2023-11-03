@@ -4,8 +4,6 @@ import App from "./App.jsx";
 import "./index.css";
 
 import { BrowserRouter } from "react-router-dom";
-// import { } from "./components/ContexProvider/MyContext.jsx";
-// import MyContext from "./components/ContexProvider/MyContext.jsx";
 import MyContext from "./ContexProvider/MyContext.jsx";
 
 import { ThemeProvider } from "@material-tailwind/react";

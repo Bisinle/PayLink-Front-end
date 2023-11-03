@@ -20,6 +20,7 @@ function MyContext({ children }) {
   const [allUsersData, setAllUsersData] = useState([]);
   const [walletData, setWalletData] = useState([]);
   const [walletActivity, setWalletActivity] = useState([]);
+  const [beneficiaries, setBeneficiaries] = useState([]);
 
   //
   //
@@ -62,7 +63,6 @@ function MyContext({ children }) {
 
   //****************** */
 
-
   /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
   useEffect(() => {
     const requestOptions = {
@@ -89,7 +89,7 @@ function MyContext({ children }) {
   }, []);
 
   //****************** */
- 
+
   useEffect(() => {
     axios
       .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
@@ -109,7 +109,11 @@ function MyContext({ children }) {
         console.error("Error fetching cart items:", error);
       });
   }, []);
-  
+
+  //****************** */
+
+  /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
+
   //****************** */
 
   const values = {
@@ -126,6 +130,7 @@ function MyContext({ children }) {
     walletData,
     localRoutePrefix,
     walletActivity,
+    
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
