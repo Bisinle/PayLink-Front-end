@@ -114,6 +114,21 @@ function MyContext({ children }) {
 
   /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
 
+  useEffect(() => {
+    axios
+      .get(`${localRoutePrefix}/beneficiaries/beneficiaries`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(" B E N E F I C I A R I E S", res.data);
+        setBeneficiaries(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cart items:", error);
+      });
+  }, []);
   //****************** */
 
   const values = {
@@ -130,7 +145,7 @@ function MyContext({ children }) {
     walletData,
     localRoutePrefix,
     walletActivity,
-    
+    beneficiaries,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
