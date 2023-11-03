@@ -67,8 +67,8 @@ export default function Login() {
       .then((data) => {
         // console.log(data);
         login(data.access_token);
-        // data.access_token && navigate("/");
-        data.access_token? setIsLoggedIn(true) : setIsLoggedIn(true);
+        data.access_token && navigate("/");
+        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
         localStorage.setItem("refresh_token", data.refresh_token);
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("user_name", data.user_name);

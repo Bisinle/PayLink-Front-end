@@ -10,8 +10,7 @@ function MyContext({ children }) {
 
   /**---------------------------------------------------------   T O K E N---------------------- */
   const access_token = localStorage.getItem("access_token");
-  console.log(access_token);
-
+  // console.log(access_token);
 
   /**---------------  F O R     U S E R ---------------------- */
   const Current_UserName = localStorage.getItem("user_name");
@@ -52,7 +51,7 @@ function MyContext({ children }) {
   /*----------------------- G E T        T R A N S A C T I O N S---------------------------- */
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/transaction/transactions`, {
+      .get(`${localRoutePrefix}/transaction/user_transactions`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -67,7 +66,6 @@ function MyContext({ children }) {
   }, []);
 
   //****************** */
-
   /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
   useEffect(() => {
     const requestOptions = {
