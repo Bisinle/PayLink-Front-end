@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import {
+  LineChart,
+  Line,
   BarChart,
   Bar,
   XAxis,
@@ -75,7 +77,7 @@ const data = [
   },
 ];
 
-export default function TransactionChart() {
+export default function AnalyticBarChart() {
   const { walletActivity } = useContext(dataContext);
 
   if (!walletActivity || walletActivity.length === 0) {
@@ -135,29 +137,46 @@ export default function TransactionChart() {
   return (
     <div className="h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
       <strong className="text-gray-700 font-medium">Transactions</strong>
+
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={arr}
-            margin={{
-              top: 20,
-              right: 10,
-              left: -10,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis type="number" domain={[0, 200]} />
+          <LineChart data={arr}>
+            <XAxis dataKey="month" />
+            <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="sent" fill="#0ea5e9" />
-            <Bar dataKey="received" fill="#ea580c" />
-          </BarChart>
+            <Line
+              type="monotone"
+              dataKey="sent"
+              stroke="green"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone"  dataKey="received" stroke="red" />
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
 }
+//  <ResponsiveContainer width="100%" height="100%">
+//         <BarChart
+//           width={500}
+//           height={300}
+//           data={arr}
+//           margin={{
+//             top: 20,
+//             right: 10,
+//             left: -10,
+//             bottom: 0,
+//           }}
+//         >
+//           <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
+//           <XAxis dataKey="name" />
+//           <YAxis type="number" domain={[0, 200]} />
+
+//           <Tooltip />
+//           <Legend />
+//           <Bar dataKey="sent" fill="#f0094d" />
+//           <Bar dataKey="received" fill="#0A67BA" />
+//         </BarChart>
+//       </ResponsiveContainer>
