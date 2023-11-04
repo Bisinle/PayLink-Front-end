@@ -16,6 +16,10 @@ export default function Wallet() {
       </div>
     );
   }
+  console.log(currentUserData.wallet);
+  //! find the wallet that has the type main so we can display it's balance
+  // typeMain = currentUserData.wallet.find((wallet) => wallet.type === "Main");
+  // console.log(typeMain);
 
   return (
     <div className=" flex flex-col justify-center items-center">
@@ -34,14 +38,20 @@ export default function Wallet() {
               <h1 className="text-7xl">Balance</h1>
               <div class="circle circle-3 w-10 h-10 top-0 opacity-40 "></div>
 
-             
               <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center   text-gray-300  font-bold h-[60%] w-[30%] relative">
-                <h1 className="text-5xl">${currentUserData.wallet.balance}</h1>
+                <h1 className="text-5xl">
+                  $
+                  {
+                    currentUserData.wallet.find(
+                      (wallet) => wallet.type === "Main"
+                    ).balance
+                  }
+                </h1>
               </div>
               <div className=" flex justify-center  w-full ">
                 <PayModal />
                 <div className="w-1/2 ml-3 btn ">
-                    <NewWalletModal/>
+                  <NewWalletModal />
                 </div>
               </div>
             </div>
