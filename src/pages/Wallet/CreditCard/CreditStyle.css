@@ -2,13 +2,12 @@
   position: relative;
   height: 270px;
   width: 450px;
-  border-radius: 25px;
-  background: #05185d9a;
-  backdrop-filter: blur(30px); /* This will produce the blur */
+  border-radius: 45px;
+  background: #0002079a;
+  backdrop-filter: blur(0px); /* This will produce the blur */
 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(173, 164, 164, 0.9);
 
-  border-radius: 50%;
 }
 
 .logo img,

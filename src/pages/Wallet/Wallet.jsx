@@ -40,7 +40,7 @@ export default function Wallet() {
               <div className=" flex justify-center  w-full ">
                 <PayModal />
                 <div className="w-1/2 ml-3 btn ">
-                  <button class="btn text-white font-bold text-xl  bg-indigo-400 border-gray-30  w-[50%]  border px-4 py-3 rounded-xl text">
+                  <button class="btn text-white  font-bold sm:text-lg sm:w-[50%]  bg-indigo-400 border-gray-30    border px-4 py-3 rounded-xl text">
                     create wallet
                   </button>
                 </div>

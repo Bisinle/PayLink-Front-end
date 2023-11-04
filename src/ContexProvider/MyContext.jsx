@@ -43,7 +43,7 @@ function MyContext({ children }) {
       .catch((error) => {
         console.error("Error fetching a user:", error);
       });
-  }, [refresh]);
+  }, [refresh, Current_UserId]);
 
   const values = {
     isLoggedIn,
