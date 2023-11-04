@@ -21,7 +21,7 @@ function MyContext({ children }) {
   const localRoutePrefix = "http://localhost:5555";
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [transactionData, setTransactionData] = useState([]);
-  const [allUsersData, setAllUsersData] = useState([]);
+  const [currentUserData, setCurrentUserData] = useState([]);
   const [walletData, setWalletData] = useState([]);
   const [walletActivity, setWalletActivity] = useState([]);
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -33,106 +33,19 @@ function MyContext({ children }) {
   /*----------------------- G E T        A L L    U S E R S ---------------------------- */
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/users`, {
+      .get(`${localRoutePrefix}/user`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       })
       .then((res) => {
-        // console.log(" All USERS-->", res.data);
-        setAllUsersData(res.data);
+        console.log(" All USERS-->", res.data);
+        setCurrentUserData(res.data);
       })
       .catch((error) => {
-        console.error("Error fetching cart items:", error);
+        console.error("Error fetching a user:", error);
       });
   }, [Current_UserId]);
-
-  //****************** */
-  /*----------------------- G E T        T R A N S A C T I O N S---------------------------- */
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/transaction/user_transactions`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((res) => {
-        // console.log(" T R A N S A C T I O N S", res.data);
-        setTransactionData(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching cart items:", error);
-      });
-  }, []);
-
-  //****************** */
-  /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
-  useEffect(() => {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-        "Content-Type": "application/json",
-      },
-    };
-    fetch("http://localhost:5555/wallet/wallet", requestOptions)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((response) => {
-        // console.log(response);
-        setWalletData(response);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }, []);
-
-  //****************** */
-
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((res) => {
-        // console.log(" Activty", res.data);
-        const activity = res.data.filter((act) => {
-          return act.user_id === 4;
-        });
-        // console.log(activity);
-        setWalletActivity(activity);
-      })
-      .catch((error) => {
-        console.error("Error fetching cart items:", error);
-      });
-  }, []);
-
-  //****************** */
-
-  /*----------------------- G E T        W A L L E T    D A T A---------------------------- */
-
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/beneficiaries/beneficiaries`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((res) => {
-        console.log(" B E N E F I C I A R I E S", res.data);
-        setBeneficiaries(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching cart items:", error);
-      });
-  }, []);
-  //****************** */
 
   const values = {
     isLoggedIn,
@@ -144,11 +57,10 @@ function MyContext({ children }) {
     Current_UserId,
     Current_UserProfilePicture,
     Current_UserAccount_number,
-    transactionData,
-    walletData,
+
     localRoutePrefix,
-    walletActivity,
-    beneficiaries,
+
+    currentUserData,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

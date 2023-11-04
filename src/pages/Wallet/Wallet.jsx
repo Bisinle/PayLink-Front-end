@@ -6,9 +6,9 @@ import axios from "axios";
 import { format, getWeek, getMonth } from "date-fns";
 
 export default function Wallet() {
-  const { walletData, localRoutePrefix } = useContext(dataContext);
+  const { currentUserData, localRoutePrefix } = useContext(dataContext);
 
-  if (!walletData || walletData.length === 0) {
+  if (!currentUserData || currentUserData.length === 0) {
     // Render a loading indicator
     return (
       <div className="text-center">
@@ -66,7 +66,7 @@ export default function Wallet() {
 
   //-----------------------------------------------------------------
   //------------fund current users Wallet----------------------------
-  const currentUserWllet = walletData.find((user) => user.id === 6);
+  // const currentUserWllet = currentUserData.wallet.find((user) => user.id === 6);
   // console.log(currentUserWllet);
 
   //-----------------------------------------------------------------
@@ -86,7 +86,7 @@ export default function Wallet() {
             <div className=" rounded-lg w-full h-[100%] flex flex-col items-center justify-center  ml-6   ">
               <h1 className="text-7xl">Balance</h1>
               <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center bg-white h-[60%] relative">
-                <h1 className="text-4xl">${currentUserWllet.balance}</h1>
+                <h1 className="text-4xl">${currentUserData.wallet.balance}</h1>
               </div>
               <div className=" flex justify-center  w-full ">
                 <PayModal />

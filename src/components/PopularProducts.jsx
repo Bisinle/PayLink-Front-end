@@ -49,8 +49,8 @@ const popularProducts = [
 ];
 
 function PopularProducts() {
-  const { beneficiaries } = useContext(dataContext);
-  if (!beneficiaries || beneficiaries.length === 0) {
+  const { currentUserData } = useContext(dataContext);
+  if (!currentUserData || currentUserData.length === 0) {
     // Render a loading indicator
     return (
       <div className="text-center">
@@ -67,11 +67,10 @@ function PopularProducts() {
         <strong className="text-gray-700 font-medium">Name</strong>
         <strong className="text-gray-700 font-medium">Account</strong>
       </div>
-      {beneficiaries.length !== 0 ? (
+      {currentUserData.beneficiaries.length !== 0 ? (
         <div className="mt-4 flex flex-col gap-3">
-          {beneficiaries.map((ben) => (
+          {currentUserData.beneficiaries.map((ben) => (
             <Link
-              
               to="/wallet"
               className="flex items-start hover:no-underline l"
             >
