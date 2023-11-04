@@ -17,9 +17,7 @@ export default function Wallet() {
     );
   }
   console.log(currentUserData.wallet);
-  //! find the wallet that has the type main so we can display it's balance
-  // typeMain = currentUserData.wallet.find((wallet) => wallet.type === "Main");
-  // console.log(typeMain);
+
 
   return (
     <div className=" flex flex-col justify-center items-center">

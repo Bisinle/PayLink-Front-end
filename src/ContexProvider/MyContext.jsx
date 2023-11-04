@@ -55,7 +55,7 @@ function MyContext({ children }) {
     Current_UserId,
     Current_UserProfilePicture,
     Current_UserAccount_number,
-
+    access_token,
     localRoutePrefix,
     setRefresh,
     currentUserData,
