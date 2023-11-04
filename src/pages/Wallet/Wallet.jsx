@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 import CreditCard from "./CreditCard/CreditCard";
 import PayModal from "./Modal/PayModal";
-import NewWalletModal from "./Modal/NewWalletModal";
+import CreateWallet from "./Modal/CreateWallet";
 import axios from "axios";
+
 
 export default function Wallet() {
   const { currentUserData } = useContext(dataContext);
@@ -50,7 +51,7 @@ export default function Wallet() {
               <div className=" flex justify-center  w-full ">
                 <PayModal />
                 <div className="w-1/2 ml-3 btn ">
-                  <NewWalletModal />
+                  <CreateWallet />
                 </div>
               </div>
             </div>

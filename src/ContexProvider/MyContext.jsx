@@ -37,7 +37,7 @@ function MyContext({ children }) {
         },
       })
       .then((res) => {
-        console.log(" All USERS-->", res.data);
+        console.log(" user----->", res.data);
         setCurrentUserData(res.data);
       })
       .catch((error) => {

@@ -6,7 +6,7 @@ import "./MinotTouches.css";
 //get the user id from the contetxProvider
 import { useContext } from "react";
 // import dataContext
-function NewWalletModal() {
+function CreateWallet() {
   //destructure the context
   // const { Current_UserId } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
@@ -171,4 +171,4 @@ function NewWalletModal() {
   );
 }
 
-export default NewWalletModal;
+export default CreateWallet;
