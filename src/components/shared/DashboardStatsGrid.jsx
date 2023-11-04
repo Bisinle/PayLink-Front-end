@@ -45,17 +45,17 @@ export default function DashboardStatsGrid() {
 
   const wallet_grid = currentUserData.wallet.map((wallet) => {
     return (
-      <BoxWrapper status={wallet.status}>
-        <Popover>
+      <BoxWrapper>
+        <Popover className="absolute  top-0 left-0 ">
           {({ open }) => (
             <>
               <Popover.Button
                 className={classNames(
                   open && "bg-gray-100",
-                  "group inline-flex items-center absolute right-4 top-5 rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none  active:bg-gray-100"
+                  "group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
                 )}
               >
-                <AiOutlineExclamation className=" " fontSize={24} />
+                <AiOutlineExclamation fontSize={24} />
               </Popover.Button>
               <Transition
                 as={Fragment}
@@ -70,11 +70,7 @@ export default function DashboardStatsGrid() {
                   <div className="bg-white  rounded-xl shadow-md ring-1 w-44 ring-black flex items-center justify-center ring-opacity-1  ">
                     <button
                       onClick={() => deactivateWallet(wallet.id)}
-                      className={` text-white  w-full font-lg font-semibold border ${
-                        wallet.status !== "Active"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      } rounded-xl p-1 border-orange-500`}
+                      className={"text-gray-00 w-full font-sm border rounded-xl p-1 "}
                     >
                       {wallet.status === "Active" ? "Deactivate" : "Activate"}
                     </button>
@@ -116,14 +112,47 @@ export default function DashboardStatsGrid() {
   return <div className="flex gap-4">{wallet_grid}</div>;
 }
 
-function BoxWrapper({ children, status }) {
+function BoxWrapper({ children }) {
   return (
-    <div
-      className={`shadow-sm  rounded-sm p-4 mb-4 flex-1 border border-gray-200 ${
-      status !== "Active" ? "bg-gray-400" : "bg-white"
-      }   flex items-center relative`}
-    >
+    <div className="shadow-sm  rounded-sm p-4 mb-4 flex-1 border border-gray-200  flex items-center relative">
       {children}
     </div>
   );
 }
+
+/* <BoxWrapper>
+				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-orange-600">
+					<IoPieChart className="text-2xl text-white" />
+				</div>
+				<div className="pl-4">
+					<span className="text-sm text-gray-500 font-light">Total Expenses</span>
+					<div className="flex items-center">
+						<strong className="text-xl text-gray-700 font-semibold">$3423</strong>
+						<span className="text-sm text-green-500 pl-2">-343</span>
+					</div>
+				</div>
+			</BoxWrapper>
+			<BoxWrapper>
+				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-yellow-400">
+					<IoPeople className="text-2xl text-white" />
+				</div>
+				<div className="pl-4">
+					<span className="text-sm text-gray-500 font-light">Total Customers</span>
+					<div className="flex items-center">
+						<strong className="text-xl text-gray-700 font-semibold">12313</strong>
+						<span className="text-sm text-red-500 pl-2">-30</span>
+					</div>
+				</div>
+			</BoxWrapper>
+			<BoxWrapper>
+				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-green-600">
+					<IoCart className="text-2xl text-white" />
+				</div>
+				<div className="pl-4">
+					<span className="text-sm text-gray-500 font-light">Total Orders</span>
+					<div className="flex items-center">
+						<strong className="text-xl text-gray-700 font-semibold">16432</strong>
+						<span className="text-sm text-red-500 pl-2">-43</span>
+					</div>
+				</div>
+			</BoxWrapper> */
