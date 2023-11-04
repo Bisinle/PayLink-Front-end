@@ -15,7 +15,7 @@ export default function Login() {
   const navigate = useNavigate();
   // const navigate = useNavigate();
   //destructure the contex
-  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
+  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle, setRefresh } =
     useContext(dataContext);
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
@@ -76,6 +76,7 @@ export default function Login() {
         localStorage.setItem("access_token", data.access_token);
         data.access_token && navigate("/");
         data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
+        setRefresh(!true);
       })
       .catch((error) => {
         console.error(error);

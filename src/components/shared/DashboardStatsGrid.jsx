@@ -12,7 +12,6 @@ import classNames from "classnames";
 import axios from "axios";
 
 export default function DashboardStatsGrid() {
-	const [forWalletState, setForWalletState] = useState('Active')
   const { currentUserData, localRoutePrefix, access_token } =
     useContext(dataContext);
 
@@ -24,7 +23,7 @@ export default function DashboardStatsGrid() {
       </div>
     );
   }
-  console.log(currentUserData.wallet);
+
   //!--------------- update wallet status function---------------------
   function deactivateWallet(id) {
     console.log(id);
@@ -38,25 +37,25 @@ export default function DashboardStatsGrid() {
       .then((res) => {
         // setCurrentUserCartItems(res.data);
         console.log("msg--->", res.data.status);
-		setForWalletState(res.data.status)
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);
       });
   }
+
   const wallet_grid = currentUserData.wallet.map((wallet) => {
     return (
-      <BoxWrapper>
-        <Popover className="relative">
+      <BoxWrapper status={wallet.status}>
+        <Popover>
           {({ open }) => (
             <>
               <Popover.Button
                 className={classNames(
                   open && "bg-gray-100",
-                  "group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
+                  "group inline-flex items-center absolute right-4 top-5 rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none  active:bg-gray-100"
                 )}
               >
-                <AiOutlineExclamation fontSize={24} />
+                <AiOutlineExclamation className=" " fontSize={24} />
               </Popover.Button>
               <Transition
                 as={Fragment}
@@ -71,9 +70,13 @@ export default function DashboardStatsGrid() {
                   <div className="bg-white  rounded-xl shadow-md ring-1 w-44 ring-black flex items-center justify-center ring-opacity-1  ">
                     <button
                       onClick={() => deactivateWallet(wallet.id)}
-                      className="text-gray-700 w-full font-lg border rounded-xl p-1 border-orange-500"
+                      className={` text-white  w-full font-lg font-semibold border ${
+                        wallet.status !== "Active"
+                          ? "bg-green-500"
+                          : "bg-red-500"
+                      } rounded-xl p-1 border-orange-500`}
                     >
-                      Deactivate
+                      {wallet.status === "Active" ? "Deactivate" : "Activate"}
                     </button>
                   </div>
                 </Popover.Panel>
@@ -98,10 +101,10 @@ export default function DashboardStatsGrid() {
               </strong>
               <span
                 className={`text-sm ${
-					forWalletState === "Active" ? "text-green-500" : "text-red-500"
+                  wallet.status === "Active" ? "text-green-500" : "text-red-500"
                 }  pl-2`}
               >
-                {forWalletState}
+                {wallet.status}
               </span>
             </div>
           </div>
@@ -113,47 +116,14 @@ export default function DashboardStatsGrid() {
   return <div className="flex gap-4">{wallet_grid}</div>;
 }
 
-function BoxWrapper({ children }) {
+function BoxWrapper({ children, status }) {
   return (
-    <div className="shadow-sm  rounded-sm p-4 mb-4 flex-1 border border-gray-200  flex items-center relative">
+    <div
+      className={`shadow-sm  rounded-sm p-4 mb-4 flex-1 border border-gray-200 ${
+      status !== "Active" ? "bg-gray-400" : "bg-white"
+      }   flex items-center relative`}
+    >
       {children}
     </div>
   );
 }
-
-/* <BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-orange-600">
-					<IoPieChart className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Expenses</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">$3423</strong>
-						<span className="text-sm text-green-500 pl-2">-343</span>
-					</div>
-				</div>
-			</BoxWrapper>
-			<BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-yellow-400">
-					<IoPeople className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Customers</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">12313</strong>
-						<span className="text-sm text-red-500 pl-2">-30</span>
-					</div>
-				</div>
-			</BoxWrapper>
-			<BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-green-600">
-					<IoCart className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Orders</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">16432</strong>
-						<span className="text-sm text-red-500 pl-2">-43</span>
-					</div>
-				</div>
-			</BoxWrapper> */
