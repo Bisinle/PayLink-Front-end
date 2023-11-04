@@ -97,23 +97,3 @@
   right: -90px;
   opacity: 0.8;
 }
-
-
-.main-circle {
-
-  border-radius: 50%;
-  background: transparent;
-}
-.circle-3 {
-  background:;
-  height: 180px;
-  width: 180px;
-
-}
-.circle-4 {
-  height: 200px;
-  width: 200px;
-  bottom: -90px;
-  right: -90px;
-  opacity: 0.8;
-}

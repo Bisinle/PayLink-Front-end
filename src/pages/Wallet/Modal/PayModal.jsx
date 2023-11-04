@@ -64,7 +64,7 @@ function PayModal() {
       <button
         onClick={openModel}
         type="button"
-        class=" btn text-white font-bold text-xl  bg-indigo-400 border-gray-30  w-[50%]  border px-4 py-2 rounded-xl text"
+        class=" btn  font-bold text-white text-xl  bg-indigo-400 border-gray-30  w-[50%] h-[60px]  border px-4 py-3 rounded-xl text"
         data-toggle="modal"
         data-target="#payment-modal"
       >
