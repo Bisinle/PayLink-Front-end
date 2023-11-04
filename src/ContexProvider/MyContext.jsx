@@ -22,9 +22,7 @@ function MyContext({ children }) {
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [transactionData, setTransactionData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState([]);
-  const [walletData, setWalletData] = useState([]);
-  const [walletActivity, setWalletActivity] = useState([]);
-  const [beneficiaries, setBeneficiaries] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   //
   //
@@ -45,7 +43,7 @@ function MyContext({ children }) {
       .catch((error) => {
         console.error("Error fetching a user:", error);
       });
-  }, [Current_UserId]);
+  }, [refresh]);
 
   const values = {
     isLoggedIn,
@@ -59,7 +57,7 @@ function MyContext({ children }) {
     Current_UserAccount_number,
 
     localRoutePrefix,
-
+    setRefresh,
     currentUserData,
   };
   // console.log(transactionData);

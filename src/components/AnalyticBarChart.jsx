@@ -189,8 +189,11 @@ export default function AnalyticBarChart() {
 //           <Bar dataKey="received" fill="#0A67BA" />
 //         </BarChart>
 //       </ResponsiveContainer>
-{/* <ResponsiveContainer width="100%" height="100%"> */}
-  {/* <LineChart data={arr}>
+{
+  /* <ResponsiveContainer width="100%" height="100%"> */
+}
+{
+  /* <LineChart data={arr}>
     <XAxis dataKey="month" />
     <YAxis />
     <Tooltip />
@@ -198,4 +201,5 @@ export default function AnalyticBarChart() {
     <Line type="monotone" dataKey="sent" stroke="green" activeDot={{ r: 8 }} />
     <Line type="monotone" dataKey="received" stroke="black" />
   </LineChart>
-// </ResponsiveContainer>; */}
+// </ResponsiveContainer>; */
+}

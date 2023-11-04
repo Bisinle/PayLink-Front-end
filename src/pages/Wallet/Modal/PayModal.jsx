@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { dataContext } from "../../../ContexProvider/MyContext";
 function PayModal() {
   //destructure the context
-  const { Current_UserId } = useContext(dataContext);
+  const { Current_UserId, setRefresh } = useContext(dataContext);
   const [isModelOpen, setIsModelOpen] = useState(false);
   // console.log(localStorage.getItem("access_token"));
 
@@ -44,6 +44,7 @@ function PayModal() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         // navigate("login");
+        setRefresh(true);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
