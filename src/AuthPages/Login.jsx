@@ -66,16 +66,16 @@ export default function Login() {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        login(data.access_token);
-        data.access_token && navigate("/");
-        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
+        // login(data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
-        localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("user_name", data.user_name);
         localStorage.setItem("user_role", data.user_role);
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("user_profile_pic", data.user_profile_pic);
         localStorage.setItem("account_number", data.account_number);
+        localStorage.setItem("access_token", data.access_token);
+        data.access_token && navigate("/");
+        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
       })
       .catch((error) => {
         console.error(error);

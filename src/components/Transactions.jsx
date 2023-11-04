@@ -6,14 +6,14 @@ import { dataContext } from "../ContexProvider/MyContext";
 
 export default function Transactions() {
   const { currentUserData } = useContext(dataContext);
-  // if (!transactionData || transactionData.length === 0) {
-  //   // Render a loading indicator
-  //   return (
-  //     <div className="text-center">
-  //       <p>Loading...</p>
-  //     </div>
-  //   );
-  // }
+  if (!currentUserData || currentUserData.length === 0) {
+    // Render a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
