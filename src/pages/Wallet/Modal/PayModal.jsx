@@ -8,7 +8,9 @@ import { useContext } from "react";
 import { dataContext } from "../../../ContexProvider/MyContext";
 import SendToBenef from "./SendToBenef";
 import SendToYourSelf from "./SendToYourSelf";
-function PayModal() {
+
+function PayModal({ setUpdatedUserBalance }) {
+  
   //destructure the context
   const { Current_UserId, setRefresh } = useContext(dataContext);
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -87,7 +89,11 @@ function PayModal() {
                 </button>
               </div>
 
-              {hideShowForm ? <SendToYourSelf /> : <SendToBenef />}
+              {hideShowForm ? (
+                <SendToYourSelf />
+              ) : (
+                <SendToBenef setUpdatedUserBalance={setUpdatedUserBalance} />
+              )}
 
               <button
                 type="button"

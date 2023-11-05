@@ -10,6 +10,7 @@ function SendToYourSelf() {
   //destructure the context
   // const { Current_UserId } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -33,7 +34,7 @@ function SendToYourSelf() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/wallet/move-movey", requestOptions)
+    fetch("http://localhost:5555//wallet/move-movey", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +46,11 @@ function SendToYourSelf() {
         // navigate("login");type
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error(
+          "There was a problem with the fetch operation:",
+          error.msg
+        );
+        // setError(e)
       });
   }
   const openNewWalletModel = () => {
@@ -76,7 +81,7 @@ function SendToYourSelf() {
               {...register("from_wallet")}
             >
               <option value="Savings">Savings</option>
-              <option value="Investment">Investment</option>
+              <option value="Invesment">Investment</option>
               <option value="Emergencies">Emergencies</option>
               <option value="Main">Main</option>
             </select>
@@ -94,7 +99,7 @@ function SendToYourSelf() {
               name="wallet_type"
               {...register("to_wallet")}
             >
-              <option value="Spending">Main</option>
+              <option value="Main">Main</option>
               <option value="Emergencies">Emergencies</option>
               <option value="Savings">Savings</option>
               <option value="Investment">Invesment</option>

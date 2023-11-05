@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { dataContext } from "../../../ContexProvider/MyContext";
 
-function SendToBenef() {
+function SendToBenef({ setUpdatedUserBalance }) {
+  const { setRefresh } = useContext(dataContext);
   const {
     register,
     watch,
@@ -35,6 +37,7 @@ function SendToBenef() {
         console.log(response); // Handle the successful response here
         // navigate("login");
         setRefresh(true);
+        setUpdatedUserBalance(response[0].balance);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

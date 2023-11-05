@@ -1,10 +1,8 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-web";
-import signupBanner from '../assets/signupBanner.json'
+import signupBanner from "../assets/signupBanner.json";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useContext } from "react";
@@ -57,7 +55,7 @@ function Register() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/auth/signup", requestOptions)
+    fetch("http://localhost:5555/auth/signup", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
