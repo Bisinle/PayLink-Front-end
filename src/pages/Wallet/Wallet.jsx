@@ -8,7 +8,8 @@ import axios from "axios";
 
 export default function Wallet() {
   const { currentUserData } = useContext(dataContext);
-  const [fixer, setFixer] = useState([]);
+  const [updatedUserBalance, setUpdatedUserBalance] = useState([]);
+  console.log(updatedUserBalance);
 
   const [userBalance, setUserBalance] = useState(0);
 
@@ -24,7 +25,6 @@ export default function Wallet() {
   }, [currentUserData]);
 
   console.log(currentUserData.wallet);
-  console.log(fixer);
 
   return (
     <div className=" flex flex-col justify-center items-center">
@@ -46,10 +46,10 @@ export default function Wallet() {
               <div class="circle circle-3 w-10 h-10 top-0 opacity-40 "></div>
 
               <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center   text-gray-300  font-bold h-[60%] w-[30%] relative">
-                <h1 className="text-5xl">${userBalance}</h1>
+                <h1 className="text-5xl">${ updatedUserBalance ? updatedUserBalance: userBalance}</h1>
               </div>
               <div className=" flex justify-center  w-full ">
-                <PayModal />
+                <PayModal setUpdatedUserBalance={setUpdatedUserBalance}/>
                 <div className="w-1/2 ml-3 btn ">
                   <CreateWallet />
                 </div>
