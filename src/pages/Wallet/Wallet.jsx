@@ -8,10 +8,10 @@ import axios from "axios";
 
 export default function Wallet() {
   const { currentUserData } = useContext(dataContext);
-  const [updatedUserBalance, setUpdatedUserBalance] = useState([]);
+  const [userBalance, setUserBalance] = useState(0);
+  const [updatedUserBalance, setUpdatedUserBalance] = useState(0);
   console.log(updatedUserBalance);
 
-  const [userBalance, setUserBalance] = useState(0);
 
   useEffect(() => {
     if (currentUserData.wallet && currentUserData.wallet.length > 0) {
@@ -49,7 +49,7 @@ export default function Wallet() {
                 <h1 className="text-5xl">${ updatedUserBalance ? updatedUserBalance: userBalance}</h1>
               </div>
               <div className=" flex justify-center  w-full ">
-                <PayModal setUpdatedUserBalance={setUpdatedUserBalance}/>
+                <PayModal setUserBalance={setUserBalance}/>
                 <div className="w-1/2 ml-3 btn ">
                   <CreateWallet />
                 </div>

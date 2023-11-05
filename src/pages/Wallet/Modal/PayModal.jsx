@@ -9,7 +9,7 @@ import { dataContext } from "../../../ContexProvider/MyContext";
 import SendToBenef from "./SendToBenef";
 import SendToYourSelf from "./SendToYourSelf";
 
-function PayModal({ setUpdatedUserBalance }) {
+function PayModal({ setUserBalance }) {
   
   //destructure the context
   const { Current_UserId, setRefresh } = useContext(dataContext);
@@ -92,7 +92,7 @@ function PayModal({ setUpdatedUserBalance }) {
               {hideShowForm ? (
                 <SendToYourSelf />
               ) : (
-                <SendToBenef setUpdatedUserBalance={setUpdatedUserBalance} />
+                <SendToBenef setUserBalance={setUserBalance} />
               )}
 
               <button
