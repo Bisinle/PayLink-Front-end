@@ -33,7 +33,7 @@ function SendToYourSelf() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/wallet/wallet", requestOptions)
+    fetch("http://127.0.0.1:5555/wallet/move-movey", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -56,69 +56,98 @@ function SendToYourSelf() {
     setIsNewWalletModelOpen(false);
   };
   return (
-    <div className="   ">
-      <h5
-        class="modal-title text-3xl font-bold text-black  mb-5 "
-        id="exampleModalCenterTitle"
+    <div className="w-full h-96 flex  flex-col justify-center ">
+      <form
+        className="space-y-4 md:space-y-6 w-[100%] flex flex-col justify-center items-center"
+        action="#"
       >
-        CREATE - WALLET
-      </h5>
-      <form class="space-y-4 md:space-y-6 w-[80%]  " action="#">
-        <div className="">
-          <label
-            for="amount"
-            class="block mb-2 text-xl font-medium text-gray-900 "
-          >
-            amount you wish to move
-          </label>
-          <input
-            type="number"
-            name="amount"
-            id="amount"
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-[80%] p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="amount"
-            {...register("amount", {
-              required: true,
-              maxLength: 20,
-            })}
-          />
-
-          {errors.amount && (
-            <p style={{ color: "red" }}>
-              {" "}
-              <small>amount is required</small>{" "}
-            </p>
-          )}
-          {errors.amount?.type === "maxLength" && (
-            <p style={{ color: "red" }}>
-              {" "}
-              <small>should have max 25 characters</small>{" "}
-            </p>
-          )}
+        <div
+          className="flex flex-row w-full bg-yellow-400
+        "
+        >
+          <div>
+            <label
+              htmlFor="countries"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              from_wallet
+            </label>
+            <select
+              id="countries"
+              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="wallet_type"
+              {...register("from_wallet")}
+            >
+              <option value="Savings">Savings</option>
+              <option value="Investment">Investment</option>
+              <option value="Emergencies">Emergencies</option>
+              <option value="Spending">Main</option>
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="countries"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              to_wallet
+            </label>
+            <select
+              id="countries"
+              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="wallet_type"
+              {...register("to_wallet")}
+            >
+              <option value="Savings">Savings</option>
+              <option value="Investment">Investment</option>
+              <option value="Emergencies">Emergencies</option>
+              <option value="Spending">Main</option>
+            </select>
+          </div>
         </div>
 
-        <div>
-          <label
-            for="countries"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Select an option
-          </label>
-          <select
-            id="countries"
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-[80%] p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="wallet_type"
-            {...register("type")}
-          >
-            <option type="Savings">Savings</option>
-            <option type="Invesment">Invesment</option>
-            <option type="Emergencies">Emergencies</option>
-            <option selected type="Spending">
-              Main
-            </option>
-          </select>
+        <div
+          className="flex flex-row w-full bg-yellow-400
+        "
+        >
+          <div className="">
+            <label
+              htmlFor="amount"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Enter amount you wish to move
+            </label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Amount"
+              {...register("amount", {
+                required: true,
+                maxLength: 20,
+              })}
+            />
+
+            {errors.amount && (
+              <p style={{ color: "red" }}>
+                <small>Amount is required</small>
+              </p>
+            )}
+            {errors.amount?.type === "maxLength" && (
+              <p style={{ color: "red" }}>
+                <small>Should have a maximum of 20 characters</small>
+              </p>
+            )}
+          </div>
         </div>
       </form>
+      <button
+        type="button"
+        class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
+        onClick={handleSubmit(sendMoney)}
+      >
+        Send
+      </button>
     </div>
   );
 }

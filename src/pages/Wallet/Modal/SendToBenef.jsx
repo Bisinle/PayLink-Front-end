@@ -10,6 +10,37 @@ function SendToBenef() {
     setError,
     formState: { errors },
   } = useForm();
+
+  function sendMoney(data) {
+    data.sender_id = localStorage.getItem("user_id");
+    console.log(data);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+
+    fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((response) => {
+        console.log(response); // Handle the successful response here
+        // navigate("login");
+        setRefresh(true);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  }
+
   return (
     <div>
       <form class="space-y-4 md:space-y-6 w-[80%]  " action="#">
@@ -97,6 +128,13 @@ function SendToBenef() {
           )}
         </div>
       </form>
+      <button
+        type="button"
+        class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
+        onClick={handleSubmit(sendMoney)}
+      >
+        Send
+      </button>
     </div>
   );
 }

@@ -34,35 +34,6 @@ function PayModal() {
     seHideShowForm(false);
   }
 
-  function sendMoney(data) {
-    data.sender_id = localStorage.getItem("user_id");
-    console.log(data);
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-
-    fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((response) => {
-        console.log(response); // Handle the successful response here
-        // navigate("login");
-        setRefresh(true);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }
   const openModel = () => {
     setIsModelOpen(true);
     console.log("open");
@@ -97,7 +68,7 @@ function PayModal() {
           role="document"
         >
           <div class="modal-content flex justify-center items-center ">
-            <div class="modal-header flex flex-col justify-center items-center w-[100%]">
+            <div class="modal-header flex flex-col justify-center items-center w-[100%] relative">
               <h1>send maney to </h1>
               <div className="flex gap-4">
                 <button
@@ -120,31 +91,14 @@ function PayModal() {
 
               <button
                 type="button"
-                class="close"
+                className="close absolute top-0 right-0 bg-blue-gray-500"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer ">
-              <button
-                type="button"
-                class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
-                data-dismiss="modal"
-                onClick={closeModel}
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
-                onClick={handleSubmit(sendMoney)}
-              >
-                Send
-              </button>
-            </div>
+          
           </div>
         </div>
       </div>
