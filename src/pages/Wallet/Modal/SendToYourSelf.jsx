@@ -61,20 +61,17 @@ function SendToYourSelf() {
         className="space-y-4 md:space-y-6 w-[100%] flex flex-col justify-center items-center"
         action="#"
       >
-        <div
-          className="flex flex-row w-full bg-yellow-400
-        "
-        >
+        <div className="grid gap-6 mb-6 md:grid-cols-2       ">
           <div>
             <label
               htmlFor="countries"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="flex font-semibold mb-2 text-sm   text-gray-900 dark:text-white"
             >
               from_wallet
             </label>
             <select
               id="countries"
-              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-indigo-500 text-gray-900 smtext-lg rounded-xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               name="wallet_type"
               {...register("from_wallet")}
             >
@@ -87,29 +84,29 @@ function SendToYourSelf() {
           <div>
             <label
               htmlFor="countries"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className=" mb-2 flex justify-start  font-semibold  text-gray-900 dark:text-white"
             >
               to_wallet
             </label>
             <select
               id="countries"
-              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               name="wallet_type"
               {...register("to_wallet")}
             >
-              <option value="Savings">Savings</option>
-              <option value="Investment">Investment</option>
-              <option value="Emergencies">Emergencies</option>
               <option value="Spending">Main</option>
+              <option value="Emergencies">Emergencies</option>
+              <option value="Savings">Savings</option>
+              <option value="Investment">Invesment</option>
             </select>
           </div>
         </div>
 
         <div
-          className="flex flex-row w-full bg-yellow-400
+          className="flex flex-row w-full
         "
         >
-          <div className="">
+          <div className=" flex flex-col justify-center items-center w-full">
             <label
               htmlFor="amount"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -120,7 +117,7 @@ function SendToYourSelf() {
               type="number"
               name="amount"
               id="amount"
-              className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl focus:ring-indigo-400 focus:border-indigo-500 block w-[80%] p-3 placeholder-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Amount"
               {...register("amount", {
                 required: true,
@@ -143,7 +140,7 @@ function SendToYourSelf() {
       </form>
       <button
         type="button"
-        class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
+        class="text-white font-bold text-xl bg-indigo-500  py-2 mt-5 rounded-lg text"
         onClick={handleSubmit(sendMoney)}
       >
         Send

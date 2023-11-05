@@ -48,7 +48,7 @@ function PayModal() {
       <button
         onClick={openModel}
         type="button"
-        class=" btn text-white font-bold text-xl bg-indigo-400 w-full border-gray-30  z-1 px-4 py-2 rounded-xl "
+        class=" btn text-indigo-500 font-bold text-xl bg-white  w-full border-gray-30  z-1 px-4 py-2 rounded-3xl "
         data-toggle="modal"
         data-target="#payment-modal"
       >
@@ -56,7 +56,7 @@ function PayModal() {
       </button>
 
       <div
-        class={`modal ${isModelOpen ? "open" : ""}  `}
+        class={`modal  ${isModelOpen ? "open" : ""}  `}
         id="payment-modal"
         tabindex="-1"
         role="dialog"
@@ -64,15 +64,15 @@ function PayModal() {
         aria-hidden="true"
       >
         <div
-          class="  w-1/2    absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg "
+          class="  w-96  bg-yellow-400  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg "
           role="document"
         >
           <div class="modal-content flex justify-center items-center ">
             <div class="modal-header flex flex-col justify-center items-center w-[100%] relative">
-              <h1>send maney to </h1>
-              <div className="flex gap-4">
+              <h1 className="text-2xl font-bold mb-3">send maney to </h1>
+              <div className="flex gap-4  w-64 h-10 items-center p-2 mt-10 justify-between ">
                 <button
-                  class="modal-title text-2xl font-bold text-black  mb-5 "
+                  class="modal-title text-xl font-bold text-indigo-500 uppercase  border-b-8  mb-5 "
                   id="exampleModalCenterTitle"
                   onClick={handleHideShowFormSenToBenef}
                 >
@@ -80,7 +80,7 @@ function PayModal() {
                 </button>
                 <button
                   onClick={handleHideShowForm}
-                  class="modal-title text-2xl font-bold text-black  mb-5 "
+                  class="modal-title text-xl font-bold text-indigo-500 uppercase border-b-8 mb-5 "
                   id="exampleModalCenterTitle"
                 >
                   your-self
@@ -91,14 +91,13 @@ function PayModal() {
 
               <button
                 type="button"
-                className="close absolute top-0 right-0 bg-blue-gray-500"
+                className="close absolute top-3 right-2 text-red bg-indigo-800"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-          
           </div>
         </div>
       </div>

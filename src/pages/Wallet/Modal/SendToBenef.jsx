@@ -42,8 +42,8 @@ function SendToBenef() {
   }
 
   return (
-    <div>
-      <form class="space-y-4 md:space-y-6 w-[80%]  " action="#">
+    <div className=" w-full flex flex-col justify-center items-center">
+      <form class="space-y-4 md:space-y-6 w-[80%] " action="#">
         <div className="">
           <label
             for="account"
@@ -55,7 +55,7 @@ function SendToBenef() {
             type="number"
             name="account"
             id="account"
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="account"
             {...register("account", {
               required: true,
@@ -87,7 +87,7 @@ function SendToBenef() {
           <input
             type="number"
             {...register("amount", { required: true, minLength: 2 })}
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="amount"
           />
           {errors.amount && (
@@ -112,7 +112,7 @@ function SendToBenef() {
           <input
             type="text"
             {...register("category", { required: true, minLength: 2 })}
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-full p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="category"
           />
           {errors.category && (
@@ -130,7 +130,7 @@ function SendToBenef() {
       </form>
       <button
         type="button"
-        class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
+        class="text-white font-bold text-xl bg-indigo-500 w-48 px-7 mt-2 py-2 rounded-lg text"
         onClick={handleSubmit(sendMoney)}
       >
         Send
