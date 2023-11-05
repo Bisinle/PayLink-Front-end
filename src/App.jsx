@@ -26,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
             <Route path="wallet" element={<Wallet />}>
               <Route path="wallet/benef" element={<SendToBenef />} />
               <Route path="wallet/yourWallet" element={<SendToYourSelf />} />

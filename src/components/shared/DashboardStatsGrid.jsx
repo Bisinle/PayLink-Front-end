@@ -12,17 +12,6 @@ import {
 import classNames from "classnames";
 import axios from "axios";
 
-// import { HiChevronUpDown } from "react-icons/hi2";
-
-// import { Listbox } from "@headlessui/react";
-
-// const people = [
-//   { name: "Savings" },
-//   { name: "Main" },
-//   { name: "Emergencies" },
-//   { name: "Invesment" },
-// ];
-
 export default function DashboardStatsGrid() {
   const [updatedWallet, setUpdatedWallet] = useState("");
   const {
@@ -35,7 +24,12 @@ export default function DashboardStatsGrid() {
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
   const [wallets, setWalltes] = useState(currentUserData.wallet);
 
-  if (!wallets || wallets.length === 0) {
+  if (
+    !currentUserData ||
+    currentUserData.length === 0 ||
+    !wallets ||
+    wallets.length === 0
+  ) {
     // Render a loading indicator
     return (
       <div className="text-center">
@@ -79,7 +73,6 @@ export default function DashboardStatsGrid() {
   //------------------------------
   //------------------------------
   //------------------------------
-
 
   const wallet_grid = wallets.map((wallet) => {
     return (
