@@ -59,6 +59,7 @@ function MyContext({ children }) {
     localRoutePrefix,
     setRefresh,
     currentUserData,
+    setCurrentUserData,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
