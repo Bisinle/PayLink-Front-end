@@ -18,11 +18,12 @@ function MyContext({ children }) {
   const Current_UserId = localStorage.getItem("user_id");
   const Current_UserProfilePicture = localStorage.getItem("user_profile_pic");
   const Current_UserAccount_number = localStorage.getItem("account_number");
-  const localRoutePrefix = "http://localhost:5555";
+  const localRoutePrefix = "http://127.0.0.1:5555";
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [transactionData, setTransactionData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [waletGridBalance, setWaletGridBalance] = useState(0);
 
   //
   //
@@ -30,19 +31,21 @@ function MyContext({ children }) {
 
   /*----------------------- G E T        A L L    U S E R S ---------------------------- */
   useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/user`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((res) => {
-        console.log(" user----->", res.data);
-        setCurrentUserData(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching a user:", error);
-      });
+    if (Current_UserId) {
+      axios
+        .get(`${localRoutePrefix}/user`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(" user----->", res.data);
+          setCurrentUserData(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching a user:", error);
+        });
+    }
   }, [refresh, Current_UserId]);
 
   const values = {
@@ -60,6 +63,8 @@ function MyContext({ children }) {
     setRefresh,
     currentUserData,
     setCurrentUserData,
+    waletGridBalance,
+    setWaletGridBalance,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

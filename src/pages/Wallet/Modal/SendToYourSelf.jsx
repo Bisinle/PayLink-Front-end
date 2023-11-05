@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { dataContext } from "../../../ContexProvider/MyContext";
 import "./MinotTouches.css";
 
-//get the user id from the contetxProvider
-import { useContext } from "react";
-// import dataContext
 function SendToYourSelf() {
   //destructure the context
-  // const { Current_UserId } = useContext(dataContext);
+  const { setWaletGridBalance } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -28,7 +26,8 @@ function SendToYourSelf() {
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("REACT_TOKEN_AUTH_KEY"),
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -43,7 +42,7 @@ function SendToYourSelf() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        // navigate("login");type
+        setWaletGridBalance(response);
       })
       .catch((error) => {
         console.error(

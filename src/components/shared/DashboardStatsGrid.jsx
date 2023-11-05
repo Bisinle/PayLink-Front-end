@@ -25,8 +25,13 @@ import axios from "axios";
 
 export default function DashboardStatsGrid() {
   const [updatedWallet, setUpdatedWallet] = useState("");
-  const { currentUserData, localRoutePrefix, access_token } =
-    useContext(dataContext);
+  const {
+    currentUserData,
+    localRoutePrefix,
+    access_token,
+    waletGridBalance,
+    setWaletGridBalance,
+  } = useContext(dataContext);
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
   const [wallets, setWalltes] = useState(currentUserData.wallet);
 
@@ -40,7 +45,7 @@ export default function DashboardStatsGrid() {
   }
   //!--------------- update wallet status function---------------------
   function deactivateWallet(id) {
-    console.log(id);
+    // console.log(id);
 
     axios
       .put(`${localRoutePrefix}/wallet/wallet/${id}`, {
@@ -59,13 +64,22 @@ export default function DashboardStatsGrid() {
             return wallet;
           }
         });
-        console.log(updatedWalletStatus);
+        // console.log(updatedWalletStatus);
         setWalltes(updatedWalletStatus);
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);
       });
   }
+
+  //------------------------------
+  //------------------------------
+  //------------------------------
+  console.log(waletGridBalance);
+  //------------------------------
+  //------------------------------
+  //------------------------------
+
 
   const wallet_grid = wallets.map((wallet) => {
     return (

@@ -24,7 +24,6 @@ export default function Wallet() {
     }
   }, [currentUserData]);
 
-  console.log(currentUserData.wallet);
 
   return (
     <div className=" flex flex-col justify-center items-center">
