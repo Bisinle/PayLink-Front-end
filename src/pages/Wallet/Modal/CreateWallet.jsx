@@ -6,7 +6,7 @@ import "./MinotTouches.css";
 //get the user id from the contetxProvider
 import { useContext } from "react";
 // import dataContext
-function NewWalletModal() {
+function CreateWallet() {
   //destructure the context
   // const { Current_UserId } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
@@ -33,7 +33,7 @@ function NewWalletModal() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
+    fetch("http://127.0.0.1:5555/wallet/wallet", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -42,7 +42,7 @@ function NewWalletModal() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        // navigate("login");
+        // navigate("login");type
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -57,16 +57,15 @@ function NewWalletModal() {
   };
   return (
     <div className="  btn ">
-    <button
-      onClick={openNewWalletModel}
-      type="button"
-      class=" btn text-white font-bold text-xl bg-indigo-400 w-full border-gray-30  z-1 px-4 py-2 rounded-xl "
-      data-toggle="modal"
-      data-target="#new-wallet-modal"
-    >
-      send money
-    </button>
-
+      <button
+        onClick={openNewWalletModel}
+        type="button"
+        class=" btn text-white font-bold text-xl bg-indigo-400 w-full border-gray-30  z-1 px-4 py-2 rounded-xl "
+        data-toggle="modal"
+        data-target="#new-wallet-modal"
+      >
+        create Wallet
+      </button>
 
       <div
         class={`model modal  ${isNewWalletModelOpen ? "open" : "hidden"} `}
@@ -135,12 +134,12 @@ function NewWalletModal() {
                     id="countries"
                     className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-2xl   focus:ring-indigo-400 focus:border-primary-600 block w-[80%] p-3   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="wallet_type"
-                    {...register("value")}
+                    {...register("type")}
                   >
-                    <option value="Savings">Savings</option>
-                    <option value="Invesment">Invesment</option>
-                    <option value="Emergencies">Emergencies</option>
-                    <option selected value="Spending">
+                    <option type="Savings">Savings</option>
+                    <option type="Invesment">Invesment</option>
+                    <option type="Emergencies">Emergencies</option>
+                    <option selected type="Spending">
                       Main
                     </option>
                   </select>
@@ -172,4 +171,4 @@ function NewWalletModal() {
   );
 }
 
-export default NewWalletModal;
+export default CreateWallet;

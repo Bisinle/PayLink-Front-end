@@ -9,6 +9,8 @@ import Login from "./AuthPages/Login";
 import NotFound from "./AuthPages/NotFound";
 import { dataContext } from "./ContexProvider/MyContext";
 import Protector from "./AuthPages/Protector/Protector";
+import SendToBenef from "./pages/Wallet/Modal/SendToBenef";
+import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
 
 function App() {
   const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
@@ -24,7 +26,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
-            <Route path="wallet" element={<Wallet />} />
+            <Route path="wallet" element={<Wallet />}>
+              <Route path="wallet/benef" element={<SendToBenef />} />
+              <Route path="wallet/yourWallet" element={<SendToYourSelf />} />
+            </Route>
             <Route path="register" element={<Register />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="register" element={<Register />} />

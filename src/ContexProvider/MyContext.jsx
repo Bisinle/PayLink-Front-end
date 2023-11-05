@@ -37,7 +37,7 @@ function MyContext({ children }) {
         },
       })
       .then((res) => {
-        console.log(" All USERS-->", res.data);
+        console.log(" user----->", res.data);
         setCurrentUserData(res.data);
       })
       .catch((error) => {
@@ -55,7 +55,7 @@ function MyContext({ children }) {
     Current_UserId,
     Current_UserProfilePicture,
     Current_UserAccount_number,
-
+    access_token,
     localRoutePrefix,
     setRefresh,
     currentUserData,
