@@ -12,6 +12,7 @@ import Protector from "./AuthPages/Protector/Protector";
 import SendToBenef from "./pages/Wallet/Modal/SendToBenef";
 import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
 import AdminDash from "./Admin/AdminDash";
+import UserTable from "./Admin/Children/UserTable";
 
 function App() {
   const { isLoggedIn, loginSignupToggle, role } = useContext(dataContext);
@@ -44,7 +45,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={role === 1 ? <AdminDash /> : <Dashboard />} />
 
-            {/* <Route path="wallet" element={role===1 ? Navigate(index) : <Wallet />}/> */}
+            <Route path="wallet" element={<Wallet />}/>
+            <Route path="users" element={<UserTable />}/>
            
             <Route path="register" element={<Register />} />
             <Route path="transactions" element={<Transactions />} />

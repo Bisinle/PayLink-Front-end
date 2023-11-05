@@ -24,12 +24,11 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   },
 
   {
-    key: "transactions",
-    label: "Transactions",
-    path: "/transactions",
+    key: "users",
+    label: "Users",
+    path: "/users",
     icon: <HiOutlineUsers />,
   },
- 
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
@@ -45,7 +44,7 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
     path: "/support",
     icon: <HiOutlineQuestionMarkCircle />,
   },
-  
+
   // {
   //     key: 'logout',
   //     label: 'Logout',
