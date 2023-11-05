@@ -81,7 +81,7 @@ function SendToYourSelf() {
               <option value="Savings">Savings</option>
               <option value="Investment">Investment</option>
               <option value="Emergencies">Emergencies</option>
-              <option value="Spending">Main</option>
+              <option value="Main">Main</option>
             </select>
           </div>
           <div>
