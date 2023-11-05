@@ -24,6 +24,7 @@ function MyContext({ children }) {
   const [currentUserData, setCurrentUserData] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [waletGridBalance, setWaletGridBalance] = useState(0);
+  const [role, setRole] = useState("");
 
   //
   //
@@ -65,6 +66,8 @@ function MyContext({ children }) {
     setCurrentUserData,
     waletGridBalance,
     setWaletGridBalance,
+    role,
+    setRole,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

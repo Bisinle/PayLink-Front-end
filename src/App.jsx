@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/shared/Layout";
 import Register from "./pages/Register";
@@ -11,9 +11,26 @@ import { dataContext } from "./ContexProvider/MyContext";
 import Protector from "./AuthPages/Protector/Protector";
 import SendToBenef from "./pages/Wallet/Modal/SendToBenef";
 import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
+import AdminDash from "./Admin/AdminDash";
 
 function App() {
   const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
+  const [loading, setLoading] = useState(true);
+  // Simulate loading delay
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
+    }, 2000); // Simulated 2 seconds of loading time
+  }, []);
+
+  if (loading) {
+    // While loading, display a loading indicator
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
   return (
     <div className="App  ">
       {!isLoggedIn ? ( // Check if the user is not logged in
@@ -26,7 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
-            <Route index element={<Dashboard />} />
+            <Route path="adminDash" element={<AdminDash />} />
             <Route path="wallet" element={<Wallet />}>
               <Route path="wallet/benef" element={<SendToBenef />} />
               <Route path="wallet/yourWallet" element={<SendToYourSelf />} />
@@ -35,6 +52,7 @@ function App() {
             <Route path="transactions" element={<Transactions />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
+            <Route path="logout" element={<Login />} />
 
             <Route path="*" element={<NotFound />} />
           </Route>
