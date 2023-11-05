@@ -29,12 +29,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     path: "/transactions",
     icon: <HiOutlineUsers />,
   },
-  {
-    key: "adminDash",
-    label: "Admin",
-    path: "/adminDash",
-    icon: <HiOutlineUsers />,
-  }
+ 
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

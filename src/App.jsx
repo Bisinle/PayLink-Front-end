@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/shared/Layout";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -14,7 +14,7 @@ import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
 import AdminDash from "./Admin/AdminDash";
 
 function App() {
-  const { isLoggedIn, loginSignupToggle } = useContext(dataContext);
+  const { isLoggedIn, loginSignupToggle, role } = useContext(dataContext);
   const [loading, setLoading] = useState(true);
   // Simulate loading delay
   useEffect(() => {
@@ -42,12 +42,10 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="adminDash" element={<AdminDash />} />
-            <Route path="wallet" element={<Wallet />}>
-              <Route path="wallet/benef" element={<SendToBenef />} />
-              <Route path="wallet/yourWallet" element={<SendToYourSelf />} />
-            </Route>
+            <Route index element={role === 1 ? <AdminDash /> : <Dashboard />} />
+
+            {/* <Route path="wallet" element={role===1 ? Navigate(index) : <Wallet />}/> */}
+           
             <Route path="register" element={<Register />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="register" element={<Register />} />

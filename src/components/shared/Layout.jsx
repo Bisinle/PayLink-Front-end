@@ -15,10 +15,11 @@ export default function Layout() {
         <div className="flex flex-col flex-1">
           <Header />
           <div className="flex-1 p-4 min-h-0 overflow-auto">
-            {role === 0 ? (
-              <UserDashboardStatsGrid />
-            ) : (
+            {role === 1 ? (
+              
               <AdminDashboardStatsGrid />
+            ) : (
+              <UserDashboardStatsGrid />
             )}
             <Outlet />
           </div>
