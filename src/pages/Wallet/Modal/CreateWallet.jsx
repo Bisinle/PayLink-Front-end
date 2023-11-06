@@ -1,33 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { dataContext } from "../../../ContexProvider/MyContext";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./MinotTouches.css";
 
-//get the user id from the contetxProvider
-import { useContext } from "react";
-// import dataContext
 function CreateWallet() {
   //destructure the context
   // const { Current_UserId } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
+  const [error, setError] = useState("");
+  const { access_token, Current_UserId, setAllWallet } =
+    useContext(dataContext);
 
   const {
     register,
     watch,
     handleSubmit,
     reset,
-    setError,
+
     formState: { errors },
   } = useForm();
 
   function sendMoney(data) {
-    data.user_id = localStorage.getItem("user_id");
+    data.user_id = Current_UserId;
     console.log(data);
+    setError("");
 
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("REACT_TOKEN_AUTH_KEY"),
+        Authorization: "Bearer " + access_token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -36,13 +38,21 @@ function CreateWallet() {
     fetch("http://127.0.0.1:5555/wallet/wallet", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          // Handle the error case and set the error message in the <p> tag
+          return res.json().then((errorData) => {
+            const errorMessage = errorData.msg;
+            console.log("-----------", res);
+            setError(errorMessage);
+          });
         }
         return res.json();
       })
       .then((response) => {
-        console.log(response); // Handle the successful response here
-        // navigate("login");type
+        if ("msg" in response) {
+          return;
+        } else {
+          setAllWallet((prevWallets) => [...prevWallets, response]);
+        }
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -146,6 +156,9 @@ function CreateWallet() {
                 </div>
               </form>
             </div>
+            <p className="text-red-500 text-xl flex flex-wrap  w-96 font-semibold">
+              {error}
+            </p>
 
             <div class="modal-footer ">
               <button

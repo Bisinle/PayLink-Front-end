@@ -39,7 +39,7 @@ export default function DashboardStatsGrid() {
     axios
       .get(`${localRoutePrefix}/wallet/wallet`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${access_token}`,
         },
       })
       .then((res) => {
@@ -99,7 +99,7 @@ export default function DashboardStatsGrid() {
   //------------------------------
   //------------------------------
   // console.log(waletGridBalance);
-  // console.log(wallets);
+  console.log(allWallet);
   //------------------------------
   //------------------------------
   //------------------------------
