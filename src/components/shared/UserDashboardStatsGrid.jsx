@@ -29,7 +29,7 @@ export default function DashboardStatsGrid() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
-    }, 2000); // Simulated 2 seconds of loading time
+    }, 4000); // Simulated 2 seconds of loading time
   }, []);
 
   if (loading) {

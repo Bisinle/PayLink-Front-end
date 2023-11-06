@@ -4,7 +4,8 @@ import { dataContext } from "../../../ContexProvider/MyContext";
 
 function SendToBenef({ setUserBalance }) {
   //total transaction is taking the info to admintrasaction stat
-  const { setRefresh,totalTransactions,setTotalTransactions } = useContext(dataContext);
+  const { setRefresh, totalTransactions, setTotalTransactions } =
+    useContext(dataContext);
   const {
     register,
     watch,
@@ -39,7 +40,7 @@ function SendToBenef({ setUserBalance }) {
         // navigate("login");
         setRefresh(true);
         setUserBalance(response[0].balance);
-        setTotalTransactions(totalTransactions +1)
+        setTotalTransactions(totalTransactions + 1);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -109,28 +110,25 @@ function SendToBenef({ setUserBalance }) {
         </div>
         <div>
           <label
-            for="category"
-            class="block mb-2 text-xl font-medium text-gray-900 "
+            htmlFor="countries"
+            className=" mb-2 flex justify-start  font-semibold  text-gray-900 dark:text-white"
           >
-            what are you paying for
+            to_wallet
           </label>
-          <input
-            type="text"
-            {...register("category", { required: true, minLength: 2 })}
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="category"
-          />
-          {errors.category && (
-            <p style={{ color: "red" }}>
-              <small>category is required</small>
-            </p>
-          )}
-          {errors.category?.type === "minLength" && (
-            <p style={{ color: "red" }}>
-              {" "}
-              <small>should have min 2 characters</small>{" "}
-            </p>
-          )}
+          <select
+            id="countries"
+            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   mb-3 focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="wallet_type"
+            {...register("category")}
+          >
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Investment">Investment</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Healthcare">Healthcare</option>
+          </select>
         </div>
       </form>
       <button

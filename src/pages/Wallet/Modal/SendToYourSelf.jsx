@@ -154,3 +154,21 @@ function SendToYourSelf() {
 }
 
 export default SendToYourSelf;
+
+
+
+
+{/* <select */}
+// name="category"
+// id="dropdown"
+// className="rounded-md p-4 outline-none"
+// onChange={handleChosenCategory}
+// // value={category}
+// >
+// <option value="all" defaultValue={"all"}>
+//   All
+// </option>
+// {categories.map((item) => (
+//   <option key={item.id}>{item.category_name}</option>
+// ))}
+// </select>
