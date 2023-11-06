@@ -16,11 +16,13 @@ export default function Login() {
   // const navigate = useNavigate();
   //destructure the contex
   const {
-    setIsLoggedIn,
     loginSignupToggle,
+    setIsLoggedIn,
     setLoginSignupToggle,
     setRole,
     setRefresh,
+    setCurrent_UserId,
+    setAccess_token,
   } = useContext(dataContext);
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
@@ -73,14 +75,15 @@ export default function Login() {
         console.log(data.access_token);
         data.access_token && navigate("/");
         data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
-        // login(data.access_token);
         setRole(data.user_role);
-        localStorage.setItem("refresh_token", data.refresh_token);
-        localStorage.setItem("user_name", data.user_name);
-        localStorage.setItem("user_id", data.user_id);
-        localStorage.setItem("user_profile_pic", data.user_profile_pic);
-        localStorage.setItem("account_number", data.account_number);
-        localStorage.setItem("access_token", data.access_token);
+        setCurrent_UserId(data.user_id);
+        setAccess_token(data.access_token);
+        // localStorage.setItem("refresh_token", data.refresh_token);
+        // localStorage.setItem("user_name", data.user_name);
+        // localStorage.setItem("user_id", data.user_id);
+        // localStorage.setItem("user_profile_pic", data.user_profile_pic);
+        // localStorage.setItem("account_number", data.account_number);
+        // localStorage.setItem("access_token", data.access_token);
         setRefresh(!true);
       })
       .catch((error) => {

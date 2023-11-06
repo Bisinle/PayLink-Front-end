@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dataContext } from "../../../ContexProvider/MyContext";
 
 function SendToBenef({ setUserBalance }) {
+  const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
   const { setRefresh, totalTransactions, setTotalTransactions } =
     useContext(dataContext);
@@ -11,18 +12,20 @@ function SendToBenef({ setUserBalance }) {
     watch,
     handleSubmit,
     reset,
-    setError,
+
     formState: { errors },
   } = useForm();
 
   function sendMoney(data) {
     data.sender_id = localStorage.getItem("user_id");
     console.log(data);
+    //clear the error stat
+    setError('')
 
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        // Authorization: "Bearer " + localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -31,22 +34,29 @@ function SendToBenef({ setUserBalance }) {
     fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          // Handle the error case and set the error message in the <p> tag
+          return res.json().then((errorData) => {
+            const errorMessage = errorData.msg;
+            console.log("-----------", res);
+            setError(errorMessage);
+          });
         }
         return res.json();
       })
       .then((response) => {
-        console.log(response); // Handle the successful response here
+        console.log(response.msg); // Handle the successful response here
         // navigate("login");
+        setError(response.msg);
         setRefresh(true);
         setUserBalance(response[0].balance);
         setTotalTransactions(totalTransactions + 1);
+        // setError(response.msg);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }
-  console.log(totalTransactions);
+
   return (
     <div className=" w-full flex flex-col justify-center items-center">
       <form class="space-y-4 md:space-y-6 w-[80%] " action="#">
@@ -110,30 +120,29 @@ function SendToBenef({ setUserBalance }) {
         </div>
         <div>
           <label
-            for="category"
-            class="block mb-2 text-xl font-medium text-gray-900 "
+            htmlFor="countries"
+            className=" mb-2 flex justify-start  font-semibold  text-gray-900 dark:text-white"
           >
-            what are you paying for
+            to_wallet
           </label>
-          <input
-            type="text"
-            {...register("category", { required: true, minLength: 2 })}
-            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="category"
-          />
-          {errors.category && (
-            <p style={{ color: "red" }}>
-              <small>category is required</small>
-            </p>
-          )}
-          {errors.category?.type === "minLength" && (
-            <p style={{ color: "red" }}>
-              {" "}
-              <small>should have min 2 characters</small>{" "}
-            </p>
-          )}
+          <select
+            id="countries"
+            className="bg-gray-50 border border-indigo-500 text-gray-900 sm:text-lg rounded-lg   mb-3 focus:ring-indigo-400 focus:border-primary-600 block w-full p-2   placeholder-gray-600  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="wallet_type"
+            {...register("category")}
+          >
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Investment">Investment</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Healthcare">Healthcare</option>
+          </select>
         </div>
       </form>
+      <p className="text-red-500 text-xl">{error}</p>
+
       <button
         type="button"
         class="text-white font-bold text-xl bg-indigo-500 w-48 px-7 mt-2 py-2 rounded-lg text"

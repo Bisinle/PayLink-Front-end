@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Layout from "./components/shared/Layout";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -15,13 +20,15 @@ import AdminDash from "./Admin/AdminDash";
 import UserTable from "./Admin/Children/UserTable";
 
 function App() {
-  const { isLoggedIn, loginSignupToggle, role } = useContext(dataContext);
+  const { isLoggedIn, loginSignupToggle,currentUserData, role } = useContext(dataContext);
   const [loading, setLoading] = useState(true);
   // Simulate loading delay
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
-    }, 2000); // Simulated 2 seconds of loading time
+    if (currentUserData) {
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
+      }, 4000);
+    } // Simulated 2 seconds of loading time
   }, []);
 
   if (loading) {
@@ -45,9 +52,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={role === 1 ? <AdminDash /> : <Dashboard />} />
 
-            <Route path="wallet" element={<Wallet />}/>
-            <Route path="users" element={<UserTable />}/>
-           
+            <Route path="wallet" element={<Wallet />} />
+            <Route path="users" element={<UserTable />} />
+
             <Route path="register" element={<Register />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="register" element={<Register />} />

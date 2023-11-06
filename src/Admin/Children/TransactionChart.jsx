@@ -92,7 +92,6 @@ export default function TransactionChart() {
         .then((res) => {
         //   console.log(" user----->", res.data);
           setTransactionsAnalytic(res.data);
-		  setTalTransactions(res.data.length)
         })
         .catch((error) => {
           console.error("Error fetching a user:", error);
