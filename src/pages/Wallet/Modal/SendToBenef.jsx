@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dataContext } from "../../../ContexProvider/MyContext";
 
 function SendToBenef({ setUserBalance }) {
+  const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
   const { setRefresh, totalTransactions, setTotalTransactions } =
     useContext(dataContext);
@@ -11,18 +12,20 @@ function SendToBenef({ setUserBalance }) {
     watch,
     handleSubmit,
     reset,
-    setError,
+
     formState: { errors },
   } = useForm();
 
   function sendMoney(data) {
     data.sender_id = localStorage.getItem("user_id");
     console.log(data);
+    //clear the error stat
+    setError('')
 
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        // Authorization: "Bearer " + localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -31,16 +34,23 @@ function SendToBenef({ setUserBalance }) {
     fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          // Handle the error case and set the error message in the <p> tag
+          return res.json().then((errorData) => {
+            const errorMessage = errorData.msg;
+            console.log("-----------", res);
+            setError(errorMessage);
+          });
         }
         return res.json();
       })
       .then((response) => {
-        console.log(response); // Handle the successful response here
+        console.log(response.msg); // Handle the successful response here
         // navigate("login");
+        setError(response.msg);
         setRefresh(true);
         setUserBalance(response[0].balance);
         setTotalTransactions(totalTransactions + 1);
+        // setError(response.msg);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -131,6 +141,8 @@ function SendToBenef({ setUserBalance }) {
           </select>
         </div>
       </form>
+      <p className="text-red-500 text-xl">{error}</p>
+
       <button
         type="button"
         class="text-white font-bold text-xl bg-indigo-500 w-48 px-7 mt-2 py-2 rounded-lg text"
