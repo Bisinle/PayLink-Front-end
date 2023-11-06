@@ -12,7 +12,7 @@ function UserTable() {
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const entriesPerPage = 5;
+  const entriesPerPage = 8;
 
   useEffect(() => {
     async function fetchData() {
@@ -88,7 +88,7 @@ function UserTable() {
               <td className="px-2 py-2 pb-4">{user.address}</td>
               <td className="px-2 py-2 pb-4">{user.phone_number}</td>
               <td
-                className={`px-2 py-2 pb-4 rounded inline-block ${
+                className={`px-2 py-2 pb-4 flex justify-center items-center rounded ${
                   user.status === "Active"
                     ? "bg-green-100 text-green-700 active-status"
                     : "bg-yellow-100 text-red-700 inactive-status"
@@ -100,33 +100,33 @@ function UserTable() {
                 {user.status === "Active" ? (
                   <button
                     onClick={() => handleUpdateProfile(user.id, "Inactive")}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    className="bg-red-500 hover:bg-red-700 text-white flex justify-center items-center w-full font-bold py-1 px-2 rounded"
                   >
                     Deactivate
                   </button>
                 ) : (
                   <button
                     onClick={() => handleUpdateProfile(user.id, "Active")}
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                    className="bg-green-500 hover:bg-green-700 text-white flex justify-center items-center w-full font-bold py-1 px-2 rounded"
                   >
                     Activate
                   </button>
                 )}
-                <button
+                {/* <button
                   onClick={() =>
-                    handleUpdateProfile(user.id, {
-                      first_name: "John",
-                      last_name: "Doe",
-                      address: "123 Main St",
-                      phone_number: "555-1234",
-                      Account: "123456789",
-                      status: "Active",
+                    // handleUpdateProfile(user.id, {
+                    //   first_name: "John",
+                    //   last_name: "Doe",
+                    //   address: "123 Main St",
+                    //   phone_number: "555-1234",
+                    //   Account: "123456789",
+                    //   status: "Active",
                     })
                   }
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
                 >
                   Update Profile
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

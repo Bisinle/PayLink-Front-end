@@ -1,13 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
+import { useSpring, animated } from "react-spring";
 
 import { dataContext } from "../../ContexProvider/MyContext";
 import axios from "axios";
 
+//number animation
+function Number({ n }) {
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: n,
+    delay: 200,
+    config: { mass: 1, tension: 20, friction: 10 },
+  });
+  return <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>;
+}
+
 export default function AdminDashboardStatsGrid() {
-  const { localRoutePrefix,activeUsers, setActiveUsers,inactiveUsers, setInactiveUsers } = useContext(dataContext);
- 
+  const {
+    localRoutePrefix,
+    activeUsers,
+    setActiveUsers,
+    inactiveUsers,
+    setInactiveUsers,
+  } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
   useEffect(() => {
@@ -46,21 +63,20 @@ export default function AdminDashboardStatsGrid() {
           <FaUser className="text-2xl text-white" />
         </div>
         <div className="  h-full w-full flex relative flex-row justify-between items-center">
-              <div className=" w-1/2 m-2 flex flex-col p-3 ">
-                <h1 className="text-2xl text-green-500">Acitve</h1>
-				<span className="text-3xl">{activeUsers}</span>
-              </div>
-              <div className=" w-1/2 m-2 flex flex-col p-3 ">
-                <h1 className="text-2xl text-red-500">Inactive</h1>
-				<span className="text-3xl">{inactiveUsers}</span>
-              </div>
+          <div className=" w-1/2 m-2 flex flex-col p-3 ">
+            <h1 className="text-2xl text-green-500">Acitve</h1>
+            <span className="text-3xl">{<Number n={activeUsers} />}</span>
+          </div>
+          <div className=" w-1/2 m-2 flex flex-col p-3 ">
+            <h1 className="text-2xl text-red-500">Inactive</h1>
+            <span className="text-3xl">{<Number n={inactiveUsers} />}</span>
+          </div>
         </div>
       </BoxWrapper>
       <BoxWrapper>
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-orange-600">
           <IoPieChart className="text-2xl text-white" />
         </div>
-
 
         <div className="pl-4">
           <span className="text-sm text-gray-500 font-light">
@@ -73,8 +89,6 @@ export default function AdminDashboardStatsGrid() {
             <span className="text-sm text-green-500 pl-2">-343</span>
           </div>
         </div>
-
-
       </BoxWrapper>
       <BoxWrapper>
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-yellow-400">
