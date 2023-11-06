@@ -30,6 +30,7 @@ export default function AdminDashboardStatsGrid() {
     totalBalance,
     setTotalBalance,
     totalTransactions,
+	setTotalTransactions,
   } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
@@ -71,7 +72,7 @@ export default function AdminDashboardStatsGrid() {
         },
       })
       .then((res) => {
-        console.log(" all-wallets----->", res.data);
+        // console.log(" all-wallets----->", res.data);
 
         //-----------------------gets the most popular wallet
         const typeCount = {};
@@ -96,7 +97,7 @@ export default function AdminDashboardStatsGrid() {
           }
         }
 
-        //----------------------gets the total balance
+        //---------------------------------------gets the total balance
         let total_Balance = 0;
         for (const wallet of res.data) {
           total_Balance += parseFloat(wallet.balance);
@@ -109,9 +110,31 @@ export default function AdminDashboardStatsGrid() {
         console.error("Error fetching a user:", error);
       });
   }, []);
+  //------------------------------------git all transactions
+  useEffect(() => {
+    fetch("http://127.0.0.1:5555/transaction/transactions")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((response) => {
+        console.log(response); // Handle the successful response here
+        setTotalTransactions(response.length);
+        // navigate("login");
+        //   setRefresh(true);
+        //   setUserBalance(response[0].balance);
+        //   setTotalTransactions(totalTransactions +1)
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  }, []);
 
   //   console.log(activeUsers, inactiveUsers);
-  console.log(walletCount);
+  //   console.log(walletCount);
+  console.log(totalTransactions);
   return (
     <div className="flex gap-4">
       <BoxWrapper>
@@ -168,7 +191,7 @@ export default function AdminDashboardStatsGrid() {
         <div className="pl-4 flex items-center justify-center">
           <div className="flex items-cente mt-10">
             <strong className="text-2xl text-gray-700 font-semibold">
-              {totalTransactions}
+              {<Number n={totalTransactions} />}
             </strong>
           </div>
         </div>

@@ -30,7 +30,7 @@ function MyContext({ children }) {
   const [activeUsers, setActiveUsers] = useState(0);
   const [inactiveUsers, setInactiveUsers] = useState(0);
   const [walletCount, setWalletCount] = useState({});
-  const [totalTransactions, setTalTransactions] = useState(0);
+  const [totalTransactions, setTotalTransactions] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
 
   //
@@ -85,7 +85,7 @@ function MyContext({ children }) {
     totalBalance,
     setTotalBalance,
     totalTransactions,
-    setTalTransactions,
+    setTotalTransactions,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
