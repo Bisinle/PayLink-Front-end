@@ -88,7 +88,7 @@ export default function DashboardStatsGrid() {
           }
         });
         console.log(updatedWalletStatus);
-        setWalltes(updatedWalletStatus);
+        setAllWallet(updatedWalletStatus);
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);

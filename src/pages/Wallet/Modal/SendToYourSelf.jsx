@@ -6,7 +6,7 @@ import "./MinotTouches.css";
 
 function SendToYourSelf() {
   //destructure the context
-  const { setWaletGridBalance } = useContext(dataContext);
+  const { setWaletGridBalance, Current_UserId,access_token } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,13 +20,13 @@ function SendToYourSelf() {
   } = useForm();
 
   function sendMoney(data) {
-    data.user_id = localStorage.getItem("user_id");
+    data.user_id = Current_UserId;
     console.log(data);
 
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        Authorization: "Bearer " + access_token,
 
         "Content-Type": "application/json",
       },
@@ -155,10 +155,9 @@ function SendToYourSelf() {
 
 export default SendToYourSelf;
 
-
-
-
-{/* <select */}
+{
+  /* <select */
+}
 // name="category"
 // id="dropdown"
 // className="rounded-md p-4 outline-none"
