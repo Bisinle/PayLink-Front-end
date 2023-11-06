@@ -16,22 +16,30 @@ function UserTable() {
   }, []);
 
   const handleUpdateProfile = async (id, updatedData) => {
-    const response = await fetch(`http://127.0.0.1:5555/user/`, {
-      method: "PATCH",
+    console.log(id, updatedData);
+    const response = await fetch(`http://127.0.0.1:5555/user/${id}`, {
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData),
     });
-    const json = await response.json();
-    console.log(json);
+    const res = await response.json();
+    console.log(res);
     // Update the user profile data in the state
-    const updatedDataIndex = data.findIndex((item) => item.id === id);
-    const newData = [...data];
-    newData[updatedDataIndex] = json.data;
-    setData(newData);
+    const updatedDataIndex = data.map((user) => {
+      if (user.id === id) {
+        user.status = res.status;
+        return user;
+      } else {
+        return user;
+      }
+    });
+    // const newData = [...data];
+    // newData[updatedDataIndex] = res.data;
+    setData(updatedDataIndex);
   };
+  console.log(data);
 
   let filteredData = data;
   const indexOfLastEntry = currentPage * entriesPerPage;
@@ -39,14 +47,11 @@ function UserTable() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  const currentEntries = filteredData.slice(
-    indexOfFirstEntry,
-    indexOfLastEntry
-  );
+  const currentEntries = data.slice(indexOfFirstEntry, indexOfLastEntry);
 
   return (
-    <div className="relative overflow-auto shadow-md sm:rounded-lg">
-      <table className="border-collapse">
+    <div className="relative overflow-auto p-3   mt-10 border shadow-md sm:rounded-lg">
+      <table className="border-collapse  w-full">
         <thead>
           <tr>
             <th className="px-2 pb-1">Account</th>
@@ -68,7 +73,7 @@ function UserTable() {
               <td className="px-2 py-2 pb-4">{user.phone_number}</td>
               <td
                 className={`px-2 py-2 pb-4 rounded inline-block ${
-                  user.status === "Acitve"
+                  user.status === "Active"
                     ? "bg-green-100 text-green-700 active-status"
                     : "bg-yellow-100 text-red-700 inactive-status"
                 }`}
@@ -76,7 +81,7 @@ function UserTable() {
                 {user.status}
               </td>
               <td className="px-2 py-2 pb-4">
-                {user.status === "Acitve" ? (
+                {user.status === "Active" ? (
                   <button
                     onClick={() => handleUpdateProfile(user.id, "Inactive")}
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
@@ -85,7 +90,7 @@ function UserTable() {
                   </button>
                 ) : (
                   <button
-                    onClick={() => handleUpdateProfile(user.id, "Acitve")}
+                    onClick={() => handleUpdateProfile(user.id, "Active")}
                     className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
                   >
                     Activate
