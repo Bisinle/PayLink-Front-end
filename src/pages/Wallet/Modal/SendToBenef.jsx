@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { dataContext } from "../../../ContexProvider/MyContext";
 
 function SendToBenef({ setUserBalance }) {
-  const { setRefresh } = useContext(dataContext);
+  //total transaction is taking the info to admintrasaction stat
+  const { setRefresh, totalTransactions, setTotalTransactions } =
+    useContext(dataContext);
   const {
     register,
     watch,
@@ -38,12 +40,13 @@ function SendToBenef({ setUserBalance }) {
         // navigate("login");
         setRefresh(true);
         setUserBalance(response[0].balance);
+        setTotalTransactions(totalTransactions + 1);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }
-
+  console.log(totalTransactions);
   return (
     <div className=" w-full flex flex-col justify-center items-center">
       <form class="space-y-4 md:space-y-6 w-[80%] " action="#">

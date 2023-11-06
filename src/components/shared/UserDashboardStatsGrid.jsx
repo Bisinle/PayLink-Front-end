@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useState } from "react";
+import React, { useContext, Fragment, useState, useEffect } from "react";
 import { IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
 import { dataContext } from "../../ContexProvider/MyContext";
 import { AiOutlineExclamation } from "react-icons/ai";
@@ -23,14 +23,17 @@ export default function DashboardStatsGrid() {
   } = useContext(dataContext);
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
   const [wallets, setWalltes] = useState(currentUserData.wallet);
+  const [loading, setLoading] = useState(true);
 
-  if (
-    !currentUserData ||
-    currentUserData.length === 0 ||
-    !wallets ||
-    wallets.length === 0
-  ) {
-    // Render a loading indicator
+  // Simulate loading delay
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
+    }, 2000); // Simulated 2 seconds of loading time
+  }, []);
+
+  if (loading) {
+    // While loading, display a loading indicator
     return (
       <div className="text-center">
         <p>Loading...</p>
@@ -69,7 +72,8 @@ export default function DashboardStatsGrid() {
   //------------------------------
   //------------------------------
   //------------------------------
-  console.log(waletGridBalance);
+  // console.log(waletGridBalance);
+  console.log(wallets);
   //------------------------------
   //------------------------------
   //------------------------------
@@ -145,7 +149,11 @@ export default function DashboardStatsGrid() {
     );
   });
 
-  return <div className="flex gap-4">{wallet_grid}</div>;
+  return (
+    <div className="flex gap-4">
+      {currentUserData ? wallet_grid : "Loading"}
+    </div>
+  );
 }
 
 function BoxWrapper({ children }) {

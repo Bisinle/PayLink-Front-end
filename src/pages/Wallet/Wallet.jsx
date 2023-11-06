@@ -10,7 +10,7 @@ export default function Wallet() {
   const { currentUserData } = useContext(dataContext);
   const [userBalance, setUserBalance] = useState(0);
   const [updatedUserBalance, setUpdatedUserBalance] = useState(0);
-  console.log(updatedUserBalance);
+  // console.log(updatedUserBalance);
 
 
   useEffect(() => {
