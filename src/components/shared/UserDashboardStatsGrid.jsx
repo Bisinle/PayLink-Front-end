@@ -99,7 +99,7 @@ export default function DashboardStatsGrid() {
   //------------------------------
   //------------------------------
   // console.log(waletGridBalance);
-  console.log(allWallet);
+  // console.log(allWallet);
   //------------------------------
   //------------------------------
   //------------------------------

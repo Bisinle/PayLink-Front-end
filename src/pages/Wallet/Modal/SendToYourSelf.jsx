@@ -6,7 +6,13 @@ import "./MinotTouches.css";
 
 function SendToYourSelf() {
   //destructure the context
-  const { setWaletGridBalance, Current_UserId,access_token } = useContext(dataContext);
+  const {
+    setWaletGridBalance,
+    Current_UserId,
+    access_token,
+    allWallet,
+    setAllWallet,
+  } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -42,7 +48,7 @@ function SendToYourSelf() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        setWaletGridBalance(response);
+        setAllWallet(response);
       })
       .catch((error) => {
         console.error(
