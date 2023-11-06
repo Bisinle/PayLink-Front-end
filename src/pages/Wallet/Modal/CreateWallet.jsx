@@ -56,19 +56,19 @@ function CreateWallet() {
     setIsNewWalletModelOpen(false);
   };
   return (
-    <div className="  btn ">
+    <div className=" ">
       <button
         onClick={openNewWalletModel}
         type="button"
-        class=" btn text-white font-bold text-xl bg-indigo-400 w-full border-gray-30  z-1 px-4 py-2 rounded-xl "
+        class=" btn text-indigo-500 font-bold text-xl bg-white  w-full border-gray-30  z-1 px-4 py-2 rounded-3xl "
         data-toggle="modal"
-        data-target="#new-wallet-modal"
+        data-target="#-wallet-modal"
       >
         create Wallet
       </button>
 
       <div
-        class={`model modal  ${isNewWalletModelOpen ? "open" : "hidden"} `}
+        class={`model modal   ${isNewWalletModelOpen ? "open" : "hidden"} `}
         data-bs-backdrop="static"
         data-keyboard="false"
         id="walletModal"

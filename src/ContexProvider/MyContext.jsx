@@ -24,6 +24,7 @@ function MyContext({ children }) {
   const [currentUserData, setCurrentUserData] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [waletGridBalance, setWaletGridBalance] = useState(0);
+  const [allWallet, setAllWallet] = useState([]);
   const [role, setRole] = useState("");
 
   // for usertable activ/inac and admin user statscard
@@ -75,6 +76,8 @@ function MyContext({ children }) {
     setWaletGridBalance,
     role,
     setRole,
+    allWallet,
+    setAllWallet,
     // for admin-dashboard stats
     activeUsers,
     setActiveUsers,
