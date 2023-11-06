@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { dataContext } from "../../ContexProvider/MyContext";
 
 function UserTable() {
+  const {
+    localRoutePrefix,
+    activeUsers,
+    setActiveUsers,
+    inactiveUsers,
+    setInactiveUsers,
+  } = useContext(dataContext);
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
@@ -35,9 +44,16 @@ function UserTable() {
         return user;
       }
     });
-    // const newData = [...data];
-    // newData[updatedDataIndex] = res.data;
+
     setData(updatedDataIndex);
+    //-------------------
+    if (res.status === "Active") {
+      setActiveUsers(activeUsers + 1);
+      setInactiveUsers(inactiveUsers - 1);
+    } else {
+      setActiveUsers(activeUsers - 1);
+      setInactiveUsers(inactiveUsers + 1);
+    }
   };
   console.log(data);
 

@@ -6,9 +6,8 @@ import { dataContext } from "../../ContexProvider/MyContext";
 import axios from "axios";
 
 export default function AdminDashboardStatsGrid() {
-  const { localRoutePrefix } = useContext(dataContext);
-  const [activeUsers, setActiveUsers] = useState(0);
-  const [inactiveUsers, setInactiveUsers] = useState(0);
+  const { localRoutePrefix,activeUsers, setActiveUsers,inactiveUsers, setInactiveUsers } = useContext(dataContext);
+ 
 
   //------------------------A L L     U S E R S
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function AdminDashboardStatsGrid() {
         let active = 0;
         let inactive = 0;
         res.data.map((user) => {
-          if (user.status === "Acitve") {
+          if (user.status === "Active") {
             active += 1;
           } else {
             inactive += 1;
