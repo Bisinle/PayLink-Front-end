@@ -78,7 +78,7 @@ const data = [
 
 export default function TransactionChart() {
   const [transactionsAnalytic, setTransactionsAnalytic] = useState([]);
-  const{localRoutePrefix} = useContext(dataContext)
+  const{localRoutePrefix , setTalTransactions} = useContext(dataContext)
 
   //-----------------------------------fet the transacions data
   useEffect(() => {
@@ -92,6 +92,7 @@ export default function TransactionChart() {
         .then((res) => {
         //   console.log(" user----->", res.data);
           setTransactionsAnalytic(res.data);
+		  setTalTransactions(res.data.length)
         })
         .catch((error) => {
           console.error("Error fetching a user:", error);

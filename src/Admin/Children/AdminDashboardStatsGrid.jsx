@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
 import { FaUser, FaWallet } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
+import { MdOutlineAttachMoney } from "react-icons/md";
 
 import { dataContext } from "../../ContexProvider/MyContext";
 import axios from "axios";
@@ -26,6 +27,9 @@ export default function AdminDashboardStatsGrid() {
     setInactiveUsers,
     walletCount,
     setWalletCount,
+    totalBalance,
+    setTotalBalance,
+    totalTransactions,
   } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
@@ -68,10 +72,12 @@ export default function AdminDashboardStatsGrid() {
       })
       .then((res) => {
         console.log(" all-wallets----->", res.data);
-        const typeCount = {};
 
+        //-----------------------gets the most popular wallet
+        const typeCount = {};
         for (const wallet of res.data) {
           const { type } = wallet;
+          //   typeCount[totalBalance] += wallet.balance;
           if (typeCount[type]) {
             typeCount[type] += 1;
           } else {
@@ -90,6 +96,13 @@ export default function AdminDashboardStatsGrid() {
           }
         }
 
+        //----------------------gets the total balance
+        let total_Balance = 0;
+        for (const wallet of res.data) {
+          total_Balance += parseFloat(wallet.balance);
+        }
+
+        setTotalBalance(total_Balance);
         setWalletCount({ type: mostPopularType, count: highestCount });
       })
       .catch((error) => {
@@ -129,38 +142,34 @@ export default function AdminDashboardStatsGrid() {
           <strong className="text-3xl  text-gray-700 font-semibold">
             {walletCount.type}
           </strong>
-          <h1 className="mt-4 text-3xl">{walletCount.count}</h1>
+          <h1 className="mt-4 text-3xl">{<Number n={walletCount.count} />}</h1>
         </div>
       </BoxWrapper>
       <BoxWrapper>
         <div className="rounded-full h-12   bg-indigo-500  p-4 flex items-center justify-between w-full">
-          <span className="text-xl text-white font-semibold">
-            Total Transactions
-          </span>
-          <IoPeople className="text-2xl text-white" />
+          <span className="text-xl text-white font-semibold">Total Money</span>
+          <MdOutlineAttachMoney className="text-2xl text-white" />
         </div>
         <div className="pl-4">
-          <div className="flex items-center">
-            <strong className="text-xl text-gray-700 font-semibold">
-              12313
+          <div className="flex justify-center mt-10  items-center">
+            <strong className="text-2xl text-gray-700 flex gap-2 font-semibold">
+              $ {<Number n={totalBalance} />}
             </strong>
-            <span className="text-sm text-red-500 pl-2">-30</span>
           </div>
         </div>
       </BoxWrapper>
       <BoxWrapper>
         <div className="rounded-full h-12   bg-indigo-500  p-4 flex items-center justify-between w-full">
           <span className="text-xl text-white font-semibold">
-            Total Customers
+            Total transactions
           </span>
           <IoPeople className="text-2xl text-white" />
         </div>
-        <div className="pl-4">
-          <div className="flex items-center">
-            <strong className="text-xl text-gray-700 font-semibold">
-              16432
+        <div className="pl-4 flex items-center justify-center">
+          <div className="flex items-cente mt-10">
+            <strong className="text-2xl text-gray-700 font-semibold">
+              {totalTransactions}
             </strong>
-            <span className="text-sm text-red-500 pl-2">-43</span>
           </div>
         </div>
       </BoxWrapper>

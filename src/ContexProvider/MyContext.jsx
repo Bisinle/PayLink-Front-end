@@ -30,6 +30,8 @@ function MyContext({ children }) {
   const [activeUsers, setActiveUsers] = useState(0);
   const [inactiveUsers, setInactiveUsers] = useState(0);
   const [walletCount, setWalletCount] = useState({});
+  const [totalTransactions, setTalTransactions] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
 
   //
   //
@@ -73,13 +75,17 @@ function MyContext({ children }) {
     setWaletGridBalance,
     role,
     setRole,
-    // for admin
+    // for admin-dashboard stats
     activeUsers,
     setActiveUsers,
     inactiveUsers,
     setInactiveUsers,
     walletCount,
     setWalletCount,
+    totalBalance,
+    setTotalBalance,
+    totalTransactions,
+    setTalTransactions,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
