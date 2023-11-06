@@ -90,7 +90,7 @@ export default function TransactionChart() {
           },
         })
         .then((res) => {
-          console.log(" user----->", res.data);
+        //   console.log(" user----->", res.data);
           setTransactionsAnalytic(res.data);
         })
         .catch((error) => {
@@ -128,12 +128,12 @@ export default function TransactionChart() {
   // Convert the map values into an array of objects
   const categoryInfoArray = Array.from(categoryInfoMap.values());
   
-  console.log(categoryInfoArray);
+//   console.log(categoryInfoArray);
   
 
   return (
     <div className="h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
-      <strong className="text-gray-700 font-medium">Transactions</strong>
+      <strong className="text-gray-700 font-medium">Category VS amount</strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart

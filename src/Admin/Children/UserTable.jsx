@@ -19,7 +19,7 @@ function UserTable() {
       const response = await fetch("http://127.0.0.1:5555/users");
       const json = await response.json();
       setData(json);
-      console.log(json);
+      // console.log(json);
     }
     fetchData();
   }, []);
@@ -34,7 +34,7 @@ function UserTable() {
       },
     });
     const res = await response.json();
-    console.log(res);
+    // console.log(res);
     // Update the user profile data in the state
     const updatedDataIndex = data.map((user) => {
       if (user.id === id) {
@@ -55,7 +55,7 @@ function UserTable() {
       setInactiveUsers(inactiveUsers + 1);
     }
   };
-  console.log(data);
+  // console.log(data);
 
   let filteredData = data;
   const indexOfLastEntry = currentPage * entriesPerPage;

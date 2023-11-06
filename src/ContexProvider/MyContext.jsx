@@ -25,9 +25,11 @@ function MyContext({ children }) {
   const [refresh, setRefresh] = useState(false);
   const [waletGridBalance, setWaletGridBalance] = useState(0);
   const [role, setRole] = useState("");
+
   // for usertable activ/inac and admin user statscard
   const [activeUsers, setActiveUsers] = useState(0);
   const [inactiveUsers, setInactiveUsers] = useState(0);
+  const [walletCount, setWalletCount] = useState({});
 
   //
   //
@@ -76,6 +78,8 @@ function MyContext({ children }) {
     setActiveUsers,
     inactiveUsers,
     setInactiveUsers,
+    walletCount,
+    setWalletCount,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
