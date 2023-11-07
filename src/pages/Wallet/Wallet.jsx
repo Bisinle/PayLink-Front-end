@@ -9,27 +9,26 @@ import axios from "axios";
 export default function Wallet() {
   const { currentUserData } = useContext(dataContext);
   const [userBalance, setUserBalance] = useState(0);
-  const [updatedUserBalance, setUpdatedUserBalance] = useState(0);
   // console.log(updatedUserBalance);
 
 
-  useEffect(() => {
-    if (currentUserData.wallet && currentUserData.wallet.length > 0) {
-      const mainWallet = currentUserData.wallet.find(
-        (wallet) => wallet.type === "Main"
-      );
-      if (mainWallet) {
-        setUserBalance(mainWallet.balance);
-      }
-    }
-  }, [currentUserData]);
+  // useEffect(() => {
+  //   if (currentUserData.wallet && currentUserData.wallet.length > 0) {
+  //     const mainWallet = currentUserData.wallet.find(
+  //       (wallet) => wallet.type === "Main"
+  //     );
+  //     if (mainWallet) {
+  //       setUserBalance(mainWallet.balance);
+  //     }
+  //   }
+  // }, [currentUserData]);
 
 
   return (
     <div className=" flex flex-col justify-center items-center">
       <h1 className="text-3xl font-semibold">
         Hello{" "}
-        <span className="text-indigo-500">{currentUserData.first_name}</span>,
+        <span className="text-indigo-500">-------------</span>,
         Welcom to your Wallet
       </h1>
       <div className="h-screen  w-full flex flex-col items-center     shadow-inner p-8 relative">
@@ -45,7 +44,7 @@ export default function Wallet() {
               <div class="circle circle-3 w-10 h-10 top-0 opacity-40 "></div>
 
               <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center   text-gray-300  font-bold h-[60%] w-[30%] relative">
-                <h1 className="text-5xl">${ updatedUserBalance ? updatedUserBalance: userBalance}</h1>
+                <h1 className="text-5xl">$----------------------</h1>
               </div>
               <div className=" flex justify-center  w-full ">
                 <PayModal setUserBalance={setUserBalance}/>
