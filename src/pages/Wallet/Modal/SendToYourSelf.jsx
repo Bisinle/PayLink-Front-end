@@ -6,7 +6,13 @@ import "./MinotTouches.css";
 
 function SendToYourSelf() {
   //destructure the context
-  const { setWaletGridBalance } = useContext(dataContext);
+  const {
+    setWaletGridBalance,
+    Current_UserId,
+    access_token,
+    allWallet,
+    setAllWallet,
+  } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,13 +26,13 @@ function SendToYourSelf() {
   } = useForm();
 
   function sendMoney(data) {
-    data.user_id = localStorage.getItem("user_id");
+    data.user_id = Current_UserId;
     console.log(data);
 
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
+        Authorization: "Bearer " + access_token,
 
         "Content-Type": "application/json",
       },
@@ -42,7 +48,7 @@ function SendToYourSelf() {
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        setWaletGridBalance(response);
+        setAllWallet(response);
       })
       .catch((error) => {
         console.error(
@@ -154,3 +160,20 @@ function SendToYourSelf() {
 }
 
 export default SendToYourSelf;
+
+{
+  /* <select */
+}
+// name="category"
+// id="dropdown"
+// className="rounded-md p-4 outline-none"
+// onChange={handleChosenCategory}
+// // value={category}
+// >
+// <option value="all" defaultValue={"all"}>
+//   All
+// </option>
+// {categories.map((item) => (
+//   <option key={item.id}>{item.category_name}</option>
+// ))}
+// </select>
