@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { dataContext } from "../../../ContexProvider/MyContext";
 
-function SendToBenef({ setUserBalance }) {
+function SendToBenef() {
   const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
   const {
@@ -10,6 +10,10 @@ function SendToBenef({ setUserBalance }) {
     totalTransactions,
     setTotalTransactions,
     Current_UserId,
+    access_token,
+    updatedUserBalance,
+    setUpdatedUserBalance,
+    setAllWallet,
   } = useContext(dataContext);
   const {
     register,
@@ -21,15 +25,16 @@ function SendToBenef({ setUserBalance }) {
   } = useForm();
 
   function sendMoney(data) {
-    data.sender_id = Current_UserId;
-    console.log(data);
+    // console.log(data);
+    // console.log(Current_UserId);
     //clear the error stat
     setError("");
+    setRefresh(!true);
 
     const requestOptions = {
       method: "POST",
       headers: {
-        // Authorization: "Bearer " + localStorage.getItem("access_token"),
+        Authorization: "Bearer " + access_token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -42,17 +47,18 @@ function SendToBenef({ setUserBalance }) {
           return res.json().then((errorData) => {
             const errorMessage = errorData.msg;
             console.log("-----------", res);
-            setError(errorMessage);
+            // setError(errorMessage);
           });
         }
         return res.json();
       })
       .then((response) => {
-        console.log(response.msg); // Handle the successful response here
         // navigate("login");
-        setError(response.msg);
-        setRefresh(true);
-        setUserBalance(response[0].balance);
+        console.log(response);
+        setError(response.error);
+        setUpdatedUserBalance(response[0].balance);
+        setAllWallet(response);
+
         setTotalTransactions(totalTransactions + 1);
         // setError(response.msg);
       })

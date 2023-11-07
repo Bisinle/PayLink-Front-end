@@ -72,7 +72,7 @@ export default function Login() {
     fetch("http://127.0.0.1:5555/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.access_token);
+        console.log(data.user_id);
         data.access_token && navigate("/");
         data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
         setRole(data.user_role);
@@ -121,23 +121,23 @@ export default function Login() {
                 </label>
                 <input
                   type="text"
-                  name="username"
-                  id="username"
+                  name="user_name"
+                  id="user_name"
                   className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="user name"
-                  {...register("username", {
+                  {...register("user_name", {
                     required: true,
                     maxLength: 20,
                   })}
                 />
 
-                {errors.username && (
+                {errors.user_name && (
                   <p style={{ color: "red" }}>
                     {" "}
-                    <small>username is required</small>{" "}
+                    <small>user_name is required</small>{" "}
                   </p>
                 )}
-                {errors.username?.type === "maxLength" && (
+                {errors.user_name?.type === "maxLength" && (
                   <p style={{ color: "red" }}>
                     {" "}
                     <small>should have max 25 characters</small>{" "}

@@ -12,6 +12,8 @@ function SendToYourSelf() {
     access_token,
     allWallet,
     setAllWallet,
+    updatedUserBalance,
+    setUpdatedUserBalance, //this one is helping solve the issue of the wallet stat balancing needing to be updated 3 time
   } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,8 +28,9 @@ function SendToYourSelf() {
   } = useForm();
 
   function sendMoney(data) {
-    data.user_id = Current_UserId;
-    console.log(data);
+    // console.log(Current_UserId);
+    // console.log(data);
+    setErrorMessage("");
 
     const requestOptions = {
       method: "POST",
@@ -42,19 +45,22 @@ function SendToYourSelf() {
     fetch("http://localhost:5555//wallet/move-movey", requestOptions)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error(" response from server  was not ok");
         }
         return res.json();
       })
       .then((response) => {
         console.log(response); // Handle the successful response here
-        setAllWallet(response);
+        if ("error" in response) {
+          console.log("heyyyyyyyyyyyyyy");
+          setErrorMessage(response.error)
+        } else {
+          setAllWallet(response);
+        }
+        
       })
       .catch((error) => {
-        console.error(
-          "There was a problem with the fetch operation:",
-          error.msg
-        );
+        console.error("There was a problem with the fetch operation:", error);
         // setError(e)
       });
   }
@@ -86,7 +92,7 @@ function SendToYourSelf() {
               {...register("from_wallet")}
             >
               <option value="Savings">Savings</option>
-              <option value="Invesment">Investment</option>
+              <option value="Invesment">Invesment</option>
               <option value="Emergencies">Emergencies</option>
               <option value="Main">Main</option>
             </select>
@@ -107,7 +113,7 @@ function SendToYourSelf() {
               <option value="Main">Main</option>
               <option value="Emergencies">Emergencies</option>
               <option value="Savings">Savings</option>
-              <option value="Investment">Invesment</option>
+              <option value="Invesment">Invesment</option>
             </select>
           </div>
         </div>
@@ -148,6 +154,9 @@ function SendToYourSelf() {
           </div>
         </div>
       </form>
+
+      <p className="text-red-500 text-xl">{errorMessage}</p>
+
       <button
         type="button"
         class="text-white font-bold text-xl bg-indigo-500  py-2 mt-5 rounded-lg text"
