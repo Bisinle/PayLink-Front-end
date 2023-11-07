@@ -71,7 +71,6 @@ function MyContext({ children }) {
         });
     }
   }, [Current_UserId]);
-
   if (!currentUserData) {
     // While loading, display a loading indicator
     return (
