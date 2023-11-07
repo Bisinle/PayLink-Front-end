@@ -15,7 +15,8 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const [animationLoaded, setAnimationLoaded] = useState(false);
+  const [animationLoaded, setAnimationLoaded] = false;
+  const [errorMessage, setErrorMessage] = useState("");
   const container = useRef();
   const {
     register,
@@ -47,6 +48,7 @@ function Register() {
 
   function signUpUser(data) {
     console.log(data);
+    setErrorMessage("");
     const requestOptions = {
       method: "POST",
       headers: {
@@ -65,6 +67,9 @@ function Register() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         // navigate("login");
+        if ("error" in response) {
+          setErrorMessage(response.error);
+        }
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -208,6 +213,9 @@ function Register() {
                   />
                 </div>
               </div>
+              <p className="text-red-500 text-xl flex justify-center ">
+                {errorMessage}
+              </p>
 
               <button className=" text-white border shadow  flex justify-center items-center mx-auto border-gray-300 bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Create an account

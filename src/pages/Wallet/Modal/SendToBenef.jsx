@@ -14,6 +14,8 @@ function SendToBenef() {
     updatedUserBalance,
     setUpdatedUserBalance,
     setAllWallet,
+    runPieChart, //a pichart dependency as soo as the button is hit
+    setRunPieChart,
   } = useContext(dataContext);
   const {
     register,
@@ -30,6 +32,7 @@ function SendToBenef() {
     //clear the error stat
     setError("");
     setRefresh(!true);
+    setRunPieChart(!runPieChart)
 
     const requestOptions = {
       method: "POST",

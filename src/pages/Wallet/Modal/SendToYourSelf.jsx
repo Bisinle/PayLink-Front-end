@@ -52,7 +52,6 @@ function SendToYourSelf() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         if ("error" in response) {
-          console.log("heyyyyyyyyyyyyyy");
           setErrorMessage(response.error)
         } else {
           setAllWallet(response);

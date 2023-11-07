@@ -29,6 +29,7 @@ function MyContext({ children }) {
   const [waletGridBalance, setWaletGridBalance] = useState(0);
   const [allWallet, setAllWallet] = useState([]);
   const [updatedUserBalance, setUpdatedUserBalance] = useState(0); // it is for the main balance in wallet and is from main stat card
+  const [runPieChart, setRunPieChart] = useState(false); // it is for the main balance in wallet and is from main stat card
 
   const [role, setRole] = useState("");
 
@@ -121,6 +122,9 @@ function MyContext({ children }) {
     setTotalBalance,
     totalTransactions,
     setTotalTransactions,
+    //for the barchart
+    runPieChart,
+    setRunPieChart,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
