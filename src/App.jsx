@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Wallet from "./pages/Wallet/Wallet";
 import AddedPage from "./pages/AddedPage";
+import Helppage from "./Helppage";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           <Route path="addedPage" element={<AddedPage />} />
         </Route>
         <Route path="/register" element={<Register />} />
+      <Route path="/*" element={<>not found</>} />
+      <Route path="/support" element={<Helppage/>} />
+
       </Routes>
     </Router>
   );
