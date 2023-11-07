@@ -23,6 +23,8 @@ export default function DashboardStatsGrid() {
     setWaletGridBalance,
     allWallet,
     setAllWallet,
+    updatedUserBalance,
+    setUpdatedUserBalance,
   } = useContext(dataContext);
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
   const [wallets, setWalltes] = useState([]);

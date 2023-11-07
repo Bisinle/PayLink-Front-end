@@ -20,6 +20,7 @@ function MyContext({ children }) {
   // const Current_UserProfilePicture = localStorage.getItem("user_profile_pic");
   // const Current_UserAccount_number = localStorage.getItem("account_number");
   const localRoutePrefix = "http://127.0.0.1:5555";
+
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [Current_UserId, setCurrent_UserId] = useState(0);
   const [transactionData, setTransactionData] = useState([]);
@@ -27,6 +28,8 @@ function MyContext({ children }) {
   const [refresh, setRefresh] = useState(false);
   const [waletGridBalance, setWaletGridBalance] = useState(0);
   const [allWallet, setAllWallet] = useState([]);
+  const [updatedUserBalance, setUpdatedUserBalance] = useState(0); // it is for the main balance in wallet and is from main stat card
+
   const [role, setRole] = useState("");
 
   // for usertable activ/inac and admin user statscard
@@ -103,8 +106,10 @@ function MyContext({ children }) {
     setWaletGridBalance,
     role,
     setRole,
-    allWallet,
+    allWallet, //for the user wallet stat cards
     setAllWallet,
+    updatedUserBalance, //for  wallet page balance
+    setUpdatedUserBalance,
     // for admin-dashboard stats
     activeUsers,
     setActiveUsers,

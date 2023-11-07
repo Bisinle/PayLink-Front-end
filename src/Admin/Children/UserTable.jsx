@@ -29,31 +29,31 @@ function UserTable() {
     const response = await fetch(`http://127.0.0.1:5555/user/${id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
     });
     const res = await response.json();
     // console.log(res);
-    // Update the user profile data in the state
-    const updatedDataIndex = data.map((user) => {
-      if (user.id === id) {
-        user.status = res.status;
-        return user;
-      } else {
-        return user;
-      }
-    });
+    // // Update the user profile data in the state
+    // const updatedDataIndex = data.map((user) => {
+    //   if (user.id === id) {
+    //     user.status = res.status;
+    //     return user;
+    //   } else {
+    //     return user;
+    //   }
+    // });
 
-    setData(updatedDataIndex);
-    //-------------------
-    if (res.status === "Active") {
-      setActiveUsers(activeUsers + 1);
-      setInactiveUsers(inactiveUsers - 1);
-    } else {
-      setActiveUsers(activeUsers - 1);
-      setInactiveUsers(inactiveUsers + 1);
-    }
+    // setData(updatedDataIndex);
+    // //-------------------
+    // if (res.status === "Active") {
+    //   setActiveUsers(activeUsers + 1);
+    //   setInactiveUsers(inactiveUsers - 1);
+    // } else {
+    //   setActiveUsers(activeUsers - 1);
+    //   setInactiveUsers(inactiveUsers + 1);
+    // }
   };
   // console.log(data);
 

@@ -5,8 +5,12 @@ import { dataContext } from "../../../ContexProvider/MyContext";
 function SendToBenef({ setUserBalance }) {
   const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
-  const { setRefresh, totalTransactions, setTotalTransactions } =
-    useContext(dataContext);
+  const {
+    setRefresh,
+    totalTransactions,
+    setTotalTransactions,
+    Current_UserId,
+  } = useContext(dataContext);
   const {
     register,
     watch,
@@ -17,10 +21,10 @@ function SendToBenef({ setUserBalance }) {
   } = useForm();
 
   function sendMoney(data) {
-    data.sender_id = localStorage.getItem("user_id");
+    data.sender_id = Current_UserId;
     console.log(data);
     //clear the error stat
-    setError('')
+    setError("");
 
     const requestOptions = {
       method: "POST",
