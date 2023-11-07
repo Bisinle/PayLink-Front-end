@@ -15,7 +15,7 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const [animationLoaded, setAnimationLoaded] = false;
+  const [animationLoaded, setAnimationLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const container = useRef();
   const {
