@@ -30,7 +30,8 @@ export default function AdminDashboardStatsGrid() {
     totalBalance,
     setTotalBalance,
     totalTransactions,
-	setTotalTransactions,
+    setTotalTransactions,
+    access_token,
   } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
@@ -39,7 +40,7 @@ export default function AdminDashboardStatsGrid() {
     axios
       .get(`${localRoutePrefix}/users`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${access_token}`,
         },
       })
       .then((res) => {
@@ -66,9 +67,9 @@ export default function AdminDashboardStatsGrid() {
   //------------------------A L L     W A L L E T S
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/wallet/wallet`, {
+      .get(`${localRoutePrefix}/wallet/all_wallet`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${access_token}`,
         },
       })
       .then((res) => {
@@ -112,7 +113,7 @@ export default function AdminDashboardStatsGrid() {
   }, []);
   //------------------------------------git all transactions
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/transaction/transactions")
+    fetch(`${localRoutePrefix}/transaction/all_transactions`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -120,21 +121,16 @@ export default function AdminDashboardStatsGrid() {
         return res.json();
       })
       .then((response) => {
-        console.log(response); // Handle the successful response here
+        console.log("adminTransac---------", response); // Handle the successful response here
         setTotalTransactions(response.length);
-        // navigate("login");
-        //   setRefresh(true);
-        //   setUserBalance(response[0].balance);
-        //   setTotalTransactions(totalTransactions +1)
+       
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, []);
 
-  //   console.log(activeUsers, inactiveUsers);
-  //   console.log(walletCount);
-  console.log(totalTransactions);
+
   return (
     <div className="flex gap-4">
       <BoxWrapper>

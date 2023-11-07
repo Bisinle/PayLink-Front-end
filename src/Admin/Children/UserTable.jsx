@@ -8,6 +8,7 @@ function UserTable() {
     setActiveUsers,
     inactiveUsers,
     setInactiveUsers,
+    access_token,
   } = useContext(dataContext);
 
   const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ function UserTable() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://127.0.0.1:5555/users");
+      const response = await fetch("${localRoutePrefix}/users");
       const json = await response.json();
       setData(json);
       // console.log(json);
@@ -24,16 +25,16 @@ function UserTable() {
     fetchData();
   }, []);
 
-  const handleUpdateProfile = async (id, updatedData) => {
-    console.log(id, updatedData);
-    const response = await fetch(`http://127.0.0.1:5555/user/${id}`, {
+  const handleUpdateProfile = async (id) => {
+    console.log(id);
+    const response = await fetch(`${localRoutePrefix}/user/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
     });
-    const res = await response.json();
+    // const res = await response.json();
     // console.log(res);
     // // Update the user profile data in the state
     // const updatedDataIndex = data.map((user) => {
@@ -99,14 +100,14 @@ function UserTable() {
               <td className="px-2 py-2 pb-4">
                 {user.status === "Active" ? (
                   <button
-                    onClick={() => handleUpdateProfile(user.id, "Inactive")}
+                    onClick={() => handleUpdateProfile(user.id )}
                     className="bg-red-500 hover:bg-red-700 text-white flex justify-center items-center w-full font-bold py-1 px-2 rounded"
                   >
                     Deactivate
                   </button>
                 ) : (
                   <button
-                    onClick={() => handleUpdateProfile(user.id, "Active")}
+                    onClick={() => handleUpdateProfile(user.id)}
                     className="bg-green-500 hover:bg-green-700 text-white flex justify-center items-center w-full font-bold py-1 px-2 rounded"
                   >
                     Activate
