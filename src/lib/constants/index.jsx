@@ -24,11 +24,24 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   },
 
   {
-    key: "users",
-    label: "Users",
-    path: "/users",
+    key: "transactions",
+    label: "Transactions",
+    path: "/transactions",
     icon: <HiOutlineUsers />,
   },
+  // {
+  //   key: "register",
+  //   label: "Register",
+  //   path: "/register",
+  //   icon: <HiOutlineUsers />,
+  // },
+
+  // {
+  //     key: 'messages',
+  //     label: 'Messages',
+  //     path: '/messages',
+  //     icon: <HiOutlineAnnotation />
+  // }
 ];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
@@ -44,11 +57,4 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
     path: "/support",
     icon: <HiOutlineQuestionMarkCircle />,
   },
-
-  // {
-  //     key: 'logout',
-  //     label: 'Logout',
-  //     path: '/logout',
-  //     icon: <HiOutlineAnnotation />
-  // },
 ];

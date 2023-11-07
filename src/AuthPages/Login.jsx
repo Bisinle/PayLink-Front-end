@@ -15,15 +15,8 @@ export default function Login() {
   const navigate = useNavigate();
   // const navigate = useNavigate();
   //destructure the contex
-  const {
-    loginSignupToggle,
-    setIsLoggedIn,
-    setLoginSignupToggle,
-    setRole,
-    setRefresh,
-    setCurrent_UserId,
-    setAccess_token,
-  } = useContext(dataContext);
+  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle, setRefresh } =
+    useContext(dataContext);
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const container = useRef();
@@ -72,18 +65,17 @@ export default function Login() {
     fetch("http://127.0.0.1:5555/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.access_token);
+        // console.log(data);
+        // login(data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+        localStorage.setItem("user_name", data.user_name);
+        localStorage.setItem("user_role", data.user_role);
+        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("user_profile_pic", data.user_profile_pic);
+        localStorage.setItem("account_number", data.account_number);
+        localStorage.setItem("access_token", data.access_token);
         data.access_token && navigate("/");
         data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
-        setRole(data.user_role);
-        setCurrent_UserId(data.user_id);
-        setAccess_token(data.access_token);
-        // localStorage.setItem("refresh_token", data.refresh_token);
-        // localStorage.setItem("user_name", data.user_name);
-        // localStorage.setItem("user_id", data.user_id);
-        // localStorage.setItem("user_profile_pic", data.user_profile_pic);
-        // localStorage.setItem("account_number", data.account_number);
-        // localStorage.setItem("access_token", data.access_token);
         setRefresh(!true);
       })
       .catch((error) => {

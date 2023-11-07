@@ -1,7 +1,6 @@
-import React, { useContext, Fragment, useState, useEffect } from "react";
+import React, { useContext, Fragment, useState } from "react";
 import { IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
 import { dataContext } from "../../ContexProvider/MyContext";
-import axios from "axios";
 import { AiOutlineExclamation } from "react-icons/ai";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import {
@@ -11,55 +10,27 @@ import {
   HiCheck,
 } from "react-icons/hi";
 import classNames from "classnames";
+import axios from "axios";
 
 export default function DashboardStatsGrid() {
   const [updatedWallet, setUpdatedWallet] = useState("");
   const {
     currentUserData,
-    Current_UserId,
     localRoutePrefix,
     access_token,
     waletGridBalance,
     setWaletGridBalance,
-    allWallet,
-    setAllWallet,
   } = useContext(dataContext);
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
-  const [wallets, setWalltes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [wallets, setWalltes] = useState(currentUserData.wallet);
 
-  // Simulate loading delay
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
-    }, 4000); // Simulated 2 seconds of loading time
-  }, []);
-  /*----------------------- G E T        A L L    W A L L E T  ---------------------------- */
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/wallet/wallet`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((res) => {
-        console.log(" all-wallet----->", res.data);
-        const currentUserWallets = res.data.filter((wallet) => {
-          if (wallet.user_prof_id === parseInt(Current_UserId)) {
-            return wallet;
-          } else {
-            return;
-          }
-        });
-        setAllWallet(currentUserWallets);
-      })
-      .catch((error) => {
-        console.error("Error fetching a user:", error);
-      });
-  }, []);
-
-  if (loading) {
-    // While loading, display a loading indicator
+  if (
+    !currentUserData ||
+    currentUserData.length === 0 ||
+    !wallets ||
+    wallets.length === 0
+  ) {
+    // Render a loading indicator
     return (
       <div className="text-center">
         <p>Loading...</p>
@@ -87,8 +58,8 @@ export default function DashboardStatsGrid() {
             return wallet;
           }
         });
-        console.log(updatedWalletStatus);
-        setAllWallet(updatedWalletStatus);
+        // console.log(updatedWalletStatus);
+        setWalltes(updatedWalletStatus);
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);
@@ -98,13 +69,12 @@ export default function DashboardStatsGrid() {
   //------------------------------
   //------------------------------
   //------------------------------
-  // console.log(waletGridBalance);
-  // console.log(allWallet);
+  console.log(waletGridBalance);
   //------------------------------
   //------------------------------
   //------------------------------
 
-  const wallet_grid = allWallet.map((wallet) => {
+  const wallet_grid = wallets.map((wallet) => {
     return (
       <BoxWrapper>
         <Popover className="absolute  top-0 left-0 ">
@@ -148,7 +118,7 @@ export default function DashboardStatsGrid() {
         </Popover>
         <div
           className="rounded-full h-12 w-12 bg-indigo-200
-		 flex items-center justify-center "
+		 flex items-center justify-center bg-sky-500"
         >
           <IoBagHandle className="text-2xl " />
         </div>{" "}
@@ -175,11 +145,7 @@ export default function DashboardStatsGrid() {
     );
   });
 
-  return (
-    <div className="flex gap-4">
-      {currentUserData ? wallet_grid : "Loading"}
-    </div>
-  );
+  return <div className="flex gap-4">{wallet_grid}</div>;
 }
 
 function BoxWrapper({ children }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardStatsGrid from "../components/shared/UserDashboardStatsGrid";
+import DashboardStatsGrid from "../components/shared/DashboardStatsGrid";
 import AnalyticBarChart from "../components/AnalyticBarChart";
 import Transactions from "../components/Transactions";
 import SentReceivedPieChart from "../components/SentReceivedPieChart";
