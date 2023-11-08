@@ -124,6 +124,8 @@ function MyContext({ children }) {
     //for the barchart
     runPieChart,
     setRunPieChart,
+    transactionData, // its is needed in the admin t-table and is getting data from t-fetch in admin stats
+    setTransactionData,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;

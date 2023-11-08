@@ -113,21 +113,7 @@ function UserTable() {
                     Activate
                   </button>
                 )}
-                {/* <button
-                  onClick={() =>
-                    // handleUpdateProfile(user.id, {
-                    //   first_name: "John",
-                    //   last_name: "Doe",
-                    //   address: "123 Main St",
-                    //   phone_number: "555-1234",
-                    //   Account: "123456789",
-                    //   status: "Active",
-                    })
-                  }
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
-                >
-                  Update Profile
-                </button> */}
+               
               </td>
             </tr>
           ))}

@@ -19,7 +19,6 @@ function Number({ n }) {
 }
 
 export default function AdminDashboardStatsGrid() {
-  
   const {
     localRoutePrefix,
     activeUsers,
@@ -32,6 +31,8 @@ export default function AdminDashboardStatsGrid() {
     setTotalBalance,
     totalTransactions,
     setTotalTransactions,
+    transactionData,
+    setTransactionData,//getting data for admin t-table from t-fetch below
     access_token,
   } = useContext(dataContext);
 
@@ -122,15 +123,14 @@ export default function AdminDashboardStatsGrid() {
         return res.json();
       })
       .then((response) => {
-        // console.log("adminTransac---------", response); // Handle the successful response here
+        console.log("adminTransac---------", response); // Handle the successful response here
+        setTransactionData(response)
         setTotalTransactions(response.length);
-       
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, []);
-
 
   return (
     <div className="flex gap-4">
