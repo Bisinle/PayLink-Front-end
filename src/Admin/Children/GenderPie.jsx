@@ -1,10 +1,7 @@
-
 import React, { useContext, useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 import { dataContext } from "../../ContexProvider/MyContext";
 import axios from "axios";
-
-
 
 const RADIAN = Math.PI / 180;
 const COLORS = ["#00C49F", "#FFBB28", "#FF8042"];
@@ -51,7 +48,7 @@ export default function GenderPie() {
         },
       })
       .then((res) => {
-        console.log(" user----->", res.data);
+        // console.log(" user----->", res.data);
         setGenderPiechart(res.data);
       })
       .catch((error) => {
@@ -78,7 +75,7 @@ export default function GenderPie() {
     { name: "Female", value: malesCount },
     { name: "Other", value: othersCount },
   ];
-  console.log(gender_data);
+  // console.log(gender_data);
   return (
     <div className="w-[20rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">Category Profile</strong>

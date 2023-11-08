@@ -19,8 +19,11 @@ import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
 import AdminDash from "./Admin/AdminDash";
 import UserTable from "./Admin/Children/UserTable";
 
+
+
 function App() {
-  const { isLoggedIn, loginSignupToggle,currentUserData, role } = useContext(dataContext);
+  const { isLoggedIn, loginSignupToggle, currentUserData, role } =
+    useContext(dataContext);
   const [loading, setLoading] = useState(true);
   // Simulate loading delay
   useEffect(() => {

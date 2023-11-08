@@ -19,6 +19,7 @@ function Number({ n }) {
 }
 
 export default function AdminDashboardStatsGrid() {
+  
   const {
     localRoutePrefix,
     activeUsers,
@@ -121,7 +122,7 @@ export default function AdminDashboardStatsGrid() {
         return res.json();
       })
       .then((response) => {
-        console.log("adminTransac---------", response); // Handle the successful response here
+        // console.log("adminTransac---------", response); // Handle the successful response here
         setTotalTransactions(response.length);
        
       })

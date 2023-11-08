@@ -60,7 +60,7 @@ export default function SentReceivedPieChart() {
           return transac.category;
         });
 
-        setCategory(r);
+        setCategory(res.data);
       })
       .catch((error) => {
         console.error("Error fetching a user:", error);

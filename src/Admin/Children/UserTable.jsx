@@ -17,7 +17,7 @@ function UserTable() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("${localRoutePrefix}/users");
+      const response = await fetch(`${localRoutePrefix}/users`);
       const json = await response.json();
       setData(json);
       // console.log(json);
@@ -34,27 +34,27 @@ function UserTable() {
         "Content-Type": "application/json",
       },
     });
-    // const res = await response.json();
-    // console.log(res);
-    // // Update the user profile data in the state
-    // const updatedDataIndex = data.map((user) => {
-    //   if (user.id === id) {
-    //     user.status = res.status;
-    //     return user;
-    //   } else {
-    //     return user;
-    //   }
-    // });
+    const res = await response.json();
+    console.log(res);
+    // Update the user profile data in the state
+    const updatedDataIndex = data.map((user) => {
+      if (user.id === id) {
+        user.status = res.status;
+        return user;
+      } else {
+        return user;
+      }
+    });
 
-    // setData(updatedDataIndex);
-    // //-------------------
-    // if (res.status === "Active") {
-    //   setActiveUsers(activeUsers + 1);
-    //   setInactiveUsers(inactiveUsers - 1);
-    // } else {
-    //   setActiveUsers(activeUsers - 1);
-    //   setInactiveUsers(inactiveUsers + 1);
-    // }
+    setData(updatedDataIndex);
+    //-------------------
+    if (response.status === "Active") {
+      setActiveUsers(activeUsers + 1);
+      setInactiveUsers(inactiveUsers - 1);
+    } else {
+      setActiveUsers(activeUsers - 1);
+      setInactiveUsers(inactiveUsers + 1);
+    }
   };
   // console.log(data);
 
@@ -100,7 +100,7 @@ function UserTable() {
               <td className="px-2 py-2 pb-4">
                 {user.status === "Active" ? (
                   <button
-                    onClick={() => handleUpdateProfile(user.id )}
+                    onClick={() => handleUpdateProfile(user.id)}
                     className="bg-red-500 hover:bg-red-700 text-white flex justify-center items-center w-full font-bold py-1 px-2 rounded"
                   >
                     Deactivate
