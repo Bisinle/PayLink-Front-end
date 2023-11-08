@@ -23,6 +23,9 @@ export default function DashboardStatsGrid() {
     setWaletGridBalance,
     allWallet,
     setAllWallet,
+    updatedUserBalance,
+    setUpdatedUserBalance,
+    refresh,
   } = useContext(dataContext);
   `-----------------declared the state here to wait for currenet data to be populated-----------------`;
   const [wallets, setWalltes] = useState([]);
@@ -44,14 +47,9 @@ export default function DashboardStatsGrid() {
       })
       .then((res) => {
         console.log(" all-wallet----->", res.data);
-        const currentUserWallets = res.data.filter((wallet) => {
-          if (wallet.user_prof_id === parseInt(Current_UserId)) {
-            return wallet;
-          } else {
-            return;
-          }
-        });
-        setAllWallet(currentUserWallets);
+       const balance =  res.data.find(wallet=> wallet.type==='Main').balance
+       setUpdatedUserBalance(balance)
+       setAllWallet(res.data)
       })
       .catch((error) => {
         console.error("Error fetching a user:", error);

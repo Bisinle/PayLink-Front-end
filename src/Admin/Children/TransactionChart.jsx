@@ -1,8 +1,10 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 
 import axios from "axios";
 import {
+  Line,
+LineChart,
   BarChart,
   Bar,
   XAxis,
@@ -78,85 +80,99 @@ const data = [
 
 export default function TransactionChart() {
   const [transactionsAnalytic, setTransactionsAnalytic] = useState([]);
-  const{localRoutePrefix , setTalTransactions} = useContext(dataContext)
+  const { localRoutePrefix, setTalTransactions,  totalTransactions,
+     } = useContext(dataContext);
 
   //-----------------------------------fet the transacions data
   useEffect(() => {
-    
-      axios
-        .get(`${localRoutePrefix}/transaction/transactions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        })
-        .then((res) => {
+    axios
+      .get(`${localRoutePrefix}/transaction/all_transactions`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
         //   console.log(" user----->", res.data);
-          setTransactionsAnalytic(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching a user:", error);
-        });
-    
+        setTransactionsAnalytic(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching a user:", error);
+      });
   }, []);
-//   const analytics = transactionsAnalytic.map(transaction=>{
-// 	  return transaction.category
-// 	})
-// 	console.log(analytics);
-  
+  //   const analytics = transactionsAnalytic.map(transaction=>{
+  // 	  return transaction.category
+  // 	})
+  // 	console.log(analytics);
+
   const categoryInfoMap = new Map();
-  
+
   // Iterate through the transactions
   for (const transaction of transactionsAnalytic) {
-	const { amount, category } = transaction;
-	const { type } = category;
-  
-	if (categoryInfoMap.has(type)) {
-	  // If the category exists in the map, update its information
-	  const categoryInfo = categoryInfoMap.get(type);
-	  categoryInfo.amount += amount;
-	  categoryInfo.users += 1;
-	} else {
-	  // If the category doesn't exist in the map, create a new entry
-	  categoryInfoMap.set(type, {
-		category: type,
-		amount: amount,
-		users: 1,
-	  });
-	}
+    const { amount, category } = transaction;
+    const { type } = category;
+
+    if (categoryInfoMap.has(type)) {
+      // If the category exists in the map, update its information
+      const categoryInfo = categoryInfoMap.get(type);
+      categoryInfo.amount += amount;
+      categoryInfo.users += 1;
+    } else {
+      // If the category doesn't exist in the map, create a new entry
+      categoryInfoMap.set(type, {
+        category: type,
+        amount: amount,
+        users: 1,
+      });
+    }
   }
-  
+
   // Convert the map values into an array of objects
   const categoryInfoArray = Array.from(categoryInfoMap.values());
-  
-//   console.log(categoryInfoArray);
-  
+
+  //   console.log(categoryInfoArray);
 
   return (
     <div className="h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
       <strong className="text-gray-700 font-medium">Category VS amount</strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={categoryInfoArray}
-            margin={{
-              top: 20,
-              right: 10,
-              left: -10,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
+          <LineChart data={categoryInfoArray}>
             <XAxis dataKey="category" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="amount" fill="#0ea5e9" />
-            <Bar dataKey="users" fill="#ea580c" />
-          </BarChart>
+            <Line
+              type="monotone"
+              dataKey="amount"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="users" stroke="#82ca9d" />
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
 }
+
+// <ResponsiveContainer width="100%" height="100%">
+//   <BarChart
+//     width={500}
+//     height={300}
+//     data={categoryInfoArray}
+//     margin={{
+//       top: 20,
+//       right: 10,
+//       left: -10,
+//       bottom: 0,
+//     }}
+//   >
+//     <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
+//     <XAxis dataKey="category" />
+//     <YAxis />
+//     <Tooltip />
+//     <Legend />
+//     <Bar dataKey="amount" fill="#0ea5e9" />
+//     <Bar dataKey="users" fill="#ea580c" />
+//   </BarChart>
+// </ResponsiveContainer>

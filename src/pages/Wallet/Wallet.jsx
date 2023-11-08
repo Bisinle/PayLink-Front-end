@@ -1,28 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 import CreditCard from "./CreditCard/CreditCard";
 import PayModal from "./Modal/PayModal";
 import CreateWallet from "./Modal/CreateWallet";
-import axios from "axios";
-
 
 export default function Wallet() {
-  const { currentUserData } = useContext(dataContext);
-  const [userBalance, setUserBalance] = useState(0);
-  const [updatedUserBalance, setUpdatedUserBalance] = useState(0);
-  // console.log(updatedUserBalance);
-
-
-  useEffect(() => {
-    if (currentUserData.wallet && currentUserData.wallet.length > 0) {
-      const mainWallet = currentUserData.wallet.find(
-        (wallet) => wallet.type === "Main"
-      );
-      if (mainWallet) {
-        setUserBalance(mainWallet.balance);
-      }
-    }
-  }, [currentUserData]);
+  const { currentUserData, updatedUserBalance,allWallet } = useContext(dataContext);
 
 
   return (
@@ -45,10 +28,10 @@ export default function Wallet() {
               <div class="circle circle-3 w-10 h-10 top-0 opacity-40 "></div>
 
               <div className=" mone-and-btn sm:flex sm:flex-col sm:flex-wrap sm:justify-center sm:items-center   text-gray-300  font-bold h-[60%] w-[30%] relative">
-                <h1 className="text-5xl">${ updatedUserBalance ? updatedUserBalance: userBalance}</h1>
+                <h1 className="text-5xl">${allWallet[0].balance}</h1>
               </div>
               <div className=" flex justify-center  w-full ">
-                <PayModal setUserBalance={setUserBalance}/>
+                <PayModal />
                 <div className="w-1/2 ml-3 btn ">
                   <CreateWallet />
                 </div>

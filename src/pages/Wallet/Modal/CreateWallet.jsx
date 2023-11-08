@@ -42,16 +42,16 @@ function CreateWallet() {
           return res.json().then((errorData) => {
             const errorMessage = errorData.msg;
             console.log("-----------", res);
-            setError(errorMessage);
           });
         }
         return res.json();
       })
       .then((response) => {
-        if ("msg" in response) {
-          return;
+        console.log(response);
+        if ("error" in response) {
+          setError(response.error);
         } else {
-          setAllWallet((prevWallets) => [...prevWallets, response]);
+          setAllWallet(response);
         }
       })
       .catch((error) => {

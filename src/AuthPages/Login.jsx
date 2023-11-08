@@ -11,6 +11,8 @@ import AOS from "aos";
 import Lottie from "lottie-web";
 
 export default function Login() {
+  const [errorMessage, setErrorMessage] = useState("");
+
   //instanticate the navigate method
   const navigate = useNavigate();
   // const navigate = useNavigate();
@@ -61,6 +63,7 @@ export default function Login() {
   // handle sumbit function for the login form
   function loginUser(data) {
     // console.log(data);
+    setErrorMessage("");
     const requestOptions = {
       method: "POST",
       headers: {
@@ -72,19 +75,23 @@ export default function Login() {
     fetch("http://127.0.0.1:5555/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.access_token);
-        data.access_token && navigate("/");
-        data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
-        setRole(data.user_role);
-        setCurrent_UserId(data.user_id);
-        setAccess_token(data.access_token);
-        // localStorage.setItem("refresh_token", data.refresh_token);
-        // localStorage.setItem("user_name", data.user_name);
-        // localStorage.setItem("user_id", data.user_id);
-        // localStorage.setItem("user_profile_pic", data.user_profile_pic);
-        // localStorage.setItem("account_number", data.account_number);
-        // localStorage.setItem("access_token", data.access_token);
-        setRefresh(!true);
+        console.log(data);
+        if ("error" in data) {
+          setErrorMessage(data.error);
+        } else {
+          data.access_token && navigate("/");
+          data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
+          setRole(data.user_role);
+          setCurrent_UserId(data.user_id);
+          setAccess_token(data.access_token);
+          // localStorage.setItem("refresh_token", data.refresh_token);
+          // localStorage.setItem("user_name", data.user_name);
+          // localStorage.setItem("user_id", data.user_id);
+          // localStorage.setItem("user_profile_pic", data.user_profile_pic);
+          // localStorage.setItem("account_number", data.account_number);
+          // localStorage.setItem("access_token", data.access_token);
+          setRefresh(!true);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -121,23 +128,23 @@ export default function Login() {
                 </label>
                 <input
                   type="text"
-                  name="username"
-                  id="username"
+                  name="user_name"
+                  id="user_name"
                   className="bg-gray-50 border border-indigo-400 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-400 focus:border-primary-600 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="user name"
-                  {...register("username", {
+                  {...register("user_name", {
                     required: true,
                     maxLength: 20,
                   })}
                 />
 
-                {errors.username && (
+                {errors.user_name && (
                   <p style={{ color: "red" }}>
                     {" "}
-                    <small>username is required</small>{" "}
+                    <small>user_name is required</small>{" "}
                   </p>
                 )}
-                {errors.username?.type === "maxLength" && (
+                {errors.user_name?.type === "maxLength" && (
                   <p style={{ color: "red" }}>
                     {" "}
                     <small>should have max 25 characters</small>{" "}
@@ -191,6 +198,10 @@ export default function Login() {
                   </label>
                 </div>
               </div>
+              <p className="text-red-500 text-xl flex justify-center ">
+                {errorMessage}
+              </p>
+
               <button
                 onClick={handleSubmit(loginUser)}
                 className=" text-white border shadow  flex justify-center items-center mx-auto border-gray-300 bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
