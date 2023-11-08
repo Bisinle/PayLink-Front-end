@@ -6,6 +6,7 @@ function SendToBenef() {
   const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
   const {
+    refresh,
     setRefresh,
     totalTransactions,
     setTotalTransactions,
@@ -31,8 +32,8 @@ function SendToBenef() {
     // console.log(Current_UserId);
     //clear the error stat
     setError("");
-    setRefresh(!true);
-    setRunPieChart(!runPieChart)
+    setRefresh(!refresh);
+    setRunPieChart(!runPieChart);
 
     const requestOptions = {
       method: "POST",
