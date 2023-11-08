@@ -4,6 +4,8 @@ import { dataContext } from "../../ContexProvider/MyContext";
 function UserTable() {
   const {
     localRoutePrefix,
+    refresh,
+    setRefresh,
     activeUsers,
     setActiveUsers,
     inactiveUsers,
@@ -27,6 +29,8 @@ function UserTable() {
 
   const handleUpdateProfile = async (id) => {
     console.log(id);
+
+    setRefresh(!refresh);
     const response = await fetch(`${localRoutePrefix}/user/${id}`, {
       method: "PUT",
       headers: {
@@ -35,7 +39,7 @@ function UserTable() {
       },
     });
     const res = await response.json();
-    console.log(res);
+    console.log(res.status);
     // Update the user profile data in the state
     const updatedDataIndex = data.map((user) => {
       if (user.id === id) {
@@ -48,13 +52,13 @@ function UserTable() {
 
     setData(updatedDataIndex);
     //-------------------
-    if (response.status === "Active") {
-      setActiveUsers(activeUsers + 1);
-      setInactiveUsers(inactiveUsers - 1);
-    } else {
-      setActiveUsers(activeUsers - 1);
-      setInactiveUsers(inactiveUsers + 1);
-    }
+    // if (response.status === "Active") {
+    //   setActiveUsers(activeUsers + 1);
+    //   setInactiveUsers(inactiveUsers - 1);
+    // } else {
+    //   setActiveUsers(activeUsers - 1);
+    //   setInactiveUsers(inactiveUsers + 1);
+    // }
   };
   // console.log(data);
 
@@ -113,7 +117,6 @@ function UserTable() {
                     Activate
                   </button>
                 )}
-               
               </td>
             </tr>
           ))}

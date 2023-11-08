@@ -32,8 +32,10 @@ export default function AdminDashboardStatsGrid() {
     totalTransactions,
     setTotalTransactions,
     transactionData,
-    setTransactionData,//getting data for admin t-table from t-fetch below
+    setTransactionData, //getting data for admin t-table from t-fetch below
     access_token,
+    refresh,
+    setRefresh,
   } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
@@ -63,7 +65,7 @@ export default function AdminDashboardStatsGrid() {
       .catch((error) => {
         console.error("Error fetching a user:", error);
       });
-  }, []);
+  }, [refresh]);
 
   //------------------------A L L     W A L L E T S
   //------------------------A L L     W A L L E T S
@@ -124,7 +126,7 @@ export default function AdminDashboardStatsGrid() {
       })
       .then((response) => {
         console.log("adminTransac---------", response); // Handle the successful response here
-        setTransactionData(response)
+        setTransactionData(response);
         setTotalTransactions(response.length);
       })
       .catch((error) => {
