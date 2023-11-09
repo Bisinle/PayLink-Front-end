@@ -4,6 +4,7 @@ import { dataContext } from "../../ContexProvider/MyContext";
 function UserTable() {
   const {
     localRoutePrefix,
+    hostedRoutPrefix,
     refresh,
     setRefresh,
     activeUsers,
@@ -19,7 +20,7 @@ function UserTable() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`${localRoutePrefix}/users`);
+      const response = await fetch(`${hostedRoutPrefix}/users`);
       const json = await response.json();
       setData(json);
       // console.log(json);
@@ -31,7 +32,7 @@ function UserTable() {
     console.log(id);
 
     setRefresh(!refresh);
-    const response = await fetch(`${localRoutePrefix}/user/${id}`, {
+    const response = await fetch(`${hostedRoutPrefix}/user/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${access_token}`,

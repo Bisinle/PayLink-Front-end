@@ -69,6 +69,7 @@ export default function WalletActivity() {
   });
   return (
     <div className="bg-white  rounded-sm border border-gray-200 flex-1">
+      <strong className="text-lg mx-4 ">Wallet Activities</strong>
       <table className="w-full">
         <thead className="bg-gray-100 rounded-xl  border-b-2 border-gray-300">
           <tr>

@@ -27,6 +27,7 @@ export default function Login() {
     setCurrent_UserId,
     setAccess_token,
     localRoutePrefix,
+    hostedRoutPrefix,
   } = useContext(dataContext);
   //boolean state to stop the SVG from rendering multiple times
   const [animationLoaded, setAnimationLoaded] = useState(false);
@@ -74,7 +75,7 @@ export default function Login() {
       body: JSON.stringify(data),
     };
 
-    fetch(`${localRoutePrefix}/auth/login`, requestOptions)
+    fetch(`${hostedRoutPrefix}/auth/login`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -90,6 +91,7 @@ export default function Login() {
           localStorage.setItem("refresh_token", data.refresh_token);
           localStorage.setItem("user_name", data.user_name);
           localStorage.setItem("user_id", data.user_id);
+          localStorage.setItem("user_role", data.user_role);
           localStorage.setItem("user_profile_pic", data.user_profile_pic);
           localStorage.setItem("account_number", data.account_number);
           localStorage.setItem("access_token", data.access_token);

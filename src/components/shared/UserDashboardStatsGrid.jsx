@@ -20,6 +20,7 @@ export default function DashboardStatsGrid() {
     currentUserData,
     Current_UserId,
     localRoutePrefix,
+    hostedRoutPrefix,
     access_token,
     waletGridBalance,
     setWaletGridBalance,
@@ -42,7 +43,7 @@ export default function DashboardStatsGrid() {
   /*----------------------- G E T        A L L    W A L L E T  ---------------------------- */
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/wallet/wallet`, {
+      .get(`${hostedRoutPrefix}/wallet/wallet`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -77,7 +78,7 @@ export default function DashboardStatsGrid() {
     setErrorMessage("");
 
     axios
-      .put(`${localRoutePrefix}/wallet/wallet/${id}`, {
+      .put(`${hostedRoutPrefix}/wallet/wallet/${id}`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

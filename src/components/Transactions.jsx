@@ -9,7 +9,7 @@ export default function Transactions() {
   const [transactionData, setTransactionData] = useState([]);
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/transactions/transactions`, {
+      .get(`${hostedRoutPrefix}/transactions/transactions`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

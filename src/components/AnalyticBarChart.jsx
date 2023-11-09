@@ -15,13 +15,9 @@ import { getMonth, getSeconds } from "date-fns";
 
 export default function AnalyticBarChart() {
   const {
-    currentUserData,
     localRoutePrefix,
-    access_token,
-    runPieChart,
-    setRunPieChart,
+
     walletActivityData,
-    setWalletActivityData,
   } = useContext(dataContext);
   const [walletActivities, setWalletActivities] = useState([]);
   // useEffect(() => {

@@ -21,6 +21,7 @@ function Number({ n }) {
 export default function AdminDashboardStatsGrid() {
   const {
     localRoutePrefix,
+    hostedRoutPrefix,
     activeUsers,
     setActiveUsers,
     inactiveUsers,
@@ -42,7 +43,7 @@ export default function AdminDashboardStatsGrid() {
   //------------------------A L L     U S E R S
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/users`, {
+      .get(`${hostedRoutPrefix}/users`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -71,7 +72,7 @@ export default function AdminDashboardStatsGrid() {
   //------------------------A L L     W A L L E T S
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/wallet/all_wallet`, {
+      .get(`${hostedRoutPrefix}/wallet/all_wallet`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -117,7 +118,7 @@ export default function AdminDashboardStatsGrid() {
   }, []);
   //------------------------------------git all transactions
   useEffect(() => {
-    fetch(`${localRoutePrefix}/transaction/all_transactions`)
+    fetch(`${hostedRoutPrefix}/transaction/all_transactions`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

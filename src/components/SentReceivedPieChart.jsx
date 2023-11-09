@@ -40,16 +40,13 @@ const renderCustomizedLabel = ({
 
 export default function SentReceivedPieChart() {
   const {
-    currentUserData,
     localRoutePrefix,
-    access_token,
-    runPieChart,
-    setRunPieChart,
+    hostedRoutPrefix,
   } = useContext(dataContext);
   const [category, setCategory] = useState([]);
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/transaction/transactions`, {
+      .get(`${hostedRoutPrefix}/transaction/transactions`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

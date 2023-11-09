@@ -33,7 +33,7 @@ function MyContext({ children }) {
   const [runPieChart, setRunPieChart] = useState(false); // it is for the main balance in wallet and is from main stat card
   const [walletActivityData, setWalletActivityData] = useState([]);
 
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState('');
 
   // for usertable activ/inac and admin user statscard
   const [activeUsers, setActiveUsers] = useState(0);
@@ -61,7 +61,7 @@ function MyContext({ children }) {
   useEffect(() => {
     // Check if Current_UserId is not 0 (or any other default initial value)
     axios
-      .get(`${localRoutePrefix}/user`, {
+      .get(`${hostedRoutPrefix}/user`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

@@ -9,7 +9,7 @@ function CreateWallet() {
   // const { Current_UserId } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [error, setError] = useState("");
-  const { access_token, Current_UserId, setAllWallet } =
+  const { access_token, Current_UserId, setAllWallet, hostedRoutPrefix } =
     useContext(dataContext);
 
   const {
@@ -35,7 +35,7 @@ function CreateWallet() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/wallet/wallet", requestOptions)
+    fetch(`${hostedRoutPrefix}/wallet/wallet`, requestOptions)
       .then((res) => {
         if (!res.ok) {
           // Handle the error case and set the error message in the <p> tag
@@ -174,7 +174,7 @@ function CreateWallet() {
                 class="text-white font-bold text-xl bg-indigo-500 px-7 py-2 rounded-lg text"
                 onClick={handleSubmit(sendMoney)}
               >
-                Send
+                Create
               </button>
             </div>
           </div>
