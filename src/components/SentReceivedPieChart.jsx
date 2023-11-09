@@ -51,7 +51,7 @@ export default function SentReceivedPieChart() {
     axios
       .get(`${localRoutePrefix}/transaction/transactions`, {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       })
       .then((res) => {

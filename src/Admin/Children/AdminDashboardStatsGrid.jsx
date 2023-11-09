@@ -201,7 +201,7 @@ export default function AdminDashboardStatsGrid() {
 
 function BoxWrapper({ children }) {
   return (
-    <div className=" rounded-sm p-2 flex-1 border relative border-gray-200 h-44  flex flex-col items-center">
+    <div className=" rounded-sm p-2 mb-3 flex-1 border relative border-gray-200 h-44  flex flex-col items-center">
       {children}
     </div>
   );

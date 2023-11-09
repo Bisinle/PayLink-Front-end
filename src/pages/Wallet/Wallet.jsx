@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { dataContext } from "../../ContexProvider/MyContext";
 import CreditCard from "./CreditCard/CreditCard";
 import PayModal from "./Modal/PayModal";
 import CreateWallet from "./Modal/CreateWallet";
 
 export default function Wallet() {
-  const { currentUserData, updatedUserBalance,allWallet } = useContext(dataContext);
+  const { currentUserData, updatedUserBalance, allWallet } =
+    useContext(dataContext);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after a delay (replace with actual data loading logic)
+    }, 2000); // Simulated 2 seconds of loading time
+  }, []);
+  if (loading) {
+    return (
+      <div className="text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className=" flex flex-col justify-center items-center">
