@@ -55,7 +55,7 @@ export default function SentReceivedPieChart() {
         },
       })
       .then((res) => {
-        console.log(" T----->", res.data);
+        // console.log(" T----->", res.data);
         const category = res.data.map((transac) => {
           return transac.category;
         });
@@ -86,7 +86,7 @@ export default function SentReceivedPieChart() {
   //   { name: "Female", value: malesCount },
   //   { name: "Other", value: othersCount },
   // ];
-  console.log(category);
+  // console.log(category);
   return (
     <div className="w-[20rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">Category Profile</strong>

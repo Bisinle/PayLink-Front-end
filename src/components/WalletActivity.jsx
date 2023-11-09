@@ -41,6 +41,8 @@ export default function WalletActivity() {
       </div>
     );
   }
+
+  // console.log(currentUserData);
   let filteredData = currentUserData.wallet_ctivities;
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;

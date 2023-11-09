@@ -83,6 +83,7 @@ export default function Login() {
           data.access_token ? setIsLoggedIn(true) : setIsLoggedIn(false);
           setRole(data.user_role);
           setCurrent_UserId(data.user_id);
+          console.log(data.user_id);
           setAccess_token(data.access_token);
           // localStorage.setItem("refresh_token", data.refresh_token);
           // localStorage.setItem("user_name", data.user_name);

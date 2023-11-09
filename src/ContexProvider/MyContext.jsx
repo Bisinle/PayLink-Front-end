@@ -70,7 +70,7 @@ function MyContext({ children }) {
           console.error("Error fetching a user:", error);
         });
     }
-  }, [Current_UserId, runPieChart,refresh]);
+  }, [Current_UserId, runPieChart, refresh]);
   if (!currentUserData) {
     // While loading, display a loading indicator
     return (

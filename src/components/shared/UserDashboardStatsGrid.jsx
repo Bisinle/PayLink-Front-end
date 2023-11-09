@@ -14,6 +14,8 @@ import classNames from "classnames";
 
 export default function DashboardStatsGrid() {
   const [updatedWallet, setUpdatedWallet] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const {
     currentUserData,
     Current_UserId,
@@ -46,10 +48,12 @@ export default function DashboardStatsGrid() {
         },
       })
       .then((res) => {
-        console.log(" all-wallet----->", res.data);
-       const balance =  res.data.find(wallet=> wallet.type==='Main').balance
-       setUpdatedUserBalance(balance)
-       setAllWallet(res.data)
+        // console.log(" all-wallet----->", res.data);
+        const balance = res.data.find(
+          (wallet) => wallet.type === "Main"
+        ).balance;
+        setUpdatedUserBalance(balance);
+        setAllWallet(res.data);
       })
       .catch((error) => {
         console.error("Error fetching a user:", error);
@@ -67,6 +71,7 @@ export default function DashboardStatsGrid() {
   //!--------------- update wallet status function---------------------
   function deactivateWallet(id) {
     // console.log(id);
+    setErrorMessage("");
 
     axios
       .put(`${localRoutePrefix}/wallet/wallet/${id}`, {
@@ -76,17 +81,14 @@ export default function DashboardStatsGrid() {
       })
       .then((res) => {
         // setCurrentUserCartItems(res.data);
-        console.log("msg--->", res.data.status);
-        const updatedWalletStatus = currentUserData.wallet.map((wallet) => {
-          if (wallet.id === id) {
-            wallet.status = res.data.status;
-            return wallet;
-          } else {
-            return wallet;
-          }
-        });
-        console.log(updatedWalletStatus);
-        setAllWallet(updatedWalletStatus);
+
+        console.log("msg--->", res.data);
+        if ("error" in res.data) {
+          console.log(res.data);
+          setErrorMessage(res.data.error);
+        } else {
+          setAllWallet(res.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);
@@ -159,6 +161,11 @@ export default function DashboardStatsGrid() {
               <strong className="text-xl text-gray-700 font-semibold">
                 ${wallet.balance}
               </strong>
+              {wallet.type === "Main" ? (
+                <p className="text-red-500 text-xl flex justify-center ">
+                  {errorMessage}
+                </p>
+              ) : null}
               <span
                 className={`text-sm ${
                   wallet.status === "Active" ? "text-green-500" : "text-red-500"
