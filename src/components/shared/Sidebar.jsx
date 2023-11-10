@@ -12,6 +12,12 @@ const linkClass =
   "flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-700 hover:no-underline active:bg-neutral-600 rounded-sm text-base";
 
 export default function Sidebar() {
+  const hanleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.clear();
+
+    navigate("/login");
+  };
   return (
     <div className="bg-indigo-500 w-60 p-3 flex flex-col">
       <div className="flex items-center gap-2 ml-5 px-1 py-3">
@@ -26,12 +32,15 @@ export default function Sidebar() {
         {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
           <SidebarLink key={link.key} link={link} />
         ))}
-        <div className={classNames(linkClass, "cursor-pointer text-red-500")}>
+        <button
+          onClick={hanleLogout}
+          className={classNames(linkClass, "cursor-pointer text-red-500")}
+        >
           <span className="text-xl">
             <HiOutlineLogout />
           </span>
           Logout
-        </div>
+        </button>
       </div>
     </div>
   );

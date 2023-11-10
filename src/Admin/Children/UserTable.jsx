@@ -32,7 +32,7 @@ function UserTable() {
     console.log(id);
 
     setRefresh(!refresh);
-    const response = await fetch(`${hostedRoutPrefix}/user/${id}`, {
+    const response = await fetch(`${localRoutePrefix}/user/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${access_token}`,

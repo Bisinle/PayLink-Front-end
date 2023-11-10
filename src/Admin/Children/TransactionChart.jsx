@@ -90,7 +90,7 @@ export default function TransactionChart() {
   //-----------------------------------fet the transacions data
   useEffect(() => {
     axios
-      .get(`${hostedRoutPrefix}/transaction/all_transactions`, {
+      .get(`${localRoutePrefix}/transaction/all_transactions`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
