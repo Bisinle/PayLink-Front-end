@@ -19,9 +19,9 @@ function Number({ n }) {
 }
 
 export default function AdminDashboardStatsGrid() {
-  
   const {
     localRoutePrefix,
+    hostedRoutPrefix,
     activeUsers,
     setActiveUsers,
     inactiveUsers,
@@ -32,14 +32,18 @@ export default function AdminDashboardStatsGrid() {
     setTotalBalance,
     totalTransactions,
     setTotalTransactions,
+    transactionData,
+    setTransactionData, //getting data for admin t-table from t-fetch below
     access_token,
+    refresh,
+    setRefresh,
   } = useContext(dataContext);
 
   //------------------------A L L     U S E R S
   //------------------------A L L     U S E R S
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/users`, {
+      .get(`${hostedRoutPrefix}/users`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -62,13 +66,13 @@ export default function AdminDashboardStatsGrid() {
       .catch((error) => {
         console.error("Error fetching a user:", error);
       });
-  }, []);
+  }, [refresh]);
 
   //------------------------A L L     W A L L E T S
   //------------------------A L L     W A L L E T S
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/wallet/all_wallet`, {
+      .get(`${hostedRoutPrefix}/wallet/all_wallet`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -114,7 +118,7 @@ export default function AdminDashboardStatsGrid() {
   }, []);
   //------------------------------------git all transactions
   useEffect(() => {
-    fetch(`${localRoutePrefix}/transaction/all_transactions`)
+    fetch(`${hostedRoutPrefix}/transaction/all_transactions`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -122,15 +126,14 @@ export default function AdminDashboardStatsGrid() {
         return res.json();
       })
       .then((response) => {
-        // console.log("adminTransac---------", response); // Handle the successful response here
+        console.log("adminTransac---------", response); // Handle the successful response here
+        setTransactionData(response);
         setTotalTransactions(response.length);
-       
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, []);
-
 
   return (
     <div className="flex gap-4">
@@ -199,7 +202,7 @@ export default function AdminDashboardStatsGrid() {
 
 function BoxWrapper({ children }) {
   return (
-    <div className=" rounded-sm p-2 flex-1 border relative border-gray-200 h-44  flex flex-col items-center">
+    <div className=" rounded-sm p-2 mb-3 flex-1 border relative border-gray-200 h-44  flex flex-col items-center">
       {children}
     </div>
   );

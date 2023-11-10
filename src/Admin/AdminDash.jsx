@@ -1,8 +1,7 @@
 import React from "react";
 import TransactionChart from "./Children/TransactionChart";
 import GenderPie from "./Children/GenderPie";
-import RecentOrders from "./Children/RecentOrders";
-import PopularProducts from "./Children/PopularProducts";
+import TransactionTable from "./Children/TransactionTable.jsx";
 
 function AdminDash() {
   return (
@@ -12,8 +11,7 @@ function AdminDash() {
         <GenderPie />
       </div>
       <div className="flex flex-row gap-4 w-full">
-        <RecentOrders />
-        <PopularProducts />
+        <TransactionTable />
       </div>
     </div>
   );

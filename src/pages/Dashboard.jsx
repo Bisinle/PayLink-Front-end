@@ -4,6 +4,7 @@ import AnalyticBarChart from "../components/AnalyticBarChart";
 import Transactions from "../components/Transactions";
 import SentReceivedPieChart from "../components/SentReceivedPieChart";
 import PopularProducts from "../components/PopularProducts";
+import WalletActivity from "../components/WalletActivity";
 
 export default function Dashboard() {
   return (
@@ -13,7 +14,8 @@ export default function Dashboard() {
         <SentReceivedPieChart />
       </div>
       <div className="flex flex-row gap-4 w-full">
-        <Transactions />
+        <WalletActivity />
+        {/* <Transactions /> */}
         <PopularProducts />
       </div>
     </div>

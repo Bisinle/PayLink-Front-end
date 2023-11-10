@@ -4,7 +4,7 @@ import { dataContext } from "../../ContexProvider/MyContext";
 import axios from "axios";
 import {
   Line,
-LineChart,
+  LineChart,
   BarChart,
   Bar,
   XAxis,
@@ -80,13 +80,17 @@ const data = [
 
 export default function TransactionChart() {
   const [transactionsAnalytic, setTransactionsAnalytic] = useState([]);
-  const { localRoutePrefix, setTalTransactions,  totalTransactions,
-     } = useContext(dataContext);
+  const {
+    localRoutePrefix,
+    hostedRoutPrefix,
+    setTalTransactions,
+    totalTransactions,
+  } = useContext(dataContext);
 
   //-----------------------------------fet the transacions data
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/transaction/all_transactions`, {
+      .get(`${hostedRoutPrefix}/transaction/all_transactions`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

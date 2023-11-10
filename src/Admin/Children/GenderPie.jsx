@@ -38,11 +38,12 @@ export default function GenderPie() {
     access_token,
     runPieChart,
     setRunPieChart,
+    hostedRoutPrefix,
   } = useContext(dataContext);
   const [genderPiechart, setGenderPiechart] = useState([]);
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/users`, {
+      .get(`${hostedRoutPrefix}/users`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

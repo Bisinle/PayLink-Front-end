@@ -18,13 +18,38 @@ import SendToBenef from "./pages/Wallet/Modal/SendToBenef";
 import SendToYourSelf from "./pages/Wallet/Modal/SendToYourSelf";
 import AdminDash from "./Admin/AdminDash";
 import UserTable from "./Admin/Children/UserTable";
-
-
+import axios from "axios";
+import { getAuthUserFromLocalStorage } from "./AuthPages/Data";
 
 function App() {
-  const { isLoggedIn, loginSignupToggle, currentUserData, role } =
-    useContext(dataContext);
+  const {
+    isLoggedIn,
+    localRoutePrefix,
+    access_token,
+    setAccess_token,
+    loginSignupToggle,
+    currentUserData,
+    role,
+  } = useContext(dataContext);
   const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   // Check if Current_UserId is not 0 (or any other default initial value)
+  //   axios
+  //     .get(`${localRoutePrefix}/auth/refresh`, {
+  //       headers: {
+  //         Authorization: `Bearer ${access_token}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       setAccess_token(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching a user:", error);
+  //     });
+  // }, []);
+
   // Simulate loading delay
   useEffect(() => {
     if (currentUserData) {

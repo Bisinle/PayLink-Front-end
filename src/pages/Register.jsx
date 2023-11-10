@@ -10,7 +10,7 @@ import { dataContext } from "../ContexProvider/MyContext";
 
 function Register() {
   //----------C O N T E X T
-  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle } =
+  const { setIsLoggedIn, loginSignupToggle, setLoginSignupToggle,hostedRoutPrefix } =
     useContext(dataContext);
 
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ function Register() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://localhost:5555/auth/signup", requestOptions)
+    fetch(`${hostedRoutPrefix}/auth/signup`, requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

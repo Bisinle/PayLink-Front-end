@@ -7,13 +7,9 @@ import "./MinotTouches.css";
 function SendToYourSelf() {
   //destructure the context
   const {
-    setWaletGridBalance,
-    Current_UserId,
     access_token,
-    allWallet,
     setAllWallet,
-    updatedUserBalance,
-    setUpdatedUserBalance, //this one is helping solve the issue of the wallet stat balancing needing to be updated 3 time
+    hostedRoutPrefix, //this one is helping solve the issue of the wallet stat balancing needing to be updated 3 time
   } = useContext(dataContext);
   const [isNewWalletModelOpen, setIsNewWalletModelOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,7 +38,7 @@ function SendToYourSelf() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://localhost:5555//wallet/move-movey", requestOptions)
+    fetch(`${hostedRoutPrefix}/wallet/move-movey`, requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error(" response from server  was not ok");
@@ -52,11 +48,10 @@ function SendToYourSelf() {
       .then((response) => {
         console.log(response); // Handle the successful response here
         if ("error" in response) {
-          setErrorMessage(response.error)
+          setErrorMessage(response.error);
         } else {
           setAllWallet(response);
         }
-        
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

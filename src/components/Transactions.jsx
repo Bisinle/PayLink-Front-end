@@ -6,14 +6,23 @@ import { dataContext } from "../ContexProvider/MyContext";
 
 export default function Transactions() {
   const { currentUserData } = useContext(dataContext);
-  if (!currentUserData || currentUserData.length === 0) {
-    // Render a loading indicator
-    return (
-      <div className="text-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+  const [transactionData, setTransactionData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${hostedRoutPrefix}/transactions/transactions`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        // console.log(" all-wallet----->", res.data);
+
+        setTransactionData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching a user:", error);
+      });
+  }, []);
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -24,7 +33,7 @@ export default function Transactions() {
         Transactions
       </strong>
       <div className="border-x border-gray-200 rounded-sm mt-3">
-        {currentUserData.transactions.length !== 0 ? (
+        {transactionData.length !== 0 ? (
           <table className="w-full text-gray-700">
             <thead>
               <tr>
@@ -38,7 +47,7 @@ export default function Transactions() {
               </tr>
             </thead>
             <tbody>
-              {currentUserData.transactions.map((order) => (
+              {transactionData.map((order) => (
                 <tr key={order.id}>
                   <td className=" text-sm">{order.transaction_id}</td>
                   <td className=" text-sm">{order.sender_name}</td>
@@ -54,9 +63,9 @@ export default function Transactions() {
             </tbody>
           </table>
         ) : (
-          <div className="text-red-500 font-semibold text-3xl text-center">
+          <p className="text-red-500 font-semibold text-3xl text-center">
             No transactions
-          </div>
+          </p>
         )}
       </div>
     </div>

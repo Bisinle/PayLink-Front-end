@@ -6,16 +6,16 @@ function SendToBenef() {
   const [error, setError] = useState("");
   //total transaction is taking the info to admintrasaction stat
   const {
+    refresh,
     setRefresh,
     totalTransactions,
     setTotalTransactions,
-    Current_UserId,
     access_token,
-    updatedUserBalance,
     setUpdatedUserBalance,
     setAllWallet,
     runPieChart, //a pichart dependency as soo as the button is hit
     setRunPieChart,
+    hostedRoutPrefix,
   } = useContext(dataContext);
   const {
     register,
@@ -31,8 +31,8 @@ function SendToBenef() {
     // console.log(Current_UserId);
     //clear the error stat
     setError("");
-    setRefresh(!true);
-    setRunPieChart(!runPieChart)
+    setRefresh(!refresh);
+    setRunPieChart(!runPieChart);
 
     const requestOptions = {
       method: "POST",
@@ -43,7 +43,7 @@ function SendToBenef() {
       body: JSON.stringify(data),
     };
 
-    fetch("http://127.0.0.1:5555/transaction/transactions", requestOptions)
+    fetch(`${hostedRoutPrefix}/transaction/transactions`, requestOptions)
       .then((res) => {
         if (!res.ok) {
           // Handle the error case and set the error message in the <p> tag

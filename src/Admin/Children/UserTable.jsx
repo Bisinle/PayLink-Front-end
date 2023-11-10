@@ -4,6 +4,9 @@ import { dataContext } from "../../ContexProvider/MyContext";
 function UserTable() {
   const {
     localRoutePrefix,
+    hostedRoutPrefix,
+    refresh,
+    setRefresh,
     activeUsers,
     setActiveUsers,
     inactiveUsers,
@@ -17,7 +20,7 @@ function UserTable() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`${localRoutePrefix}/users`);
+      const response = await fetch(`${hostedRoutPrefix}/users`);
       const json = await response.json();
       setData(json);
       // console.log(json);
@@ -27,7 +30,9 @@ function UserTable() {
 
   const handleUpdateProfile = async (id) => {
     console.log(id);
-    const response = await fetch(`${localRoutePrefix}/user/${id}`, {
+
+    setRefresh(!refresh);
+    const response = await fetch(`${hostedRoutPrefix}/user/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${access_token}`,
@@ -35,7 +40,7 @@ function UserTable() {
       },
     });
     const res = await response.json();
-    console.log(res);
+    console.log(res.status);
     // Update the user profile data in the state
     const updatedDataIndex = data.map((user) => {
       if (user.id === id) {
@@ -48,13 +53,13 @@ function UserTable() {
 
     setData(updatedDataIndex);
     //-------------------
-    if (response.status === "Active") {
-      setActiveUsers(activeUsers + 1);
-      setInactiveUsers(inactiveUsers - 1);
-    } else {
-      setActiveUsers(activeUsers - 1);
-      setInactiveUsers(inactiveUsers + 1);
-    }
+    // if (response.status === "Active") {
+    //   setActiveUsers(activeUsers + 1);
+    //   setInactiveUsers(inactiveUsers - 1);
+    // } else {
+    //   setActiveUsers(activeUsers - 1);
+    //   setInactiveUsers(inactiveUsers + 1);
+    // }
   };
   // console.log(data);
 
@@ -113,21 +118,6 @@ function UserTable() {
                     Activate
                   </button>
                 )}
-                {/* <button
-                  onClick={() =>
-                    // handleUpdateProfile(user.id, {
-                    //   first_name: "John",
-                    //   last_name: "Doe",
-                    //   address: "123 Main St",
-                    //   phone_number: "555-1234",
-                    //   Account: "123456789",
-                    //   status: "Active",
-                    })
-                  }
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-2"
-                >
-                  Update Profile
-                </button> */}
               </td>
             </tr>
           ))}

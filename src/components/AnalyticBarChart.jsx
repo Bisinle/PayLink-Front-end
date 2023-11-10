@@ -15,33 +15,31 @@ import { getMonth, getSeconds } from "date-fns";
 
 export default function AnalyticBarChart() {
   const {
-    currentUserData,
     localRoutePrefix,
-    access_token,
-    runPieChart,
-    setRunPieChart,
+
+    walletActivityData,
   } = useContext(dataContext);
   const [walletActivities, setWalletActivities] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((res) => {
-        console.log(" user----->", res.data);
-        setWalletActivities(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching wallet activities:", error);
-      });
-  }, [runPieChart]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
+  //       headers: {
+  //         Authorization: `Bearer ${access_token}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(" user----->", res.data);
+  //       setWalletActivities(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching wallet activities:", error);
+  //     });
+  // }, [runPieChart]);
 
   // Step 1: Group transactions by week and calculate totals
   const weeklyData =
-  walletActivities.length > 0
-      ? walletActivities.reduce((acc, transaction) => {
+    walletActivityData.length > 0
+      ? walletActivityData.reduce((acc, transaction) => {
           const transactionDate = new Date(transaction.created_at);
           const weekNumber = getMonth(transactionDate); // Use getWeek from date-fns to get the week number
 

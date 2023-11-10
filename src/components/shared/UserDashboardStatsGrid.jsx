@@ -14,10 +14,13 @@ import classNames from "classnames";
 
 export default function DashboardStatsGrid() {
   const [updatedWallet, setUpdatedWallet] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const {
     currentUserData,
     Current_UserId,
     localRoutePrefix,
+    hostedRoutPrefix,
     access_token,
     waletGridBalance,
     setWaletGridBalance,
@@ -40,16 +43,19 @@ export default function DashboardStatsGrid() {
   /*----------------------- G E T        A L L    W A L L E T  ---------------------------- */
   useEffect(() => {
     axios
-      .get(`${localRoutePrefix}/wallet/wallet`, {
+      .get(`${hostedRoutPrefix}/wallet/wallet`, {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       })
       .then((res) => {
         console.log(" all-wallet----->", res.data);
-       const balance =  res.data.find(wallet=> wallet.type==='Main').balance
-       setUpdatedUserBalance(balance)
-       setAllWallet(res.data)
+        const balance = res.data.find(
+          (wallet) => wallet.type === "Main"
+        ).balance;
+        console.log(balance);
+        // setUpdatedUserBalance(balance);
+        setAllWallet(res.data);
       })
       .catch((error) => {
         console.error("Error fetching a user:", error);
@@ -57,36 +63,36 @@ export default function DashboardStatsGrid() {
   }, []);
 
   if (loading) {
+    if (!allWallet) {
+      return (
+        <div className="text-center">
+          <p>Loading...</p>
+        </div>
+      );
+    }
     // While loading, display a loading indicator
-    return (
-      <div className="text-center">
-        <p>Loading...</p>
-      </div>
-    );
   }
   //!--------------- update wallet status function---------------------
   function deactivateWallet(id) {
     // console.log(id);
+    setErrorMessage("");
 
     axios
-      .put(`${localRoutePrefix}/wallet/wallet/${id}`, {
+      .put(`${hostedRoutPrefix}/wallet/wallet/${id}`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       })
       .then((res) => {
         // setCurrentUserCartItems(res.data);
-        console.log("msg--->", res.data.status);
-        const updatedWalletStatus = currentUserData.wallet.map((wallet) => {
-          if (wallet.id === id) {
-            wallet.status = res.data.status;
-            return wallet;
-          } else {
-            return wallet;
-          }
-        });
-        console.log(updatedWalletStatus);
-        setAllWallet(updatedWalletStatus);
+
+        console.log("msg--->", res.data);
+        if ("error" in res.data) {
+          console.log(res.data);
+          setErrorMessage(res.data.error);
+        } else {
+          setAllWallet(res.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching updating wallet:", error);
@@ -159,6 +165,11 @@ export default function DashboardStatsGrid() {
               <strong className="text-xl text-gray-700 font-semibold">
                 ${wallet.balance}
               </strong>
+              {wallet.type === "Main" ? (
+                <p className="text-red-500 text-xl flex justify-center ">
+                  {errorMessage}
+                </p>
+              ) : null}
               <span
                 className={`text-sm ${
                   wallet.status === "Active" ? "text-green-500" : "text-red-500"
@@ -182,45 +193,8 @@ export default function DashboardStatsGrid() {
 
 function BoxWrapper({ children }) {
   return (
-    <div className="shadow-sm  rounded-sm p-4 mb-4 flex-1 border border-gray-200  flex items-center relative">
+    <div className="shadow-sm  rounded-sm p-4 mb-4 flex-1 border  border-gray-200  flex items-center relative">
       {children}
     </div>
   );
 }
-
-/* <BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-orange-600">
-					<IoPieChart className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Expenses</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">$3423</strong>
-						<span className="text-sm text-green-500 pl-2">-343</span>
-					</div>
-				</div>
-			</BoxWrapper>
-			<BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-yellow-400">
-					<IoPeople className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Customers</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">12313</strong>
-						<span className="text-sm text-red-500 pl-2">-30</span>
-					</div>
-				</div>
-			</BoxWrapper>
-			<BoxWrapper>
-				<div className="rounded-full h-12 w-12 flex items-center justify-center bg-green-600">
-					<IoCart className="text-2xl text-white" />
-				</div>
-				<div className="pl-4">
-					<span className="text-sm text-gray-500 font-light">Total Orders</span>
-					<div className="flex items-center">
-						<strong className="text-xl text-gray-700 font-semibold">16432</strong>
-						<span className="text-sm text-red-500 pl-2">-43</span>
-					</div>
-				</div>
-			</BoxWrapper> */

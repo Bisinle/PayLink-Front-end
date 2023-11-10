@@ -20,6 +20,7 @@ function MyContext({ children }) {
   // const Current_UserProfilePicture = localStorage.getItem("user_profile_pic");
   // const Current_UserAccount_number = localStorage.getItem("account_number");
   const localRoutePrefix = "http://127.0.0.1:5555";
+  const hostedRoutPrefix = "https://paylink-v83s.onrender.com";
 
   /**---------------  F O R    A P P       S T A T E S ---------------------- */
   const [Current_UserId, setCurrent_UserId] = useState(0);
@@ -30,8 +31,9 @@ function MyContext({ children }) {
   const [allWallet, setAllWallet] = useState([]);
   const [updatedUserBalance, setUpdatedUserBalance] = useState(0); // it is for the main balance in wallet and is from main stat card
   const [runPieChart, setRunPieChart] = useState(false); // it is for the main balance in wallet and is from main stat card
+  const [walletActivityData, setWalletActivityData] = useState([]);
 
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState('');
 
   // for usertable activ/inac and admin user statscard
   const [activeUsers, setActiveUsers] = useState(0);
@@ -45,7 +47,10 @@ function MyContext({ children }) {
   //
   const [loading, setLoading] = useState(true);
   //
-
+  useEffect(() => {
+    setIsLoggedIn(true); // Simulated 2 seconds of loading time
+    setRefresh(!refresh);
+  }, []);
   // Simulate loading delay
   useEffect(() => {
     setTimeout(() => {
@@ -55,35 +60,36 @@ function MyContext({ children }) {
   /*----------------------- G E T        A L L    U S E R S ---------------------------- */
   useEffect(() => {
     // Check if Current_UserId is not 0 (or any other default initial value)
-    if (Current_UserId !== 0) {
-      axios
-        .get(`${localRoutePrefix}/user`, {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        })
-        .then((res) => {
-          console.log(" user----->", res.data);
-          setCurrentUserData(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching a user:", error);
-        });
-    }
-  }, [Current_UserId, runPieChart]);
-  if (!currentUserData) {
-    // While loading, display a loading indicator
-    return (
-      <Dna
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="dna-loading"
-        wrapperStyle={{ display: "flex" }}
-        wrapperClass="dna-wrapper"
-      />
-    );
-  }
+    axios
+      .get(`${hostedRoutPrefix}/user`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(" user----->", res.data);
+        setCurrentUserData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching a user:", error);
+      });
+  }, [refresh]);
+
+  useEffect(() => {
+    axios
+      .get(`${hostedRoutPrefix}/wallet/wallet-Activity`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setWalletActivityData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  }, [refresh]);
 
   const values = {
     isLoggedIn,
@@ -99,11 +105,15 @@ function MyContext({ children }) {
     access_token,
     setAccess_token,
     localRoutePrefix,
+    hostedRoutPrefix,
+    refresh,
     setRefresh,
     currentUserData,
     setCurrentUserData,
     waletGridBalance,
     setWaletGridBalance,
+    walletActivityData,
+    setWalletActivityData,
     role,
     setRole,
     allWallet, //for the user wallet stat cards
@@ -124,6 +134,8 @@ function MyContext({ children }) {
     //for the barchart
     runPieChart,
     setRunPieChart,
+    transactionData, // its is needed in the admin t-table and is getting data from t-fetch in admin stats
+    setTransactionData,
   };
   // console.log(transactionData);
   return <dataContext.Provider value={values}>{children}</dataContext.Provider>;
