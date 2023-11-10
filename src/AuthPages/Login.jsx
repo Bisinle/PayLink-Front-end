@@ -75,7 +75,7 @@ export default function Login() {
       body: JSON.stringify(data),
     };
 
-    fetch(`${hostedRoutPrefix}/auth/login`, requestOptions)
+    fetch(`${localRoutePrefix}/auth/login`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

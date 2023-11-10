@@ -43,7 +43,7 @@ export default function GenderPie() {
   const [genderPiechart, setGenderPiechart] = useState([]);
   useEffect(() => {
     axios
-      .get(`${hostedRoutPrefix}/users`, {
+      .get(`${localRoutePrefix}/users`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -79,7 +79,7 @@ export default function GenderPie() {
   // console.log(gender_data);
   return (
     <div className="w-[20rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
-      <strong className="text-gray-700 font-medium">Category Profile</strong>
+      <strong className="text-gray-700 font-medium">Gender </strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={300}>

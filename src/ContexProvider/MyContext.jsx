@@ -61,7 +61,7 @@ function MyContext({ children }) {
   useEffect(() => {
     // Check if Current_UserId is not 0 (or any other default initial value)
     axios
-      .get(`${hostedRoutPrefix}/user`, {
+      .get(`${localRoutePrefix}/user`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -77,7 +77,7 @@ function MyContext({ children }) {
 
   useEffect(() => {
     axios
-      .get(`${hostedRoutPrefix}/wallet/wallet-Activity`, {
+      .get(`${localRoutePrefix}/wallet/wallet-Activity`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
