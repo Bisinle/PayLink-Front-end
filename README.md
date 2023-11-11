@@ -85,7 +85,7 @@ Thank you for using this school management system! We hope it helps you on your 
 
 Authored by:
 
-[Bisinle Daud](https://github.com/ArshavineRoy)
+[Bisinle Daud](https://github.com/Bisinle)
 
 [Cathy Maseki](https://github.com/cherise43)
 
