@@ -33,7 +33,7 @@ function MyContext({ children }) {
   const [runPieChart, setRunPieChart] = useState(false); // it is for the main balance in wallet and is from main stat card
   const [walletActivityData, setWalletActivityData] = useState([]);
 
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState("");
 
   // for usertable activ/inac and admin user statscard
   const [activeUsers, setActiveUsers] = useState(0);
@@ -48,7 +48,6 @@ function MyContext({ children }) {
   const [loading, setLoading] = useState(true);
   //
   useEffect(() => {
-    setIsLoggedIn(true); // Simulated 2 seconds of loading time
     setRefresh(!refresh);
   }, []);
   // Simulate loading delay
