@@ -48,6 +48,7 @@ function MyContext({ children }) {
   const [loading, setLoading] = useState(true);
   //
   useEffect(() => {
+    setIsLoggedIn(true); // Simulated 2 seconds of loading time
     setRefresh(!refresh);
   }, []);
   // Simulate loading delay
