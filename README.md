@@ -30,7 +30,7 @@ This is a money transfer app that utilizes graphs and charts read real data from
 
 </details>
 
-#### Testing
+## Testing
 
 > **NB: Use the following accounts to test the application and send money between users:**
 >
